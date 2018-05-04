@@ -10,6 +10,7 @@ import com.jds.fitnessjunkiess.getfitapp.Services.WorkoutData;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import retrofit2.Call;
@@ -18,13 +19,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Singleton
 public class WorkoutDataRepository {
 
     private WorkoutData workoutData;
+    private Retrofit retrofit;
 
-    public WorkoutDataRepository(){
-        Retrofit retrofit = new Retrofit.Builder()
+    @Inject
+    public WorkoutDataRepository(Retrofit.Builder retrofitBuilder){
+        this.retrofit = retrofitBuilder
                 .baseUrl("http://35eb9732.ngrok.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

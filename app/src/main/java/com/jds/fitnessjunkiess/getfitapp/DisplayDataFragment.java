@@ -1,13 +1,16 @@
 package com.jds.fitnessjunkiess.getfitapp;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutRepositoryComponent;
+import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.WorkoutRepositoryComponent;
+import com.jds.fitnessjunkiess.getfitapp.DI.DaggerModules.WorkoutRepositoryModule;
+import com.jds.fitnessjunkiess.getfitapp.Repositories.WorkoutDataRepository;
 
 public class DisplayDataFragment extends Fragment {
 
@@ -18,17 +21,15 @@ public class DisplayDataFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         int workoutId = 1;
 
-//        workoutViewModel = ViewModelProviders.of(this).get(WorkoutViewModel.class);
-//        workoutViewModel.init(workoutId);
-//
-////        workoutViewModel.getWorkout().observe(this, workout -> {
-////            Log.i("**", workout.toString());
-////        });
+        WorkoutRepositoryComponent workoutDataRepository =
+                DaggerWorkoutRepositoryComponent
+                .builder()
+                .workoutRepositoryModule(new WorkoutRepositoryModule())
+                .build();
 
+        WorkoutDataRepository workoutDataRepository1 = workoutDataRepository.provideWorkoutDataRepository();
 
-
-
-
+        workoutDataRepository1.getWorkouts(1);
     }
 
     @Override

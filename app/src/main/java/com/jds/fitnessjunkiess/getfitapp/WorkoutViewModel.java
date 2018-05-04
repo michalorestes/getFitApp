@@ -14,7 +14,6 @@ public class WorkoutViewModel extends ViewModel {
     private LiveData<List<Workout>> workout;
     private WorkoutDataRepository workoutData;
 
-    @Inject
     public WorkoutViewModel(WorkoutDataRepository workoutData){
         this.workoutData = workoutData;
     }

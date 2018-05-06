@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Activities.MainActivity.MainActivity"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -20,7 +20,7 @@
     </android.support.v7.widget.CardView>
 
     <fragment
-        android:name="com.jds.fitnessjunkiess.getfitapp.DisplayDataFragment"
+        android:name="com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.DisplayDataFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fragmentId"/>

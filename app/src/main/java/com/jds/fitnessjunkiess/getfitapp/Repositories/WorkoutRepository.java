@@ -19,15 +19,15 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class WorkoutDataRepository {
+public class WorkoutRepository {
 
     private WorkoutData workoutData;
     private Retrofit retrofit;
 
     @Inject
-    public WorkoutDataRepository(Retrofit.Builder retrofitBuilder){
+    public WorkoutRepository(Retrofit.Builder retrofitBuilder){
         this.retrofit = retrofitBuilder
-                .baseUrl("http://35eb9732.ngrok.io/")
+                .baseUrl("http://57bc8c77.ngrok.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         this.workoutData = retrofit.create(WorkoutData.class);

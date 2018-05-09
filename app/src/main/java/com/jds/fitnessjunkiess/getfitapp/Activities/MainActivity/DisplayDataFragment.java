@@ -1,5 +1,6 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerUserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutViewModelFactoryComponent;
+import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.UserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.WorkoutViewModelFactoryComponent;
+import com.jds.fitnessjunkiess.getfitapp.DI.DaggerModules.UserViewModelFactoryModule;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerModules.WorkoutViewModelFactoryModule;
+import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
+import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.UserViewModelFactory;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.WorkoutViewModelFactory;
+import com.jds.fitnessjunkiess.getfitapp.ViewModels.UserViewModel;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutViewModel;
 
 import javax.inject.Inject;
@@ -22,14 +29,15 @@ import javax.inject.Inject;
 public class DisplayDataFragment extends Fragment {
 
     WorkoutViewModel workoutViewModel;
-    //TODO: This doesn't get injected to null is being passed to ViewProviderModel
-
     WorkoutViewModelFactory workoutViewModelFactory;
+
+    UserViewModel userViewModel;
+    UserViewModelFactory userViewModelFactory;
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
 
         WorkoutViewModelFactoryComponent workoutViewModelFactoryComponent =
                 DaggerWorkoutViewModelFactoryComponent
@@ -46,32 +54,41 @@ public class DisplayDataFragment extends Fragment {
 
         workoutViewModel.init(1);
         workoutViewModel.getWorkout().observe(this, w -> {
-            for (Workout workout : w){
-                Log.i("**", workout.toString());
+            if (w != null){
+                for (Workout workout : w){
+                    Log.i("***", workout.toString());
+                }
+            }
+
+        });
+
+
+        UserViewModelFactoryComponent userViewModelFactoryComponent =
+                DaggerUserViewModelFactoryComponent
+                .builder()
+                .userViewModelFactoryModule(new UserViewModelFactoryModule())
+                .build();
+
+        this.userViewModelFactory =
+                userViewModelFactoryComponent
+                .provideUserViewModelFactory();
+
+        this.userViewModel = ViewModelProviders.of(this, this.userViewModelFactory)
+                .get(UserViewModel.class);
+
+        userViewModel.init("michalorestes@gmail.com");
+        userViewModel.getUser().observe(this, u -> {
+            if (u != null){
+                Log.i("***", "Got the user: " + u.getEmail() + " " + u.getUsername());
             }
         });
 
 
-//        for (Workout w : workoutViewModel.getWorkout().getValue()){
-//            Log.i("**", w.toString());
-//        }
+
+
 
 
         Log.i("**", "Could be working");
-
-
-
-
-//        WorkoutRepositoryComponent workoutDataRepository =
-//                DaggerWorkoutRepositoryComponent
-//                .builder()
-//                .workoutRepositoryModule(new WorkoutRepositoryModule())
-//                .build();
-//
-//        WorkoutRepository workoutDataRepository1 =
-//                workoutDataRepository.provideWorkoutDataRepository();
-//
-//        workoutDataRepository1.getWorkouts(1);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class UserRepository {
     @Inject
     public UserRepository(Retrofit.Builder retrofitBuilder) {
         this.retrofit = retrofitBuilder
-                .baseUrl("http://9183bc92.ngrok.io")
+                .baseUrl("http://be207eed.ngrok.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         this.userData = retrofit.create(UserData.class);
@@ -45,5 +45,30 @@ public class UserRepository {
         });
 
         return user;
+    }
+
+    public void addUser(User user){
+        Call<Void> service = userData.addUser(user);
+        service.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.d("***", "onResponse: nope ");
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.i("***", "Failed to add user data:: " + t.getMessage());
+            }
+//            @Override
+//            public void onResponse(Call<Void> call, Response<User> response) {
+//                Log.d("***", "onResponse: " + response.body());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                Log.i("***", "Failed to add user data:: " + t.getMessage());
+//            }
+        });
     }
 }

@@ -1,10 +1,16 @@
 package com.jds.fitnessjunkiess.getfitapp.Entities;
 
+import com.google.gson.annotations.Expose;
+
 public class User {
 
+    @Expose
     private int id;
+    @Expose
     private String email;
+    @Expose
     private String username;
+    @Expose
     private String password;
 
     public int getId() {

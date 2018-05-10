@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:id="@+id/fragment">
 
-    <TextView
+    <Button
+        android:id="@+id/startActivityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test"/>
+        android:layout_weight="1"
+        android:text="Start Login Activity" />
 
 </LinearLayout>

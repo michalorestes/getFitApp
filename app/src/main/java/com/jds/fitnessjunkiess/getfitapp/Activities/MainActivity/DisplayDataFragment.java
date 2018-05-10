@@ -1,7 +1,7 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity;
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.jds.fitnessjunkiess.getfitapp.Activities.LoginActivity.LoginActivity;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerUserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.UserViewModelFactoryComponent;
@@ -24,8 +26,6 @@ import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.WorkoutViewModelFa
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.UserViewModel;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutViewModel;
 
-import javax.inject.Inject;
-
 public class DisplayDataFragment extends Fragment {
 
     WorkoutViewModel workoutViewModel;
@@ -33,6 +33,8 @@ public class DisplayDataFragment extends Fragment {
 
     UserViewModel userViewModel;
     UserViewModelFactory userViewModelFactory;
+
+    Button button;
 
 
     @Override
@@ -62,7 +64,6 @@ public class DisplayDataFragment extends Fragment {
 
         });
 
-
         UserViewModelFactoryComponent userViewModelFactoryComponent =
                 DaggerUserViewModelFactoryComponent
                 .builder()
@@ -83,16 +84,29 @@ public class DisplayDataFragment extends Fragment {
             }
         });
 
-
-
-
-
+        User user = new User();
+        user.setEmail("trump@mail.com");
+        user.setUsername("hahahtramp");
+        userViewModel.addUser(user);
 
         Log.i("**", "Could be working");
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstances){
-        return inflater.inflate(R.layout.display_data_fragment, viewGroup, false);
+        View rootView = inflater.inflate(R.layout.display_data_fragment, viewGroup, false);
+
+        this.button = (Button) rootView.findViewById(R.id.startActivityBtn);
+        this.button.setOnClickListener(this::startLoginScreen);
+
+        return rootView;
+    }
+
+    public void startLoginScreen(View view){
+        Log.i("**", "screen starting");
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

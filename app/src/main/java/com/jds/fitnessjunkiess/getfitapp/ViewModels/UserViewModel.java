@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel;
 
 import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.Repositories.UserRepository;
-import com.jds.fitnessjunkiess.getfitapp.Services.UserData;
 
 import javax.inject.Inject;
 
@@ -28,5 +27,9 @@ public class UserViewModel extends ViewModel {
 
     public LiveData<User> getUser(){
         return this.user;
+    }
+
+    public void addUser(User user){
+        this.userRepository.addUser(user);
     }
 }

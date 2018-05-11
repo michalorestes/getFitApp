@@ -11,5 +11,5 @@ public interface UserData {
     @GET("users/{email}")
     Call<User> getUser(@Path("email") String email);
     @POST("users")
-    Call<Void> addUser(@Body User user);
+    Call<User> addUser(@Body User user);
 }

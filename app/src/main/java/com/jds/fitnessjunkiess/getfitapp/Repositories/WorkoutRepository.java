@@ -28,7 +28,7 @@ public class WorkoutRepository {
     @Inject
     public WorkoutRepository(Retrofit.Builder retrofitBuilder) {
         this.retrofit = retrofitBuilder
-                .baseUrl("http://be207eed.ngrok.io")
+                .baseUrl("http://4ed7ef54.ngrok.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         this.workoutData = retrofit.create(WorkoutData.class);

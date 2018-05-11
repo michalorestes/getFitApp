@@ -29,7 +29,7 @@ public class UserViewModel extends ViewModel {
         return this.user;
     }
 
-    public void addUser(User user){
-        this.userRepository.addUser(user);
+    public LiveData<User> addUser(User user){
+        return this.userRepository.addUser(user);
     }
 }

@@ -30,12 +30,9 @@ public class DisplayDataFragment extends Fragment {
 
     WorkoutViewModel workoutViewModel;
     WorkoutViewModelFactory workoutViewModelFactory;
-
     UserViewModel userViewModel;
     UserViewModelFactory userViewModelFactory;
-
     Button button;
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -90,13 +87,12 @@ public class DisplayDataFragment extends Fragment {
         userViewModel.addUser(user);
 
         Log.i("**", "Could be working");
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup viewGroup, Bundle savedInstances){
-        View rootView = inflater.inflate(R.layout.display_data_fragment, viewGroup, false);
+        View rootView =
+                inflater.inflate(R.layout.display_data_fragment, viewGroup, false);
 
         this.button = (Button) rootView.findViewById(R.id.startActivityBtn);
         this.button.setOnClickListener(this::startLoginScreen);

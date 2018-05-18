@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="WorkoutCardView">
+        <attr name="title" format="string" />
+        <attr name="subTitle" format="string" />
+        <attr name="setIcon" format="string" />
+    </declare-styleable>
+</resources>

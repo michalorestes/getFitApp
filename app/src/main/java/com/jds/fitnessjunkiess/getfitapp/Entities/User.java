@@ -80,4 +80,9 @@ public class User implements Parcelable {
         dest.writeString(this.username);
         dest.writeString(this.password);
     }
+
+    @Override
+    public String toString(){
+        return getEmail() + " " + getUsername();
+    }
 }

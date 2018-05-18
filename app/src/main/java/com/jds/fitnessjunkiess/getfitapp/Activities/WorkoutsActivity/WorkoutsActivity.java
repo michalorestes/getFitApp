@@ -7,9 +7,8 @@ import android.util.Log;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.jds.fitnessjunkiess.getfitapp.Activities.LoginActivity.LoginActivity;
+import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class WorkoutsActivity extends AppCompatActivity {
@@ -19,10 +18,11 @@ public class WorkoutsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workouts);
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if (account == null){
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+        //TODO: simply fetch user's data based on email here instead
+        Intent intent = getIntent();
+        User u = intent.getParcelableExtra("userData");
+        if (u != null){
+            u.toString();
         }
     }
 }

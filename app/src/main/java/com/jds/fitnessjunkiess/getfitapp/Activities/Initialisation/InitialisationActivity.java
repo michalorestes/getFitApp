@@ -31,6 +31,8 @@ public class InitialisationActivity extends AppCompatActivity {
         } else {
             startLoginActivity();
         }
+
+//        finish();
     }
 
     private void startLoginActivity() {

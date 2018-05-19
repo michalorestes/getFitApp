@@ -1,28 +1,48 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity;
 
-import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.jds.fitnessjunkiess.getfitapp.Activities.LoginActivity.LoginActivity;
-import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
-public class WorkoutsActivity extends AppCompatActivity {
+public class WorkoutsActivity extends AppCompatActivity implements WorkoutsListFragment.onWorkoutSelectedInterface {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workouts);
 
-        //TODO: simply fetch user's data based on email here instead
-        Intent intent = getIntent();
-        User u = intent.getParcelableExtra("userData");
-        if (u != null){
-            u.toString();
-        }
+//        Intent intent = getIntent();
+//        User u = intent.getParcelableExtra("userData");
+//        if (u != null){
+//            u.toString();
+//        }
+
+        WorkoutsListFragment workoutsListFragment = new WorkoutsListFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager
+                .beginTransaction()
+                .add(R.id.workouts_fragment_container, workoutsListFragment)
+                .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        getSupportFragmentManager().popBackStackImmediate();
+//        Log.d("CDA", "onBackPressed Called");
+
+    }
+
+    @Override
+    public void onWorkoutSelected(int workoutId) {
+        Log.i("****","workout : " + workoutId);
+        ViewWorkoutFragment viewWorkoutFragment = new ViewWorkoutFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.workouts_fragment_container, viewWorkoutFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

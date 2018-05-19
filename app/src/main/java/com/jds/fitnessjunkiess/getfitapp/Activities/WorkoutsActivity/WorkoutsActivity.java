@@ -3,7 +3,6 @@ package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class WorkoutsActivity extends AppCompatActivity implements WorkoutsListFragment.onWorkoutSelectedInterface {
@@ -29,15 +28,12 @@ public class WorkoutsActivity extends AppCompatActivity implements WorkoutsListF
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
+        super.onBackPressed();
         getSupportFragmentManager().popBackStackImmediate();
-//        Log.d("CDA", "onBackPressed Called");
-
     }
 
     @Override
     public void onWorkoutSelected(int workoutId) {
-        Log.i("****","workout : " + workoutId);
         ViewWorkoutFragment viewWorkoutFragment = new ViewWorkoutFragment();
         getSupportFragmentManager()
                 .beginTransaction()

@@ -16,8 +16,9 @@ public class WorkoutListRecycleViewAdapter
     private List<Workout> dataSet;
     private WorkoutsListFragment.onWorkoutSelectedInterface onWorkoutSelectedInterface;
 
-    public WorkoutListRecycleViewAdapter
-            (List<Workout> dataSet, WorkoutsListFragment.onWorkoutSelectedInterface onWorkoutSelectedInterface) {
+    public WorkoutListRecycleViewAdapter(
+            List<Workout> dataSet,
+            WorkoutsListFragment.onWorkoutSelectedInterface onWorkoutSelectedInterface) {
         this.dataSet = dataSet;
         this.onWorkoutSelectedInterface = onWorkoutSelectedInterface;
     }
@@ -25,7 +26,6 @@ public class WorkoutListRecycleViewAdapter
     @NonNull
     @Override
     public WorkoutListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View workoutCard = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.workout_card_layout, parent, false);
 
@@ -35,7 +35,7 @@ public class WorkoutListRecycleViewAdapter
     @Override
     public void onBindViewHolder(WorkoutListViewHolder holder, int position) {
         holder.title.setText(this.dataSet.get(position).getName());
-        holder.subTitle.setText(String.valueOf(this.dataSet.get(position).getExercises().size()));
+        holder.subTitle.setText(String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises");
         holder.icon.setImageResource(R.drawable.dumbell_icon);
         holder.workoutId = this.dataSet.get(position).getId();
     }
@@ -45,15 +45,8 @@ public class WorkoutListRecycleViewAdapter
         return this.dataSet.size();
     }
 
-    public void swapData(List<Workout> dataSet){
-        if (this.dataSet != null) {
-            this.dataSet.clear();
-            this.dataSet.addAll(dataSet);
-        }
-        else {
-            this.dataSet = dataSet;
-        }
-
+    public void swapData(List<Workout> data){
+        this.dataSet = data;
         notifyDataSetChanged();
     }
 }

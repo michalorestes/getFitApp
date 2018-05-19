@@ -1,6 +1,5 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity;
 
-
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -9,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +34,7 @@ public class WorkoutsListFragment extends Fragment {
     private List<Workout> workouts;
 
     public WorkoutsListFragment() {
-        // Required empty public constructor
+
     }
 
     public interface onWorkoutSelectedInterface {
@@ -50,7 +50,6 @@ public class WorkoutsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_workouts_list, container, false);
         this.recyclerView = view.findViewById(R.id.workoutsList);
         this.recyclerView.setHasFixedSize(true);
@@ -66,7 +65,6 @@ public class WorkoutsListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         WorkoutViewModelFactoryComponent workoutViewModelFactoryComponent =
         DaggerWorkoutViewModelFactoryComponent
                 .builder()
@@ -83,10 +81,15 @@ public class WorkoutsListFragment extends Fragment {
         workoutViewModel.init(1);
         workoutViewModel.getWorkout().observe(this, w -> {
             if (w != null){
-                this.workouts = w;
-                this.recycleViewAdapter.swapData(this.workouts);
+                this.recycleViewAdapter.swapData(w);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("cycle", "Resuming WorkoutListFragment");
     }
 
     @Override

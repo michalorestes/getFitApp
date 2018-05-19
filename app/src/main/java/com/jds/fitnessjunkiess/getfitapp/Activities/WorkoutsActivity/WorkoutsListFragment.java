@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +31,7 @@ public class WorkoutsListFragment extends Fragment {
     private RecyclerView.LayoutManager recyclerViewLayoutManager;
     private onWorkoutSelectedInterface onWorkoutSelectedInterface;
     private List<Workout> workouts;
+    private int userId;
 
     public WorkoutsListFragment() {
 
@@ -45,6 +45,7 @@ public class WorkoutsListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.workouts = new ArrayList<>();
+        this.userId = getArguments().getInt("userId");
     }
 
     @Override
@@ -78,7 +79,7 @@ public class WorkoutsListFragment extends Fragment {
         this.workoutViewModel =  ViewModelProviders.of(this, this.workoutViewModelFactory)
                 .get(WorkoutViewModel.class);
 
-        workoutViewModel.init(1);
+        workoutViewModel.init(this.userId);
         workoutViewModel.getWorkout().observe(this, w -> {
             if (w != null){
                 this.recycleViewAdapter.swapData(w);

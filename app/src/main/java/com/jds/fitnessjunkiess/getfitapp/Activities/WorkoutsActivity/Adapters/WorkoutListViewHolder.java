@@ -15,7 +15,9 @@ class WorkoutListViewHolder extends RecyclerView.ViewHolder {
     public ImageView icon;
     public int workoutId;
 
-    WorkoutListViewHolder(View card, WorkoutsListFragment.onWorkoutSelectedInterface onWorkoutSelectedInterface) {
+    WorkoutListViewHolder(
+            View card,
+            WorkoutsListFragment.onWorkoutSelectedInterface onWorkoutSelectedInterface) {
         super(card);
         this.title = card.findViewById(R.id.workout_card_title);
         this.subTitle = card.findViewById(R.id.workout_card_sub_title);

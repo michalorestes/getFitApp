@@ -31,13 +31,12 @@ public class InitialisationActivity extends AppCompatActivity {
         } else {
             startLoginActivity();
         }
-
-//        finish();
     }
 
     private void startLoginActivity() {
         Intent loginActivity = new Intent(this, LoginActivity.class);
         startActivity(loginActivity);
+        finish();
     }
 
     private void startWorkoutsActivity(GoogleSignInAccount account) {
@@ -61,6 +60,7 @@ public class InitialisationActivity extends AppCompatActivity {
                 Intent workoutsActivity = new Intent(this, WorkoutsActivity.class);
                 workoutsActivity.putExtra("userData", u);
                 startActivity(workoutsActivity);
+                finish();
             }
         });
     }

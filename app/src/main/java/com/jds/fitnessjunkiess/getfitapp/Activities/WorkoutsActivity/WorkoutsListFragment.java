@@ -87,12 +87,6 @@ public class WorkoutsListFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.i("cycle", "Resuming WorkoutListFragment");
-    }
-
-    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 

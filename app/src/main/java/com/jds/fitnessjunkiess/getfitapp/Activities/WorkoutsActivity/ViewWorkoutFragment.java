@@ -11,7 +11,7 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class ViewWorkoutFragment extends Fragment {
 
-    public ViewWorkoutFragment(){
+    public ViewWorkoutFragment() {
 
     }
 
@@ -19,10 +19,5 @@ public class ViewWorkoutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_view_workout, container, false);
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.i("cycle", "Resuming ViewWorkoutFragment");
     }
 }

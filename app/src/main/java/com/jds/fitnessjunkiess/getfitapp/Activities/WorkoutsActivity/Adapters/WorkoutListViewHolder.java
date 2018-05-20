@@ -13,7 +13,7 @@ class WorkoutListViewHolder extends RecyclerView.ViewHolder {
     public TextView title;
     public TextView subTitle;
     public ImageView icon;
-    public int workoutId;
+    public int workoutIndex;
 
     WorkoutListViewHolder(
             View card,
@@ -22,11 +22,11 @@ class WorkoutListViewHolder extends RecyclerView.ViewHolder {
         this.title = card.findViewById(R.id.workout_card_title);
         this.subTitle = card.findViewById(R.id.workout_card_sub_title);
         this.icon = card.findViewById(R.id.icon);
-        this.workoutId = 0;
+        this.workoutIndex = 0;
 
         card.setOnClickListener((View v) -> {
-            Log.i("view", ""+ this.workoutId);
-            onWorkoutSelectedInterface.onWorkoutSelected(9);
+            Log.i("view", ""+ this.workoutIndex);
+            onWorkoutSelectedInterface.onWorkoutSelected(workoutIndex);
         });
     }
 }

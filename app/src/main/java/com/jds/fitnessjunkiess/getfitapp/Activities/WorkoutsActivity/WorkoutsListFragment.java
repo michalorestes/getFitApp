@@ -30,7 +30,6 @@ public class WorkoutsListFragment extends Fragment {
     private WorkoutListRecycleViewAdapter recycleViewAdapter;
     private RecyclerView.LayoutManager recyclerViewLayoutManager;
     private onWorkoutSelectedInterface onWorkoutSelectedInterface;
-    private List<Workout> workouts;
     private int userId;
 
     public WorkoutsListFragment() {
@@ -39,13 +38,12 @@ public class WorkoutsListFragment extends Fragment {
 
     public interface onWorkoutSelectedInterface {
         void onWorkoutSelected(int workoutId);
+        List<Workout> onWorkoutListRequested();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.workouts = new ArrayList<>();
-        this.userId = getArguments().getInt("userId");
     }
 
     @Override
@@ -57,7 +55,8 @@ public class WorkoutsListFragment extends Fragment {
         this.recyclerViewLayoutManager = new LinearLayoutManager(getContext());
         this.recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
-        this.recycleViewAdapter = new WorkoutListRecycleViewAdapter(this.workouts, this.onWorkoutSelectedInterface);
+        this.recycleViewAdapter =
+                new WorkoutListRecycleViewAdapter(this.onWorkoutSelectedInterface.onWorkoutListRequested(), this.onWorkoutSelectedInterface);
         this.recyclerView.setAdapter(recycleViewAdapter);
 
         return view;
@@ -66,25 +65,7 @@ public class WorkoutsListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        WorkoutViewModelFactoryComponent workoutViewModelFactoryComponent =
-        DaggerWorkoutViewModelFactoryComponent
-                .builder()
-                .workoutViewModelFactoryModule(new WorkoutViewModelFactoryModule())
-                .build();
-
-        this.workoutViewModelFactory =
-                workoutViewModelFactoryComponent
-                        .provideWorkoutViewModelFactory();
-
-        this.workoutViewModel =  ViewModelProviders.of(this, this.workoutViewModelFactory)
-                .get(WorkoutViewModel.class);
-
-        workoutViewModel.init(this.userId);
-        workoutViewModel.getWorkout().observe(this, w -> {
-            if (w != null){
-                this.recycleViewAdapter.swapData(w);
-            }
-        });
+        this.recycleViewAdapter.swapData(this.onWorkoutSelectedInterface.onWorkoutListRequested());
     }
 
     @Override
@@ -94,5 +75,9 @@ public class WorkoutsListFragment extends Fragment {
         if (context instanceof Activity){
             onWorkoutSelectedInterface = (onWorkoutSelectedInterface) context;
         }
+    }
+
+    public void updateWorkoutsList(List<Workout> workouts) {
+        this.recycleViewAdapter.swapData(workouts);
     }
 }

@@ -37,7 +37,7 @@ public class WorkoutListRecycleViewAdapter
         holder.title.setText(this.dataSet.get(position).getName());
         holder.subTitle.setText(String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises");
         holder.icon.setImageResource(R.drawable.dumbell_icon);
-        holder.workoutId = this.dataSet.get(position).getId();
+        holder.workoutIndex = position;
     }
 
     @Override

@@ -26,19 +26,23 @@ public class WorkoutsActivity
 
     private WorkoutsListFragment workoutsListFragment;
     private List<Workout> workouts;
+    private WorkoutViewModel workoutViewModel;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workouts);
+        this.user = new User();
         this.workouts = new ArrayList<>();
 
         Intent intent = getIntent();
         User u = intent.getParcelableExtra("userData");
         int userId;
         if (u != null) {
-            userId = u.getId();
+            this.user.setId(u.getId());
         } else {
+            //TODO: Ideally stop app execution if no user ID is available
             userId = 0;
         }
 
@@ -59,14 +63,14 @@ public class WorkoutsActivity
         WorkoutViewModelFactory workoutViewModelFactory = workoutViewModelFactoryComponent
                 .provideWorkoutViewModelFactory();
 
-        WorkoutViewModel workoutViewModel =
+        this.workoutViewModel =
                 ViewModelProviders.of(this, workoutViewModelFactory)
                 .get(WorkoutViewModel.class);
 
-        workoutViewModel.init(userId);
+        workoutViewModel.init(this.user.getId());
         workoutViewModel.getWorkout().observe(this, w -> {
             this.workouts = w;
-            this.workoutsListFragment.updateWorkoutsList(this.workouts);
+            this.workoutsListFragment.updateWorkoutsList(this.workouts, false);
         });
     }
 
@@ -97,5 +101,16 @@ public class WorkoutsActivity
     @Override
     public List<Workout> onWorkoutListRequested() {
         return this.workouts;
+    }
+
+    @Override
+    public void onAddWorkout(String workoutName) {
+        Workout workout = new Workout();
+        workout.setName(workoutName);
+        workout.setUserId(this.user.getId());
+        this.workoutViewModel.addWorkout(workout).observe(this, w -> {
+            this.workouts.add(w);
+            this.workoutsListFragment.updateWorkoutsList(this.workouts, true);
+        });
     }
 }

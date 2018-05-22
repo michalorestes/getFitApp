@@ -52,4 +52,23 @@ public class WorkoutRepository {
 
         return workouts;
     }
+
+    public LiveData<Workout> addWorkout(Workout workout){
+        final Call<Workout> service = workoutData.addWorkout(workout);
+        final MutableLiveData<Workout> workoutMutableLiveData = new MutableLiveData<>();
+
+        service.enqueue(new Callback<Workout>() {
+            @Override
+            public void onResponse(@NonNull Call<Workout> call, @NonNull Response<Workout> response) {
+                workoutMutableLiveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Workout> call, @NonNull Throwable t) {
+                Log.i("Workouts Repository: ", t.getMessage());
+            }
+        });
+
+        return workoutMutableLiveData;
+    }
 }

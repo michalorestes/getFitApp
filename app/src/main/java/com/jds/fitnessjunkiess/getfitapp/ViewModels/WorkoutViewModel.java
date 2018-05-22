@@ -16,7 +16,6 @@ public class WorkoutViewModel extends ViewModel {
 
     @Inject
     public WorkoutViewModel(WorkoutRepository workoutData){
-        //TODO: test to see if it gets injected
         this.workoutData = workoutData;
     }
 
@@ -30,5 +29,9 @@ public class WorkoutViewModel extends ViewModel {
 
     public LiveData<List<Workout>> getWorkout() {
         return workout;
+    }
+
+    public LiveData<Workout> addWorkout(Workout workout) {
+        return this.workoutData.addWorkout(workout);
     }
 }

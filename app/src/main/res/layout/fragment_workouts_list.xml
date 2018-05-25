@@ -9,6 +9,16 @@
     tools:context=".Activities.WorkoutsActivity.WorkoutsListFragment">
 
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/body_weight_exercise_type"
+        android:clickable="true"
+        android:src="@drawable/body_weight_exercise_type"
+        tools:layout_editor_absoluteX="328dp"
+        tools:layout_editor_absoluteY="386dp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/workoutsList"
         android:layout_width="0dp"

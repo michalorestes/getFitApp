@@ -17,6 +17,7 @@ import android.widget.EditText;
 
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.Adapters.WorkoutListRecycleViewAdapter;
 
+import com.jds.fitnessjunkiess.getfitapp.CustomViews.AddBoxView;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.WorkoutViewModelFactory;
@@ -29,9 +30,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
     private WorkoutListRecycleViewAdapter recycleViewAdapter;
     private RecyclerView.LayoutManager recyclerViewLayoutManager;
     private onWorkoutSelectedInterface onWorkoutSelectedInterface;
-
-    private EditText workoutNameInput;
-    private Button addWorkoutBtn;
+    private AddBoxView addBoxView;
 
     public WorkoutsListFragment() {
 
@@ -61,9 +60,8 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
                 new WorkoutListRecycleViewAdapter(this.onWorkoutSelectedInterface.onWorkoutListRequested(), this.onWorkoutSelectedInterface);
         this.recyclerView.setAdapter(recycleViewAdapter);
 
-        this.workoutNameInput = view.findViewById(R.id.workout_name_input);
-        this.addWorkoutBtn = view.findViewById(R.id.add_workout_btn);
-        this.addWorkoutBtn.setOnClickListener(this);
+        this.addBoxView = view.findViewById(R.id.add_box_view);
+        this.addBoxView.getButton().setOnClickListener(this);
         return view;
     }
 
@@ -92,10 +90,9 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.add_workout_btn:
-                Log.d("***", "addWorkoutBtn: clicked " + this.workoutNameInput.getText());
-
-                this.onWorkoutSelectedInterface.onAddWorkout(this.workoutNameInput.getText().toString());
+            case R.id.button:
+                Log.d("***", "addWorkoutBtn: clicked " + this.addBoxView.getInput());
+                this.onWorkoutSelectedInterface.onAddWorkout(this.addBoxView.getInput());
 
                 break;
         }

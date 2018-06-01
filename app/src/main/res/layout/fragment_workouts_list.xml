@@ -1,75 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#e1e1e1"
     android:padding="0dp"
-    tools:context=".Activities.WorkoutsActivity.WorkoutsListFragment">
+    tools:context=".Activities.WorkoutsActivity.WorkoutsListFragment"
+    tools:layout_editor_absoluteY="81dp">
 
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/body_weight_exercise_type"
-        android:clickable="true"
-        android:src="@drawable/body_weight_exercise_type"
-        tools:layout_editor_absoluteX="328dp"
-        tools:layout_editor_absoluteY="386dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/workoutsList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
         android:elevation="0dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/add_box_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
     </android.support.v7.widget.RecyclerView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="67dp"
-        android:background="@android:color/background_light"
-        android:elevation="10dp"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="match_parent"
+        android:outlineProvider="bounds">
 
-        <EditText
-            android:id="@+id/workout_name_input"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.AddBoxView
+            android:id="@+id/add_box_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="add workout..." />
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:clipToPadding="false"
+            android:elevation="24dp"
+            android:outlineProvider="bounds" />
 
-        <Button
-            android:id="@+id/add_workout_btn"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_weight="0.7"
-            android:elevation="10dp"
-            android:text=">>" />
-    </LinearLayout>
+    </FrameLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>

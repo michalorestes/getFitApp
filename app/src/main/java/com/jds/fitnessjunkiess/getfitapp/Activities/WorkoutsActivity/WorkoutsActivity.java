@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutViewModelFactoryComponent;
@@ -13,7 +12,6 @@ import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.WorkoutViewModelFac
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerModules.WorkoutViewModelFactoryModule;
 import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
-import com.jds.fitnessjunkiess.getfitapp.Entities.WorkoutExercise;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.WorkoutViewModelFactory;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutViewModel;

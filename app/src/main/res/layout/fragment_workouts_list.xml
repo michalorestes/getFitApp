@@ -26,18 +26,33 @@
     </android.support.v7.widget.RecyclerView>
 
     <FrameLayout
+        android:id="@+id/overlay_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clickable="false"
         android:outlineProvider="bounds">
 
-        <com.jds.fitnessjunkiess.getfitapp.CustomViews.AddBoxView
-            android:id="@+id/add_box_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:clipToPadding="false"
-            android:elevation="24dp"
-            android:outlineProvider="bounds" />
+        <!--<com.jds.fitnessjunkiess.getfitapp.CustomViews.AddBoxView-->
+        <!--android:id="@+id/add_box_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:clipToPadding="false"-->
+        <!--android:elevation="24dp"-->
+        <!--android:outlineProvider="bounds" >-->
+
+        <!--</com.jds.fitnessjunkiess.getfitapp.CustomViews.AddBoxView>-->
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/floatingActionButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:layout_marginEnd="30dp"-->
+        <!--android:clickable="true"-->
+        <!--android:src="@android:color/holo_green_light"-->
+        <!--android:focusable="true" />-->
 
     </FrameLayout>
 

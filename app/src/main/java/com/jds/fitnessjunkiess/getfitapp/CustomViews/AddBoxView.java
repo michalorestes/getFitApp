@@ -40,6 +40,7 @@ public class AddBoxView extends LinearLayout {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.add_box_view, this);
+        this.onFinishInflate();
     }
 
     @Override
@@ -53,7 +54,15 @@ public class AddBoxView extends LinearLayout {
         return this.button;
     }
 
+    public EditText getInputTxt() {
+        return inputTxt;
+    }
+
     public String getInput() {
         return this.inputTxt.getText().toString();
+    }
+
+    public void requestInputFocus() {
+        this.inputTxt.requestFocus();
     }
 }

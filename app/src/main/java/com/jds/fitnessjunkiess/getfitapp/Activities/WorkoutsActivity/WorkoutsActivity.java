@@ -36,6 +36,7 @@ public class WorkoutsActivity
 
         Intent intent = getIntent();
         User u = intent.getParcelableExtra("userData");
+        //TODO: Sort this part out once login is done
         int userId;
         if (u != null) {
             this.user.setId(u.getId());
@@ -46,6 +47,7 @@ public class WorkoutsActivity
 
         this.workoutsListFragment = new WorkoutsListFragment();
 
+        //TODO: DI Injection should be handled here
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()

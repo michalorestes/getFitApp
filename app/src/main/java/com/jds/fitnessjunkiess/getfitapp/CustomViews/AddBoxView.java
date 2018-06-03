@@ -54,10 +54,12 @@ public class AddBoxView extends LinearLayout {
         return this.button;
     }
 
+    //TODO: Give it more descriptive name
     public EditText getInputTxt() {
         return inputTxt;
     }
 
+    //TODO: Give it more descriptive name
     public String getInput() {
         return this.inputTxt.getText().toString();
     }

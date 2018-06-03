@@ -31,6 +31,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
 
     private RecyclerView recyclerView;
     private WorkoutListRecycleViewAdapter recycleViewAdapter;
+    //TODO: This needs to be renamed to fit its purpose
     private onWorkoutSelectedInterface onWorkoutSelectedInterface;
     private AddBoxView addBoxView;
     private FloatingActionButton actionButton;
@@ -55,6 +56,8 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
 
         this.addBoxView = new AddBoxView(Objects.requireNonNull(getContext()));
 
+
+        //TODO: Should this stay here or be in onCreateView
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT,
@@ -62,6 +65,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
         );
 
         this.addBoxView.setLayoutParams(layoutParams);
+        this.addBoxView.getButton().setOnClickListener(this);
 
     }
 
@@ -84,7 +88,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
 
         this.actionButton =
                 new FloatingActionButton(Objects.requireNonNull(getContext()));
-
+        //TODO: Should this be here or moved somewhere else? maybe to a different method?
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT,
@@ -119,6 +123,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    //TODO: I don't remember what this is for. Remind yourself and refactor to make more sense
     public void updateWorkoutsList(List<Workout> workouts, boolean newWorkout) {
         this.recycleViewAdapter.swapData(workouts);
         if (newWorkout){
@@ -139,6 +144,11 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
                 break;
             case R.id.overlay_layout:
                 removeAddBoxView((FrameLayout) v);
+                break;
+            case R.id.button:
+                //TODO: Keyboard and add box need to close once workout is added
+                //TODO: Add new workout to the top of the list
+                this.onWorkoutSelectedInterface.onAddWorkout(this.addBoxView.getInput());
                 break;
         }
     }

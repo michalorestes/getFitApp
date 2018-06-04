@@ -128,8 +128,8 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
         this.recycleViewAdapter.swapData(workouts);
         if (newWorkout){
             recyclerView
-                    .scrollToPosition(
-                            this.onWorkoutSelectedInterface.onWorkoutListRequested().size()-1
+                    .smoothScrollToPosition(
+                            0//this.onWorkoutSelectedInterface.onWorkoutListRequested().size()-1
                     );
         }
     }

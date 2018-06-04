@@ -109,7 +109,7 @@ public class WorkoutsActivity
         workout.setName(workoutName);
         workout.setUserId(this.user.getId());
         this.workoutViewModel.addWorkout(workout).observe(this, w -> {
-            this.workouts.add(w);
+            this.workouts.add(0, w);
             this.workoutsListFragment.updateWorkoutsList(this.workouts, true);
         });
     }

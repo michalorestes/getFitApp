@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutsActivity
-        extends AppCompatActivity implements WorkoutsListFragment.onWorkoutSelectedInterface {
+        extends AppCompatActivity implements WorkoutsListFragment.onWorkoutInteractionInterface {
 
     private WorkoutsListFragment workoutsListFragment;
     private List<Workout> workouts;

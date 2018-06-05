@@ -14,13 +14,13 @@ public class WorkoutListRecycleViewAdapter
         extends RecyclerView.Adapter<WorkoutListViewHolder> {
 
     private List<Workout> dataSet;
-    private WorkoutsListFragment.onWorkoutSelectedInterface onWorkoutSelectedInterface;
+    private WorkoutsListFragment.onWorkoutInteractionInterface onWorkoutInteractionInterface;
 
     public WorkoutListRecycleViewAdapter(
             List<Workout> dataSet,
-            WorkoutsListFragment.onWorkoutSelectedInterface onWorkoutSelectedInterface) {
+            WorkoutsListFragment.onWorkoutInteractionInterface onWorkoutInteractionInterface) {
         this.dataSet = dataSet;
-        this.onWorkoutSelectedInterface = onWorkoutSelectedInterface;
+        this.onWorkoutInteractionInterface = onWorkoutInteractionInterface;
     }
 
     @NonNull
@@ -29,13 +29,15 @@ public class WorkoutListRecycleViewAdapter
         View workoutCard = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.workout_card_layout, parent, false);
 
-        return new WorkoutListViewHolder(workoutCard, this.onWorkoutSelectedInterface);
+        return new WorkoutListViewHolder(workoutCard, this.onWorkoutInteractionInterface);
     }
 
     @Override
     public void onBindViewHolder(WorkoutListViewHolder holder, int position) {
         holder.title.setText(this.dataSet.get(position).getName());
-        holder.subTitle.setText(String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises");
+        holder.subTitle.setText(
+                String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises"
+        );
         holder.icon.setImageResource(R.drawable.dumbell_icon);
         holder.workoutIndex = position;
     }

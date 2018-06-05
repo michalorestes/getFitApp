@@ -1,7 +1,6 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,14 +9,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.Adapters.WorkoutListRecycleViewAdapter;
@@ -31,8 +27,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
 
     private RecyclerView recyclerView;
     private WorkoutListRecycleViewAdapter recycleViewAdapter;
-    //TODO: This needs to be renamed to fit its purpose
-    private onWorkoutSelectedInterface onWorkoutSelectedInterface;
+    private onWorkoutInteractionInterface onWorkoutInteractionInterface;
     private AddBoxView addBoxView;
     private FloatingActionButton actionButton;
     private InputMethodManager imm;
@@ -41,7 +36,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
 
     }
 
-    public interface onWorkoutSelectedInterface {
+    public interface onWorkoutInteractionInterface {
         void onWorkoutSelected(int workoutId);
         List<Workout> onWorkoutListRequested();
         void onAddWorkout(String workoutName);
@@ -53,20 +48,6 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
 
         this.imm = (InputMethodManager) getContext().getSystemService(
                 Context.INPUT_METHOD_SERVICE);
-
-        this.addBoxView = new AddBoxView(Objects.requireNonNull(getContext()));
-
-
-        //TODO: Should this stay here or be in onCreateView
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT,
-                Gravity.BOTTOM
-        );
-
-        this.addBoxView.setLayoutParams(layoutParams);
-        this.addBoxView.getButton().setOnClickListener(this);
-
     }
 
     @Override
@@ -81,27 +62,23 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
 
         this.recycleViewAdapter =
                 new WorkoutListRecycleViewAdapter(
-                        this.onWorkoutSelectedInterface.onWorkoutListRequested(),
-                        this.onWorkoutSelectedInterface
+                        this.onWorkoutInteractionInterface.onWorkoutListRequested(),
+                        this.onWorkoutInteractionInterface
                 );
         this.recyclerView.setAdapter(recycleViewAdapter);
 
-        this.actionButton =
-                new FloatingActionButton(Objects.requireNonNull(getContext()));
-        //TODO: Should this be here or moved somewhere else? maybe to a different method?
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                Gravity.RIGHT | Gravity.BOTTOM
+        this.actionButton = view.findViewById(R.id.floating_action_add_workout);
+        this.actionButton.setOnClickListener(this);
+
+        this.addBoxView = new AddBoxView(Objects.requireNonNull(getContext()));
+        FrameLayout.LayoutParams addBoxLayoutParams = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT,
+                Gravity.BOTTOM
         );
 
-        layoutParams.setMargins(0,0,60,90);
-        actionButton.setLayoutParams(layoutParams);
-        actionButton.setOnClickListener(this);
-        actionButton.setId(R.id.floating_action_add_workout);
-
-        FrameLayout overlayLayout = view.findViewById(R.id.overlay_layout);
-        overlayLayout.addView(actionButton);
+        this.addBoxView.setLayoutParams(addBoxLayoutParams);
+        this.addBoxView.getButton().setOnClickListener(this);
 
         return view;
     }
@@ -110,7 +87,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.recycleViewAdapter.swapData(
-                this.onWorkoutSelectedInterface.onWorkoutListRequested()
+                this.onWorkoutInteractionInterface.onWorkoutListRequested()
         );
     }
 
@@ -119,18 +96,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
         super.onAttach(context);
 
         if (context instanceof Activity){
-            onWorkoutSelectedInterface = (onWorkoutSelectedInterface) context;
-        }
-    }
-
-    //TODO: I don't remember what this is for. Remind yourself and refactor to make more sense
-    public void updateWorkoutsList(List<Workout> workouts, boolean newWorkout) {
-        this.recycleViewAdapter.swapData(workouts);
-        if (newWorkout){
-            recyclerView
-                    .smoothScrollToPosition(
-                            0//this.onWorkoutSelectedInterface.onWorkoutListRequested().size()-1
-                    );
+            onWorkoutInteractionInterface = (onWorkoutInteractionInterface) context;
         }
     }
 
@@ -138,18 +104,21 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.floating_action_add_workout:
-                Log.d("***", "floating action button: clicked ");
-                FrameLayout frameLayout = (FrameLayout) v.getParent();
-                this.addBoxView(frameLayout, v);
+                this.addBoxView((FrameLayout) v.getParent(), v);
                 break;
             case R.id.overlay_layout:
                 removeAddBoxView((FrameLayout) v);
                 break;
             case R.id.button:
-                //TODO: Keyboard and add box need to close once workout is added
-                //TODO: Add new workout to the top of the list
-                this.onWorkoutSelectedInterface.onAddWorkout(this.addBoxView.getInput());
+                this.onWorkoutInteractionInterface.onAddWorkout(this.addBoxView.getInputText());
                 break;
+        }
+    }
+
+    public void updateWorkoutsList(List<Workout> workouts, boolean newWorkout) {
+        this.recycleViewAdapter.swapData(workouts);
+        if (newWorkout){
+            recyclerView.smoothScrollToPosition(0);
         }
     }
 
@@ -162,12 +131,12 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
         viewGroup.removeView(v);
         viewGroup.addView(this.addBoxView);
         this.addBoxView.requestInputFocus();
-        this.imm.showSoftInput(this.addBoxView.getInputTxt(), InputMethodManager.SHOW_IMPLICIT);
+        this.imm.showSoftInput(this.addBoxView.getInput(), InputMethodManager.SHOW_IMPLICIT);
     }
 
     private void removeAddBoxView(FrameLayout viewGroup) {
         viewGroup.setClickable(false);
-        this.imm.hideSoftInputFromWindow(this.addBoxView.getInputTxt().getWindowToken(), 0);
+        this.imm.hideSoftInputFromWindow(this.addBoxView.getInput().getWindowToken(), 0);
         viewGroup.removeView(this.addBoxView);
         viewGroup.setBackgroundColor(
                 getResources().getColor(R.color.cardview_shadow_end_color, null)

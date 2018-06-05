@@ -20,6 +20,7 @@ public class ViewWorkoutFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     Workout workout;
+
     public ViewWorkoutFragment() {
 
     }
@@ -30,8 +31,6 @@ public class ViewWorkoutFragment extends Fragment {
         Bundle bundle  = getArguments();
         Gson gson = new Gson();
         this.workout = gson.fromJson(bundle.getString("workout"), Workout.class);
-
-        Log.i("**", workout.toString());
     }
 
     @Nullable
@@ -44,7 +43,9 @@ public class ViewWorkoutFragment extends Fragment {
         this.recyclerView.setHasFixedSize(true);
         this.linearLayoutManager = new LinearLayoutManager(getContext());
         this.recyclerView.setLayoutManager(this.linearLayoutManager);
-        WorkoutViewRecycleViewAdapter workoutViewRecycleViewAdapter = new WorkoutViewRecycleViewAdapter(this.workout.getExercises());
+
+        WorkoutViewRecycleViewAdapter workoutViewRecycleViewAdapter =
+                new WorkoutViewRecycleViewAdapter(this.workout.getExercises());
         this.recyclerView.setAdapter(workoutViewRecycleViewAdapter);
         return view;
     }

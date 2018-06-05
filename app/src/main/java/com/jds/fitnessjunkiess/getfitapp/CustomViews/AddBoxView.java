@@ -3,16 +3,11 @@ package com.jds.fitnessjunkiess.getfitapp.CustomViews;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class AddBoxView extends LinearLayout {
@@ -54,13 +49,11 @@ public class AddBoxView extends LinearLayout {
         return this.button;
     }
 
-    //TODO: Give it more descriptive name
-    public EditText getInputTxt() {
+    public EditText getInput() {
         return inputTxt;
     }
 
-    //TODO: Give it more descriptive name
-    public String getInput() {
+    public String getInputText() {
         return this.inputTxt.getText().toString();
     }
 

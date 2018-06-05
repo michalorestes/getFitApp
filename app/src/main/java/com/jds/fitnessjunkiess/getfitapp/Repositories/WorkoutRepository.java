@@ -4,16 +4,10 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
-
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.Services.WorkoutData;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

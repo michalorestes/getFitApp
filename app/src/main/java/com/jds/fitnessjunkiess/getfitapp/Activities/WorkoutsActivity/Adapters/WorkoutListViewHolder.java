@@ -17,7 +17,7 @@ class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
     WorkoutListViewHolder(
             View card,
-            WorkoutsListFragment.onWorkoutSelectedInterface onWorkoutSelectedInterface) {
+            WorkoutsListFragment.onWorkoutInteractionInterface onWorkoutInteractionInterface) {
         super(card);
         this.title = card.findViewById(R.id.workout_card_title);
         this.subTitle = card.findViewById(R.id.workout_card_sub_title);
@@ -26,7 +26,7 @@ class WorkoutListViewHolder extends RecyclerView.ViewHolder {
 
         card.setOnClickListener((View v) -> {
             Log.i("view", ""+ this.workoutIndex);
-            onWorkoutSelectedInterface.onWorkoutSelected(workoutIndex);
+            onWorkoutInteractionInterface.onWorkoutSelected(workoutIndex);
         });
     }
 }

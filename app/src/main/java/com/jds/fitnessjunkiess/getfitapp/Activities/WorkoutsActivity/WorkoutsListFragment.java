@@ -23,6 +23,8 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 import java.util.List;
 import java.util.Objects;
 
+import dagger.android.AndroidInjectionModule;
+
 public class WorkoutsListFragment extends Fragment implements View.OnClickListener {
 
     private RecyclerView recyclerView;

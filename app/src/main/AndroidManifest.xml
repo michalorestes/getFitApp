@@ -18,7 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.MainActivity.MainActivity" />
         <activity android:name=".Activities.WorkoutsActivity.WorkoutsActivity" />
         <activity android:name=".Activities.LoginActivity.LoginActivity"></activity>
     </application>

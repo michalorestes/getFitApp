@@ -4,9 +4,12 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewParent;
 
 import com.google.gson.Gson;
+import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.Adapters.PagerAdapter;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.WorkoutViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerModules.WorkoutViewModelFactoryModule;
@@ -45,15 +48,27 @@ public class WorkoutsActivity
             userId = 0;
         }
 
-        this.workoutsListFragment = new WorkoutsListFragment();
+        //------------- TEST SECTION
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.pager);
+        viewPager.setAdapter(pagerAdapter);
 
+
+
+
+
+
+        //--------------------------
+
+//        this.workoutsListFragment = new WorkoutsListFragment();
+//
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager
+//                .beginTransaction()
+//                .add(R.id.workouts_fragment_container, workoutsListFragment)
+//                .commit();
+//
         //TODO: DI Injection should be handled here
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .add(R.id.workouts_fragment_container, workoutsListFragment)
-                .commit();
-
         WorkoutViewModelFactoryComponent workoutViewModelFactoryComponent =
                 DaggerWorkoutViewModelFactoryComponent
                         .builder()
@@ -70,7 +85,8 @@ public class WorkoutsActivity
         workoutViewModel.init(this.user.getId());
         workoutViewModel.getWorkout().observe(this, w -> {
             this.workouts = w;
-            this.workoutsListFragment.updateWorkoutsList(this.workouts, false);
+            pagerAdapter.updateWorkoutList(this.workouts, false);
+            //this.workoutsListFragment.updateWorkoutsList(this.workouts, false);
         });
     }
 
@@ -82,20 +98,20 @@ public class WorkoutsActivity
 
     @Override
     public void onWorkoutSelected(int workoutIndex) {
-        Workout workout = this.workouts.get(workoutIndex);
-
-        Gson gson = new Gson();
-        String workoutJson = gson.toJson(workout);
-
-        Bundle bundle = new Bundle();
-        bundle.putString("workout", workoutJson);
-        ViewWorkoutFragment viewWorkoutFragment = new ViewWorkoutFragment();
-        viewWorkoutFragment.setArguments(bundle);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.workouts_fragment_container, viewWorkoutFragment)
-                .addToBackStack(null)
-                .commit();
+//        Workout workout = this.workouts.get(workoutIndex);
+//
+//        Gson gson = new Gson();
+//        String workoutJson = gson.toJson(workout);
+//
+//        Bundle bundle = new Bundle();
+//        bundle.putString("workout", workoutJson);
+//        ViewWorkoutFragment viewWorkoutFragment = new ViewWorkoutFragment();
+//        viewWorkoutFragment.setArguments(bundle);
+//        getSupportFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.workouts_fragment_container, viewWorkoutFragment)
+//                .addToBackStack(null)
+//                .commit();
     }
 
     @Override

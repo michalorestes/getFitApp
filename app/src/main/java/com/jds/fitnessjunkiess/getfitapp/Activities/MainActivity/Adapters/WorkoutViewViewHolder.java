@@ -1,12 +1,10 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.Adapters;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.WorkoutsListFragment;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 class WorkoutViewViewHolder extends RecyclerView.ViewHolder {

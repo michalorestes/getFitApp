@@ -1,10 +1,11 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.Adapters;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.WorkoutsListFragment;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Workouts.WorkoutsListFragment;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public class PagerAdapter extends FragmentPagerAdapter {
     WorkoutsListFragment workoutsListFragment;
     WorkoutsListFragment workoutsListFragment2;
+    Context context;
 
     public PagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -29,7 +31,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     }
 
     public void updateWorkoutList(List<Workout> workouts, boolean newWorkout) {
-        this.workoutsListFragment.updateWorkoutsList(workouts, newWorkout);
+//        this.workoutsListFragment.updateWorkoutsList(workouts, newWorkout);
     }
 
     @Override

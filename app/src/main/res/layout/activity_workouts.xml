@@ -10,14 +10,14 @@
     <!--xmlns:tools="http://schemas.android.com/tools"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
-    <!--tools:context=".Activities.WorkoutsActivity.WorkoutsActivity">-->
+    <!--tools:context=".Activities.MainActivity.MainActivity">-->
 
     <!--<FrameLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:id="@+id/workouts_fragment_container">-->
         <!--<fragment-->
-            <!--android:name="com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.WorkoutsListFragment"-->
+            <!--android:name="com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.WorkoutsListFragment"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent"-->
             <!--android:id="@+id/workouts_list" />-->

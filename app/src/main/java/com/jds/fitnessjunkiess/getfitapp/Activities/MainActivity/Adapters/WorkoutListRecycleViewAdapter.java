@@ -1,26 +1,27 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.Adapters;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.WorkoutsListFragment;
+
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Workouts.WorkoutsListInterface;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutListRecycleViewAdapter
         extends RecyclerView.Adapter<WorkoutListViewHolder> {
 
     private List<Workout> dataSet;
-    private WorkoutsListFragment.onWorkoutInteractionInterface onWorkoutInteractionInterface;
+    private WorkoutsListInterface workoutsListInterface;
 
-    public WorkoutListRecycleViewAdapter(
-            List<Workout> dataSet,
-            WorkoutsListFragment.onWorkoutInteractionInterface onWorkoutInteractionInterface) {
-        this.dataSet = dataSet;
-        this.onWorkoutInteractionInterface = onWorkoutInteractionInterface;
+    public WorkoutListRecycleViewAdapter(WorkoutsListInterface workoutsListInterface) {
+        this.dataSet = new ArrayList<>();
+        this.workoutsListInterface = workoutsListInterface;
     }
 
     @NonNull
@@ -29,7 +30,7 @@ public class WorkoutListRecycleViewAdapter
         View workoutCard = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.workout_card_layout, parent, false);
 
-        return new WorkoutListViewHolder(workoutCard, this.onWorkoutInteractionInterface);
+        return new WorkoutListViewHolder(workoutCard, this.workoutsListInterface);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class WorkoutListRecycleViewAdapter
                 String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises"
         );
         holder.icon.setImageResource(R.drawable.dumbell_icon);
-        holder.workoutIndex = position;
+        holder.workoutIndex = this.dataSet.get(position).getId();
     }
 
     @Override

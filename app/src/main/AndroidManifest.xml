@@ -18,8 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.WorkoutsActivity.WorkoutsActivity" />
-        <activity android:name=".Activities.LoginActivity.LoginActivity"></activity>
+        <activity android:name=".Activities.MainActivity.MainActivity" />
+        <activity android:name=".Activities.LoginActivity.LoginActivity" />
+        <activity android:name=".Activities.WorkoutViewActivity.WorkoutViewActivity"></activity>
     </application>
 
 </manifest>

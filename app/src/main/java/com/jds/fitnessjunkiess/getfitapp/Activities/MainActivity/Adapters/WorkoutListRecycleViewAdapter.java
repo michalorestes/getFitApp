@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Workouts.WorkoutsListInterface;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListInterface;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 

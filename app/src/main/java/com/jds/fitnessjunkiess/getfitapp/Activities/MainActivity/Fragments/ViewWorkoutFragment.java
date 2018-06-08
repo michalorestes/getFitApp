@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

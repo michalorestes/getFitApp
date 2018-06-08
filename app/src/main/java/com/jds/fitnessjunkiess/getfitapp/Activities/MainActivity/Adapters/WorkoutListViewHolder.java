@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Workouts.WorkoutsListInterface;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListInterface;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 class WorkoutListViewHolder extends RecyclerView.ViewHolder {

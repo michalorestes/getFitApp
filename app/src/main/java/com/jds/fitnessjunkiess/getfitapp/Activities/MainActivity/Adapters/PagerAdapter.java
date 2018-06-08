@@ -1,41 +1,43 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters;
 
-import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Workouts.WorkoutsListFragment;
-import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
-
-import java.util.List;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Exercises.ExercisesListFragment;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
-    WorkoutsListFragment workoutsListFragment;
-    WorkoutsListFragment workoutsListFragment2;
-    Context context;
+    private WorkoutsListFragment workoutsListFragment;
+    private ExercisesListFragment exerciseList;
 
     public PagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
         this.workoutsListFragment = new WorkoutsListFragment();
-        this.workoutsListFragment2 = new WorkoutsListFragment();
+        this.exerciseList = new ExercisesListFragment();
     }
 
     @Override
     public Fragment getItem(int position) {
 
-        if (position == 1){
+        if (position == 0){
             return this.workoutsListFragment;
         }
-        return this.workoutsListFragment2;
-    }
-
-    public void updateWorkoutList(List<Workout> workouts, boolean newWorkout) {
-//        this.workoutsListFragment.updateWorkoutsList(workouts, newWorkout);
+        return this.exerciseList;
     }
 
     @Override
     public int getCount() {
         return 2;
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getPageTitle(int position) {
+        if (position == 0){
+            return "Workouts";
+        }
+        return"Exercises";
     }
 }

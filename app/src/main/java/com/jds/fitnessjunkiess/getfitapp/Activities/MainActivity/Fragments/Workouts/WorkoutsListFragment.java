@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Workouts;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts;
 
 import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
@@ -17,7 +17,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters.WorkoutListRecycleViewAdapter;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
 import com.jds.fitnessjunkiess.getfitapp.CustomViews.AddBoxView;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.WorkoutViewModelFactoryComponent;
@@ -75,7 +74,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_workouts_list, container, false);
         this.recyclerView = view.findViewById(R.id.workoutsList);
-        this.recyclerView.setHasFixedSize(true);
+//        this.recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager recyclerViewLayoutManager =
                 new LinearLayoutManager(getContext());
         this.recyclerView.setLayoutManager(recyclerViewLayoutManager);

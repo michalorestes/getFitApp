@@ -1,17 +1,16 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.Adapters.WorkoutViewRecycleViewAdapter;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters.WorkoutViewRecycleViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 

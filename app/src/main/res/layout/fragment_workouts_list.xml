@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#e1e1e1"
     android:padding="0dp"
-    tools:context=".Activities.WorkoutsActivity.WorkoutsListFragment"
+    tools:context=".Activities.MainActivity.Fragments.Workouts.WorkoutsListFragment"
     tools:layout_editor_absoluteY="81dp">
 
 

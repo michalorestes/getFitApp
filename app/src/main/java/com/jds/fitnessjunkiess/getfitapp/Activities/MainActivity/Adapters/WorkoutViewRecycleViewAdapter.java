@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.Adapters;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

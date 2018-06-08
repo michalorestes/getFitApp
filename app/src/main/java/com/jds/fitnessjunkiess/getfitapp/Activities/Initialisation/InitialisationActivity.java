@@ -9,11 +9,10 @@ import android.util.Log;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.jds.fitnessjunkiess.getfitapp.Activities.LoginActivity.LoginActivity;
-import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.WorkoutsActivity;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerUserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.UserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerModules.UserViewModelFactoryModule;
-import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.UserViewModelFactory;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.UserViewModel;
@@ -57,7 +56,7 @@ public class InitialisationActivity extends AppCompatActivity {
         userViewModel.getUser().observe(this, u -> {
             if (u != null){
                 Log.i("***", "Got the user: " + u.getEmail() + " " + u.getUsername());
-                Intent workoutsActivity = new Intent(this, WorkoutsActivity.class);
+                Intent workoutsActivity = new Intent(this, MainActivity.class);
                 workoutsActivity.putExtra("userData", u);
                 startActivity(workoutsActivity);
                 finish();

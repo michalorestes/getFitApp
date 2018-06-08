@@ -13,7 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutsActivity.WorkoutsActivity;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerUserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.UserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerModules.UserViewModelFactoryModule;
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         userViewModel.addUser(user).observe(this, u -> {
             if (u != null){
                 Log.i("***", "Got the user: " + u.getEmail() + " " + u.getUsername());
-                Intent intent = new Intent(this, WorkoutsActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("userData", u);
                 startActivity(intent);
             }

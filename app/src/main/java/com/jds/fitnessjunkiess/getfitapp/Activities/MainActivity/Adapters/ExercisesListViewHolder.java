@@ -1,6 +1,7 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
@@ -16,6 +17,7 @@ public class ExercisesListViewHolder extends RecyclerView.ViewHolder implements 
     private ImageView icon;
     private Button button;
     private Context context;
+    private int exerciseIndex;
 
     public ExercisesListViewHolder(View itemView, Context context) {
         super(itemView);
@@ -29,6 +31,14 @@ public class ExercisesListViewHolder extends RecyclerView.ViewHolder implements 
 
     public void setExerciseName(String exerciseName) {
         this.exerciseName.setText(exerciseName);
+    }
+
+    public void setExerciseIcon(int drawableId) {
+        this.icon.setImageResource(drawableId);
+    }
+
+    public void setExerciseIndex(int index) {
+        this.exerciseIndex = index;
     }
 
     @Override

@@ -5,10 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.jds.fitnessjunkiess.getfitapp.Entities.WorkoutExercise;
 import com.jds.fitnessjunkiess.getfitapp.R;
-
 import java.util.List;
 
 public class WorkoutViewRecycleViewAdapter
@@ -35,7 +33,6 @@ public class WorkoutViewRecycleViewAdapter
         holder.sets.setText(String.valueOf(this.exercises.get(position).getSets() + " sets"));
         holder.reps.setText(String.valueOf(this.exercises.get(position).getReps() + " reps"));
         holder.icon.setImageResource(R.drawable.body_weight_exercise_type);
-
     }
 
     @Override

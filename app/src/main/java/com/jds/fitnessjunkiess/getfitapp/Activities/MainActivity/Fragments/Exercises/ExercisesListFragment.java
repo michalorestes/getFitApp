@@ -3,6 +3,7 @@ package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Exer
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExercisesListFragment extends Fragment {
+public class ExercisesListFragment extends Fragment implements View.OnClickListener{
 
     private List<Exercise> exercises;
 
@@ -39,7 +40,6 @@ public class ExercisesListFragment extends Fragment {
         this.exercises.add(exercise);
         this.exercises.add(exercise2);
         this.exercises.add(exercise3);
-
     }
 
     @Override
@@ -51,10 +51,15 @@ public class ExercisesListFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.exercises_list_recycler_view);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        ExercisesListAdapter adapter = new ExercisesListAdapter();
+        ExercisesListAdapter adapter = new ExercisesListAdapter(getContext());
         recyclerView.setAdapter(adapter);
         adapter.swapData(this.exercises);
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

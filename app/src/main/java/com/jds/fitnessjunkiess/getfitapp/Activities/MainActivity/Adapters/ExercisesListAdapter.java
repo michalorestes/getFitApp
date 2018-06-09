@@ -1,5 +1,6 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,9 +14,11 @@ import java.util.List;
 public class ExercisesListAdapter extends RecyclerView.Adapter<ExercisesListViewHolder> {
 
     private List<Exercise> dataSet;
+    private Context context;
 
-    public ExercisesListAdapter() {
+    public ExercisesListAdapter(Context context) {
         this.dataSet = new ArrayList<>();
+        this.context = context;
     }
 
     @NonNull
@@ -24,7 +27,7 @@ public class ExercisesListAdapter extends RecyclerView.Adapter<ExercisesListView
         View exerciseItem = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_holder_exercise_list, parent, false);
 
-        return new ExercisesListViewHolder(exerciseItem);
+        return new ExercisesListViewHolder(exerciseItem, this.context);
     }
 
     @Override

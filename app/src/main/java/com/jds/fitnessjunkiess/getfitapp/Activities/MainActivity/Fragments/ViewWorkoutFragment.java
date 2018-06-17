@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters.WorkoutViewRecycleViewAdapter;
+import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.Adapters.WorkoutViewRecycleViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 

@@ -2,11 +2,9 @@ package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters.PagerAdapter;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListFragment;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListInterface;
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.WorkoutViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.Entities.User;
@@ -19,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements WorkoutsListInter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workouts);
+        setContentView(R.layout.activity_main);
         this.user = new User();
 
         Intent intent = getIntent();
@@ -33,13 +31,10 @@ public class MainActivity extends AppCompatActivity implements WorkoutsListInter
             userId = 0;
         }
 
-        TabLayout tabLayout = findViewById(R.id.tabs);
-        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.pager);
-        viewPager.setAdapter(pagerAdapter);
-//        tabLayout.setTabsFromPagerAdapter();
-        tabLayout.setupWithViewPager(viewPager, true);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        WorkoutsListFragment workoutsListFragment = new WorkoutsListFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.main_layout, workoutsListFragment).commit();
     }
 
     @Override

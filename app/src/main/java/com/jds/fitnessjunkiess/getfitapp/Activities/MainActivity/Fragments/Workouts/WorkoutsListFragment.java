@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters.WorkoutListRecycleViewAdapter;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListRecycleViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.CustomViews.AddBoxView;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.WorkoutViewModelFactoryComponent;

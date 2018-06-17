@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;

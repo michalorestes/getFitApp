@@ -157,7 +157,15 @@ public class WorkoutsListFragment
     @Override
     public void onWorkoutSelected(int workoutId) {
         Intent workoutView = new Intent(getContext(), WorkoutViewActivity.class);
-        workoutView.putExtra("workoutId", workoutId);
+        Workout workout = this.workoutViewModel
+                .getWorkout()
+                .getValue()
+                .stream()
+                .filter(w -> w.getId() == workoutId)
+                .findFirst()
+                .get();
+
+        workoutView.putExtra("workoutData", workout);
         startActivity(workoutView);
     }
 }

@@ -5,12 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListFragment;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListInterface;
-import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.WorkoutViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
-public class MainActivity extends AppCompatActivity implements WorkoutsListInterface {
+public class MainActivity extends AppCompatActivity {
 
     User user;
 
@@ -41,12 +39,5 @@ public class MainActivity extends AppCompatActivity implements WorkoutsListInter
     public void onBackPressed() {
         super.onBackPressed();
         getSupportFragmentManager().popBackStackImmediate();
-    }
-
-    @Override
-    public void onWorkoutSelected(int workoutId) {
-        Intent workoutView = new Intent(getApplicationContext(), WorkoutViewActivity.class);
-        workoutView.putExtra("workoutId", workoutId);
-        startActivity(workoutView);
     }
 }

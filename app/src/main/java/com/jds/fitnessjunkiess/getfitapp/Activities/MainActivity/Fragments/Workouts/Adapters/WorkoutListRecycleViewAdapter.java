@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListViewHolder;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListInterface;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
@@ -18,11 +16,11 @@ public class WorkoutListRecycleViewAdapter
         extends RecyclerView.Adapter<WorkoutListViewHolder> {
 
     private List<Workout> dataSet;
-    private WorkoutsListInterface workoutsListInterface;
+    private WorkoutListViewHolderInterface workoutListViewHolderInterface;
 
-    public WorkoutListRecycleViewAdapter(WorkoutsListInterface workoutsListInterface) {
+    public WorkoutListRecycleViewAdapter(WorkoutListViewHolderInterface workoutListViewHolderInterface) {
         this.dataSet = new ArrayList<>();
-        this.workoutsListInterface = workoutsListInterface;
+        this.workoutListViewHolderInterface = workoutListViewHolderInterface;
     }
 
     @NonNull
@@ -31,7 +29,7 @@ public class WorkoutListRecycleViewAdapter
         View workoutCard = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.workout_card_layout, parent, false);
 
-        return new WorkoutListViewHolder(workoutCard, this.workoutsListInterface);
+        return new WorkoutListViewHolder(workoutCard, this.workoutListViewHolderInterface);
     }
 
     @Override

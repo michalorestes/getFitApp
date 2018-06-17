@@ -1,8 +1,8 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts;
 
-import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -15,8 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
-
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListRecycleViewAdapter;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListViewHolderInterface;
+import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.WorkoutViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.CustomViews.AddBoxView;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.WorkoutViewModelFactoryComponent;
@@ -25,11 +26,12 @@ import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.WorkoutViewModelFactory;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutViewModel;
-
 import java.util.List;
 import java.util.Objects;
 
-public class WorkoutsListFragment extends Fragment implements View.OnClickListener {
+public class WorkoutsListFragment
+        extends Fragment
+        implements View.OnClickListener, WorkoutListViewHolderInterface {
 
     private RecyclerView recyclerView;
     private WorkoutListRecycleViewAdapter recycleViewAdapter;
@@ -37,7 +39,6 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
     private FloatingActionButton actionButton;
     private InputMethodManager imm;
     private WorkoutViewModel workoutViewModel;
-    private WorkoutsListInterface workoutsListInterface;
 
     public WorkoutsListFragment() {
 
@@ -61,9 +62,9 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
                         .get(WorkoutViewModel.class);
 
         workoutViewModel.init(7);
-        workoutViewModel.getWorkout().observe(this, w -> {
-            this.updateWorkoutsList(w, false);
-        });
+        workoutViewModel.getWorkout().observe(
+                this, w -> this.updateWorkoutsList(w, false)
+        );
 
         this.imm = (InputMethodManager) getContext().getSystemService(
                 Context.INPUT_METHOD_SERVICE);
@@ -80,7 +81,7 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
         this.recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
         this.recycleViewAdapter =
-                new WorkoutListRecycleViewAdapter(this.workoutsListInterface);
+                new WorkoutListRecycleViewAdapter(this);
         this.recyclerView.setAdapter(recycleViewAdapter);
 
         this.actionButton = view.findViewById(R.id.floating_action_add_workout);
@@ -97,16 +98,6 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
         this.addBoxView.getButton().setOnClickListener(this);
 
         return view;
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if (context instanceof Activity){
-            workoutsListInterface = (WorkoutsListInterface) context;
-        }
     }
 
     @Override
@@ -161,5 +152,12 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
                 getResources().getColor(R.color.cardview_shadow_end_color, null)
         );
         viewGroup.addView(this.actionButton);
+    }
+
+    @Override
+    public void onWorkoutSelected(int workoutId) {
+        Intent workoutView = new Intent(getContext(), WorkoutViewActivity.class);
+        workoutView.putExtra("workoutId", workoutId);
+        startActivity(workoutView);
     }
 }

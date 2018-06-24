@@ -10,16 +10,16 @@ import com.jds.fitnessjunkiess.getfitapp.ViewModels.UserViewModel;
 import javax.inject.Inject;
 
 public class UserViewModelFactory implements ViewModelProvider.Factory {
-    private UserRepository userRepository;
+  private UserRepository userRepository;
 
-    @Inject
-    public UserViewModelFactory(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
+  @Inject
+  public UserViewModelFactory(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
-    @NonNull
-    @Override
-    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new UserViewModel(this.userRepository);
-    }
+  @NonNull
+  @Override
+  public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+    return (T) new UserViewModel(this.userRepository);
+  }
 }

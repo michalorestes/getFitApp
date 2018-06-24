@@ -11,16 +11,16 @@ import javax.inject.Inject;
 
 public class WorkoutViewModelFactory implements ViewModelProvider.Factory {
 
-    private final WorkoutRepository workoutRepository;
+  private final WorkoutRepository workoutRepository;
 
-    @Inject
-    public WorkoutViewModelFactory(WorkoutRepository workoutRepository) {
-        this.workoutRepository = workoutRepository;
-    }
+  @Inject
+  public WorkoutViewModelFactory(WorkoutRepository workoutRepository) {
+    this.workoutRepository = workoutRepository;
+  }
 
-    @NonNull
-    @Override
-    public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        return (T) new WorkoutViewModel(this.workoutRepository);
-    }
+  @NonNull
+  @Override
+  public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+    return (T) new WorkoutViewModel(this.workoutRepository);
+  }
 }

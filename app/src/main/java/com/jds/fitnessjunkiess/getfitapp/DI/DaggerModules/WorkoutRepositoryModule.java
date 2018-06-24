@@ -8,8 +8,9 @@ import retrofit2.Retrofit;
 
 @Module
 public class WorkoutRepositoryModule {
-    @Provides @Singleton
-    WorkoutRepository provideWorkoutDataRepository(){
-        return new WorkoutRepository(new Retrofit.Builder());
-    }
+  @Provides
+  @Singleton
+  WorkoutRepository provideWorkoutDataRepository() {
+    return new WorkoutRepository(new Retrofit.Builder());
+  }
 }

@@ -8,5 +8,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = {WorkoutRepositoryModule.class})
 public interface WorkoutRepositoryComponent {
-    WorkoutRepository provideWorkoutDataRepository();
+  WorkoutRepository provideWorkoutDataRepository();
 }

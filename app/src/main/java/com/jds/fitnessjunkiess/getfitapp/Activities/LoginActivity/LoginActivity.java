@@ -24,81 +24,81 @@ import com.jds.fitnessjunkiess.getfitapp.ViewModels.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_CODE = 0;
+  private GoogleSignInClient mGoogleSignInClient;
+  private static final int RC_CODE = 0;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_login);
 
-        GoogleSignInOptions gso =
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
+    GoogleSignInOptions gso =
+        new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        SignInButton signInButton = findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
-        signInButton.setOnClickListener(this);
+    mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    SignInButton signInButton = findViewById(R.id.sign_in_button);
+    signInButton.setSize(SignInButton.SIZE_WIDE);
+    signInButton.setOnClickListener(this);
+  }
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+    if (requestCode == RC_CODE) {
+      Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+      handleSignInResult(task);
     }
+  }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_CODE) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-        }
+  @Override
+  public void onClick(View v) {
+    if (v.getId() == R.id.sign_in_button) {
+      signIn();
     }
+  }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.sign_in_button){
-            signIn();
-        }
+  public void signIn() {
+    Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+    startActivityForResult(signInIntent, RC_CODE);
+  }
+
+  private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+    try {
+      GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+      startWorkoutsActivity(account);
+    } catch (ApiException e) {
+      Log.w("***", "signInResult:failed code=" + e.getStatusCode());
     }
+  }
 
-    public void signIn(){
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_CODE);
-    }
+  private void startWorkoutsActivity(GoogleSignInAccount account) {
+    UserViewModelFactoryComponent userViewModelFactoryComponent =
+        DaggerUserViewModelFactoryComponent.builder()
+            .userViewModelFactoryModule(new UserViewModelFactoryModule())
+            .build();
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            startWorkoutsActivity(account);
-        } catch (ApiException e) {
-            Log.w("***", "signInResult:failed code=" + e.getStatusCode());
-        }
-    }
+    UserViewModelFactory userViewModelFactory =
+        userViewModelFactoryComponent.provideUserViewModelFactory();
 
-    private void startWorkoutsActivity(GoogleSignInAccount account){
-        UserViewModelFactoryComponent userViewModelFactoryComponent =
-                DaggerUserViewModelFactoryComponent
-                        .builder()
-                        .userViewModelFactoryModule(new UserViewModelFactoryModule())
-                        .build();
+    UserViewModel userViewModel =
+        ViewModelProviders.of(this, userViewModelFactory).get(UserViewModel.class);
 
-        UserViewModelFactory userViewModelFactory =
-                userViewModelFactoryComponent
-                        .provideUserViewModelFactory();
+    User user = new User();
+    user.setEmail(account.getEmail());
+    user.setUsername(account.getDisplayName());
 
-        UserViewModel userViewModel = ViewModelProviders.of(this, userViewModelFactory)
-                .get(UserViewModel.class);
-
-        User user = new User();
-        user.setEmail(account.getEmail());
-        user.setUsername(account.getDisplayName());
-
-        userViewModel.addUser(user).observe(this, u -> {
-            if (u != null){
+    userViewModel
+        .addUser(user)
+        .observe(
+            this,
+            u -> {
+              if (u != null) {
                 Log.i("***", "Got the user: " + u.getEmail() + " " + u.getUsername());
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("userData", u);
                 startActivity(intent);
-            }
-        });
-    }
+              }
+            });
+  }
 }

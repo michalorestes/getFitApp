@@ -12,43 +12,43 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkoutListRecycleViewAdapter
-        extends RecyclerView.Adapter<WorkoutListViewHolder> {
+public class WorkoutListRecycleViewAdapter extends RecyclerView.Adapter<WorkoutListViewHolder> {
 
-    private List<Workout> dataSet;
-    private WorkoutListViewHolderInterface workoutListViewHolderInterface;
+  private List<Workout> dataSet;
+  private WorkoutListViewHolderInterface workoutListViewHolderInterface;
 
-    public WorkoutListRecycleViewAdapter(WorkoutListViewHolderInterface workoutListViewHolderInterface) {
-        this.dataSet = new ArrayList<>();
-        this.workoutListViewHolderInterface = workoutListViewHolderInterface;
-    }
+  public WorkoutListRecycleViewAdapter(
+      WorkoutListViewHolderInterface workoutListViewHolderInterface) {
+    this.dataSet = new ArrayList<>();
+    this.workoutListViewHolderInterface = workoutListViewHolderInterface;
+  }
 
-    @NonNull
-    @Override
-    public WorkoutListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View workoutCard = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.workout_card_layout, parent, false);
+  @NonNull
+  @Override
+  public WorkoutListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View workoutCard =
+        LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.workout_card_layout, parent, false);
 
-        return new WorkoutListViewHolder(workoutCard, this.workoutListViewHolderInterface);
-    }
+    return new WorkoutListViewHolder(workoutCard, this.workoutListViewHolderInterface);
+  }
 
-    @Override
-    public void onBindViewHolder(WorkoutListViewHolder holder, int position) {
-        holder.title.setText(this.dataSet.get(position).getName());
-        holder.subTitle.setText(
-                String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises"
-        );
-        holder.icon.setImageResource(R.drawable.dumbell_icon);
-        holder.workoutIndex = this.dataSet.get(position).getId();
-    }
+  @Override
+  public void onBindViewHolder(WorkoutListViewHolder holder, int position) {
+    holder.title.setText(this.dataSet.get(position).getName());
+    holder.subTitle.setText(
+        String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises");
+    holder.icon.setImageResource(R.drawable.dumbell_icon);
+    holder.workoutIndex = this.dataSet.get(position).getId();
+  }
 
-    @Override
-    public int getItemCount() {
-        return this.dataSet.size();
-    }
+  @Override
+  public int getItemCount() {
+    return this.dataSet.size();
+  }
 
-    public void swapData(List<Workout> data){
-        this.dataSet = data;
-        notifyDataSetChanged();
-    }
+  public void swapData(List<Workout> data) {
+    this.dataSet = data;
+    notifyDataSetChanged();
+  }
 }

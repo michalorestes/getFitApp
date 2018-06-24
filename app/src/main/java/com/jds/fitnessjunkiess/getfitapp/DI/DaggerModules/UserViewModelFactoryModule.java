@@ -11,12 +11,9 @@ import retrofit2.Retrofit;
 
 @Module
 public class UserViewModelFactoryModule {
-    @Provides @Singleton
-    UserViewModelFactory provideUserViewModelFactory(){
-        return new UserViewModelFactory(
-                new UserRepository(
-                        new Retrofit.Builder()
-                )
-        );
-    }
+  @Provides
+  @Singleton
+  UserViewModelFactory provideUserViewModelFactory() {
+    return new UserViewModelFactory(new UserRepository(new Retrofit.Builder()));
+  }
 }

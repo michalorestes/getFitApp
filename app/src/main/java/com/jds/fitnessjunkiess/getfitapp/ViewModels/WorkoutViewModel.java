@@ -11,27 +11,27 @@ import javax.inject.Inject;
 
 public class WorkoutViewModel extends ViewModel {
 
-    private LiveData<List<Workout>> workout;
-    private WorkoutRepository workoutData;
+  private LiveData<List<Workout>> workout;
+  private WorkoutRepository workoutData;
 
-    @Inject
-    public WorkoutViewModel(WorkoutRepository workoutData){
-        this.workoutData = workoutData;
+  @Inject
+  public WorkoutViewModel(WorkoutRepository workoutData) {
+    this.workoutData = workoutData;
+  }
+
+  public void init(int userId) {
+    if (workout != null) {
+      return;
     }
 
-    public void init(int userId){
-        if (workout != null){
-            return;
-        }
+    this.workout = this.workoutData.getWorkouts(userId);
+  }
 
-        this.workout = this.workoutData.getWorkouts(userId);
-    }
+  public LiveData<List<Workout>> getWorkout() {
+    return workout;
+  }
 
-    public LiveData<List<Workout>> getWorkout() {
-        return workout;
-    }
-
-    public LiveData<Workout> addWorkout(Workout workout) {
-        return this.workoutData.addWorkout(workout);
-    }
+  public LiveData<Workout> addWorkout(Workout workout) {
+    return this.workoutData.addWorkout(workout);
+  }
 }

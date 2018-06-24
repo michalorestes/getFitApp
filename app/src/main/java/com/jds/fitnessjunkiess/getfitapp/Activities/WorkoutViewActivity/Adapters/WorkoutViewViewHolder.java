@@ -9,17 +9,16 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 
 class WorkoutViewViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView exerciseName;
-    public TextView sets;
-    public TextView reps;
-    public ImageView icon;
+  public TextView exerciseName;
+  public TextView sets;
+  public TextView reps;
+  public ImageView icon;
 
-    WorkoutViewViewHolder(View card) {
-        super(card);
-        this.exerciseName = card.findViewById(R.id.exercise_name);
-        this.sets = card.findViewById(R.id.exercise_sets);
-        this.reps = card.findViewById(R.id.exercise_reps);
-        this.icon = card.findViewById(R.id.exercise_icon);
-    }
+  WorkoutViewViewHolder(View card) {
+    super(card);
+    this.exerciseName = card.findViewById(R.id.exercise_name);
+    this.sets = card.findViewById(R.id.exercise_sets);
+    this.reps = card.findViewById(R.id.exercise_reps);
+    this.icon = card.findViewById(R.id.exercise_icon);
+  }
 }
-

@@ -12,13 +12,9 @@ import retrofit2.Retrofit;
 
 @Module
 public class WorkoutViewModelFactoryModule {
-    @Provides
-    @Singleton
-    WorkoutViewModelFactory provideWorkoutViewModelFactory(){
-        return new WorkoutViewModelFactory(
-            new WorkoutRepository(
-                    new Retrofit.Builder()
-            )
-        );
-    }
+  @Provides
+  @Singleton
+  WorkoutViewModelFactory provideWorkoutViewModelFactory() {
+    return new WorkoutViewModelFactory(new WorkoutRepository(new Retrofit.Builder()));
+  }
 }

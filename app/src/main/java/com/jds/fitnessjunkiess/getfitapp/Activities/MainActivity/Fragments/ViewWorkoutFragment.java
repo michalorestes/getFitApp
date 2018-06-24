@@ -16,36 +16,34 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class ViewWorkoutFragment extends Fragment {
 
-    RecyclerView recyclerView;
-    LinearLayoutManager linearLayoutManager;
-    Workout workout;
+  RecyclerView recyclerView;
+  LinearLayoutManager linearLayoutManager;
+  Workout workout;
 
-    public ViewWorkoutFragment() {
+  public ViewWorkoutFragment() {}
 
-    }
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    Bundle bundle = getArguments();
+    Gson gson = new Gson();
+    this.workout = gson.fromJson(bundle.getString("workout"), Workout.class);
+  }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Bundle bundle  = getArguments();
-        Gson gson = new Gson();
-        this.workout = gson.fromJson(bundle.getString("workout"), Workout.class);
-    }
+  @Nullable
+  @Override
+  public View onCreateView(
+      LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
-    @Nullable
-    @Override
-    public View onCreateView
-            (LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    View view = inflater.inflate(R.layout.fragment_view_workout, container, false);
+    this.recyclerView = view.findViewById(R.id.exercise_list_recycle_viewer);
+    this.recyclerView.setHasFixedSize(true);
+    this.linearLayoutManager = new LinearLayoutManager(getContext());
+    this.recyclerView.setLayoutManager(this.linearLayoutManager);
 
-        View view = inflater.inflate(R.layout.fragment_view_workout, container, false);
-        this.recyclerView = view.findViewById(R.id.exercise_list_recycle_viewer);
-        this.recyclerView.setHasFixedSize(true);
-        this.linearLayoutManager = new LinearLayoutManager(getContext());
-        this.recyclerView.setLayoutManager(this.linearLayoutManager);
-
-        WorkoutViewRecycleViewAdapter workoutViewRecycleViewAdapter =
-                new WorkoutViewRecycleViewAdapter(this.workout.getExercises());
-        this.recyclerView.setAdapter(workoutViewRecycleViewAdapter);
-        return view;
-    }
+    WorkoutViewRecycleViewAdapter workoutViewRecycleViewAdapter =
+        new WorkoutViewRecycleViewAdapter(this.workout.getExercises());
+    this.recyclerView.setAdapter(workoutViewRecycleViewAdapter);
+    return view;
+  }
 }

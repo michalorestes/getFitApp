@@ -11,8 +11,9 @@ import retrofit2.Retrofit;
 
 @Module
 public class WorkoutViewModelModule {
-    @Provides @Singleton
-    WorkoutViewModel provideWorkoutViewmodel(){
-        return new WorkoutViewModel(new WorkoutRepository(new Retrofit.Builder()));
-    }
+  @Provides
+  @Singleton
+  WorkoutViewModel provideWorkoutViewmodel() {
+    return new WorkoutViewModel(new WorkoutRepository(new Retrofit.Builder()));
+  }
 }

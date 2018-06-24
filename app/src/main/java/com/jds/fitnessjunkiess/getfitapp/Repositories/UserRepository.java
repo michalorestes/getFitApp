@@ -13,52 +13,55 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserRepository {
-    private UserData userData;
-    private Retrofit retrofit;
+  private UserData userData;
+  private Retrofit retrofit;
 
-    @Inject
-    public UserRepository(Retrofit.Builder retrofitBuilder) {
-        this.retrofit = retrofitBuilder
-                .baseUrl(EndPoint.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        this.userData = retrofit.create(UserData.class);
-    }
+  @Inject
+  public UserRepository(Retrofit.Builder retrofitBuilder) {
+    this.retrofit =
+        retrofitBuilder
+            .baseUrl(EndPoint.URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+    this.userData = retrofit.create(UserData.class);
+  }
 
-    public LiveData<User> getUser(String email) {
-        final Call<User> service = userData.getUser(email);
-        final MutableLiveData<User> user = new MutableLiveData<>();
+  public LiveData<User> getUser(String email) {
+    final Call<User> service = userData.getUser(email);
+    final MutableLiveData<User> user = new MutableLiveData<>();
 
-        service.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                user.setValue(response.body());
-            }
+    service.enqueue(
+        new Callback<User>() {
+          @Override
+          public void onResponse(Call<User> call, Response<User> response) {
+            user.setValue(response.body());
+          }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.e("**", "Could not load user data");
-            }
+          @Override
+          public void onFailure(Call<User> call, Throwable t) {
+            Log.e("**", "Could not load user data");
+          }
         });
 
-        return user;
-    }
+    return user;
+  }
 
-    public LiveData<User> addUser(User user){
-        Call<User> service = userData.addUser(user);
-        final MutableLiveData<User> userData = new MutableLiveData<>();
-        service.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                userData.setValue(response.body());
-            }
+  public LiveData<User> addUser(User user) {
+    Call<User> service = userData.addUser(user);
+    final MutableLiveData<User> userData = new MutableLiveData<>();
+    service.enqueue(
+        new Callback<User>() {
+          @Override
+          public void onResponse(Call<User> call, Response<User> response) {
+            userData.setValue(response.body());
+          }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.i("***", "Failed to add user data:: " + t.getMessage());
-            }
+          @Override
+          public void onFailure(Call<User> call, Throwable t) {
+            Log.i("***", "Failed to add user data:: " + t.getMessage());
+          }
         });
 
-        return userData;
-    }
+    return userData;
+  }
 }

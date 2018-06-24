@@ -13,35 +13,36 @@ import java.util.List;
 
 public class ExercisesListAdapter extends RecyclerView.Adapter<ExercisesListViewHolder> {
 
-    private List<Exercise> dataSet;
-    private Context context;
+  private List<Exercise> dataSet;
+  private Context context;
 
-    public ExercisesListAdapter(Context context) {
-        this.dataSet = new ArrayList<>();
-        this.context = context;
-    }
+  public ExercisesListAdapter(Context context) {
+    this.dataSet = new ArrayList<>();
+    this.context = context;
+  }
 
-    @NonNull
-    @Override
-    public ExercisesListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View exerciseItem = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_holder_exercise_list, parent, false);
+  @NonNull
+  @Override
+  public ExercisesListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View exerciseItem =
+        LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.view_holder_exercise_list, parent, false);
 
-        return new ExercisesListViewHolder(exerciseItem, this.context);
-    }
+    return new ExercisesListViewHolder(exerciseItem, this.context);
+  }
 
-    @Override
-    public void onBindViewHolder(@NonNull ExercisesListViewHolder holder, int position) {
-        holder.setExerciseName(this.dataSet.get(position).getName());
-    }
+  @Override
+  public void onBindViewHolder(@NonNull ExercisesListViewHolder holder, int position) {
+    holder.setExerciseName(this.dataSet.get(position).getName());
+  }
 
-    @Override
-    public int getItemCount() {
-        return this.dataSet.size();
-    }
+  @Override
+  public int getItemCount() {
+    return this.dataSet.size();
+  }
 
-    public void swapData(List<Exercise> data){
-        this.dataSet = data;
-        notifyDataSetChanged();
-    }
+  public void swapData(List<Exercise> data) {
+    this.dataSet = data;
+    notifyDataSetChanged();
+  }
 }

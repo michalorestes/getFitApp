@@ -8,5 +8,5 @@ import dagger.Component;
 @Singleton
 @Component(modules = {UserViewModelFactoryModule.class})
 public interface UserViewModelFactoryComponent {
-    UserViewModelFactory provideUserViewModelFactory();
+  UserViewModelFactory provideUserViewModelFactory();
 }

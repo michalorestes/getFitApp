@@ -10,3 +10,4 @@
 /build
 /captures
 .externalNativeBuild
+/app/src/main/java/com/jds/fitnessjunkiess/getfitapp/IPAddressProvider.java

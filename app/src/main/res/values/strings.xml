@@ -5,4 +5,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="testMessage">Shit is working</string>
+
+    <string name="bottom_nav_workouts">Workouts</string>
+    <string name="bottom_nav_exercises">Exercises</string>
+    <string name="bottom_nav_profile">Profile</string>
 </resources>

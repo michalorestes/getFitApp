@@ -1,5 +1,6 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts;
 
+import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -26,8 +29,12 @@ import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.WorkoutViewModelFactory;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutViewModel;
+
+import java.sql.Time;
 import java.util.List;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 public class WorkoutsListFragment extends Fragment
     implements View.OnClickListener, WorkoutListViewHolderInterface {
@@ -38,12 +45,18 @@ public class WorkoutsListFragment extends Fragment
   private FloatingActionButton actionButton;
   private InputMethodManager imm;
   private WorkoutViewModel workoutViewModel;
+  private boolean addBoxStatus;
 
   public WorkoutsListFragment() {}
+
+  public static WorkoutsListFragment getInstance() {
+    return new WorkoutsListFragment();
+  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    this.addBoxStatus = false;
     // TODO: This should be handled with fragment injection
     WorkoutViewModelFactoryComponent workoutViewModelFactoryComponent =
         DaggerWorkoutViewModelFactoryComponent.builder()
@@ -94,7 +107,9 @@ public class WorkoutsListFragment extends Fragment
   public void onClick(View v) {
     switch (v.getId()) {
       case R.id.floating_action_add_workout:
-        this.addBoxView((FrameLayout) v.getParent(), v);
+        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
+        AddWorkoutDialog dialogTest = new AddWorkoutDialog();
+        dialogTest.show(fragmentTransaction, "tag");
         break;
       case R.id.overlay_layout:
         removeAddBoxView((FrameLayout) v);
@@ -127,22 +142,26 @@ public class WorkoutsListFragment extends Fragment
   }
 
   private void addBoxView(FrameLayout viewGroup, View v) {
+    this.addBoxStatus = true;
     viewGroup.setClickable(true);
     viewGroup.setOnClickListener(this);
     viewGroup.setBackgroundColor(
         getResources().getColor(R.color.cardview_shadow_start_color, null));
-    viewGroup.removeView(v);
+    this.actionButton.setVisibility(View.GONE);
+//    viewGroup.removeView(v);
     viewGroup.addView(this.addBoxView);
     this.addBoxView.requestInputFocus();
     this.imm.showSoftInput(this.addBoxView.getInput(), InputMethodManager.SHOW_IMPLICIT);
   }
 
   private void removeAddBoxView(FrameLayout viewGroup) {
-    viewGroup.setClickable(false);
     this.imm.hideSoftInputFromWindow(this.addBoxView.getInput().getWindowToken(), 0);
+    viewGroup.setClickable(false);
     viewGroup.removeView(this.addBoxView);
+//    this.addBoxView.setVisibility(View.GONE);
     viewGroup.setBackgroundColor(getResources().getColor(R.color.cardview_shadow_end_color, null));
-    viewGroup.addView(this.actionButton);
+    this.addBoxStatus = false;
+    this.actionButton.setVisibility(View.VISIBLE);
   }
 
   @Override
@@ -157,5 +176,10 @@ public class WorkoutsListFragment extends Fragment
 
     workoutView.putExtra("workoutData", workout);
     startActivity(workoutView);
+  }
+
+  public boolean isAddBoxDisplayed()
+  {
+    return this.addBoxStatus;
   }
 }

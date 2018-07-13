@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_workouts"
+        android:title="@string/bottom_nav_workouts"
+        android:icon="@drawable/bottom_nav_workouts"/>
+    <item
+        android:id="@+id/action_exercises"
+        android:title="@string/bottom_nav_exercises"
+        android:icon="@drawable/bottom_nav_exercise"/>
+    <item
+        android:id="@+id/action_profile"
+        android:title="@string/bottom_nav_profile"
+        android:icon="@drawable/bottom_nav_profile"/>
+</menu>

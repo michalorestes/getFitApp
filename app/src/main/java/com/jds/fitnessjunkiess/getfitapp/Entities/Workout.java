@@ -22,6 +22,7 @@ public class Workout implements Parcelable {
 
   @Expose private Integer id;
   @Expose private String name;
+  @Expose private String type;
   @Expose private List<WorkoutExercise> exercises;
   @Expose private Integer userId;
 
@@ -34,6 +35,7 @@ public class Workout implements Parcelable {
     this.userId = in.readInt();
     this.id = in.readInt();
     this.name = in.readString();
+    this.type = in.readString();
     in.readList(this.exercises, WorkoutExercise.class.getClassLoader());
   }
 
@@ -79,13 +81,17 @@ public class Workout implements Parcelable {
     this.userId = userId;
   }
 
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
   @Override
   public boolean equals(Object o) {
-    if (o instanceof Workout) {
-      return (this.getId()).equals(((Workout) o).getId());
-    }
-
-    return false;
+    return o instanceof Workout && (this.getId()).equals(((Workout) o).getId());
   }
 
   @Override
@@ -98,6 +104,7 @@ public class Workout implements Parcelable {
     dest.writeInt(this.userId);
     dest.writeInt(this.id);
     dest.writeString(this.name);
+    dest.writeString(this.type);
     dest.writeList(this.exercises);
   }
 

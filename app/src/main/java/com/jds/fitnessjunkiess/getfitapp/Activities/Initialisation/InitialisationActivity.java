@@ -13,6 +13,7 @@ import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerUserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.UserViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerModules.UserViewModelFactoryModule;
+import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.UserViewModelFactory;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.UserViewModel;
@@ -24,6 +25,17 @@ public class InitialisationActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_initialisation);
 
+    //TODO: Dev code to avoid fetching data from DB
+    User u = new User();
+    u.setId(7);
+    u.setEmail("michalorestes@gmail.com");
+    u.setUsername("MichalOrestes");
+    u.setPassword("noPass");
+    Intent workoutsActivity = new Intent(this, MainActivity.class);
+    workoutsActivity.putExtra("userData", u);
+    startActivity(workoutsActivity);
+    finish();
+    //Currently unused google sign in
     GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
     if (account != null) {
       startWorkoutsActivity(account);
@@ -53,9 +65,7 @@ public class InitialisationActivity extends AppCompatActivity {
     userViewModel.init(account.getEmail());
     userViewModel
         .getUser()
-        .observe(
-            this,
-            u -> {
+        .observe(this, u -> {
               if (u != null) {
                 Log.i("***", "Got the user: " + u.getEmail() + " " + u.getUsername());
                 Intent workoutsActivity = new Intent(this, MainActivity.class);

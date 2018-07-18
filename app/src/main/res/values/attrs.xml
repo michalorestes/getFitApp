@@ -4,4 +4,9 @@
         <attr name="subTitle" format="string" />
         <attr name="setIcon" format="string" />
     </declare-styleable>
+    <declare-styleable name="SelectorItem">
+        <attr name="selectedIcon" format="integer" />
+        <attr name="deselectedIcon" format="integer" />
+        <attr name="text" format="string" />
+    </declare-styleable>
 </resources>

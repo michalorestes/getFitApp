@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -47,28 +46,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <CheckBox
-            android:id="@+id/checkBox"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="CheckBox" />
+            android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="CheckBox" />
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/checkBox3"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="CheckBox" />
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content" />
+
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <TextView

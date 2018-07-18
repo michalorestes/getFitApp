@@ -8,6 +8,7 @@
     <color name="colorAccentLight">#ff6434</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#a5a5a5</color>
+    <color name="unfocusedTextBox">#eaeaea</color>
     <color name="textColorWhite">#ffffff</color>
     <color name="colorBackground">#ffffff</color>
     <color name="colorBackgroundDark">#f5f5f5</color>

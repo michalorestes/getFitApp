@@ -41,35 +41,46 @@
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Select workout type: " />
 
-    <LinearLayout
+    <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
+            android:id="@+id/weight_selector"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:deselectedIcon="@drawable/deselected_weights"
+            app:selectedIcon="@drawable/dumbell_icon"
+            app:text="Weights" />
 
         <Space
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content" />
 
         <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
+            android:id="@+id/hiit_selector"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:deselectedIcon="@drawable/deselected_hiit"
+            app:selectedIcon="@drawable/inverval_workout_icon"
+            app:text="Weights" />
 
         <Space
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="wrap_content" />
 
         <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
+            android:id="@+id/cardio_selector"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            app:deselectedIcon="@drawable/deselected_cardio"
+            app:selectedIcon="@drawable/cardio_workout_icon"
+            app:text="Weights" />
+    </com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorGroup>
 
     <TextView
         android:id="@+id/textView8"

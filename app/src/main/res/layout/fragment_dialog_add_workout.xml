@@ -43,13 +43,13 @@
         android:layout_height="wrap_content"
         android:text="Select workout type: " />
 
-    <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorGroup
+    <com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector.SelectorGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector.SelectorItem
             android:id="@+id/weight_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content" />
 
-        <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector.SelectorItem
             android:id="@+id/hiit_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,14 +73,14 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content" />
 
-        <com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorItem
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector.SelectorItem
             android:id="@+id/cardio_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:deselectedIcon="@drawable/deselected_cardio"
             app:selectedIcon="@drawable/cardio_workout_icon"
             app:text="Weights" />
-    </com.jds.fitnessjunkiess.getfitapp.CustomViews.SelectorGroup>
+    </com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector.SelectorGroup>
 
     <TextView
         android:id="@+id/textView8"
@@ -95,48 +95,41 @@
         app:alignContent="stretch"
         app:alignItems="stretch"
         app:flexWrap="wrap">
-
-        <CheckBox
-            android:id="@+id/checkBox4"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            app:textLabel="Monday"/>
 
-        <CheckBox
-            android:id="@+id/checkBox10"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            app:textLabel="Tuesday"/>
 
-        <CheckBox
-            android:id="@+id/checkBox9"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            app:textLabel="Wednsday"/>
 
-        <CheckBox
-            android:id="@+id/checkBox8"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            app:textLabel="Thirsday"/>
 
-        <CheckBox
-            android:id="@+id/checkBox7"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            app:textLabel="Friday"/>
 
-        <CheckBox
-            android:id="@+id/checkBox6"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            app:textLabel="Saturday"/>
 
-        <CheckBox
-            android:id="@+id/checkBox5"
+        <com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckBox" />
+            app:textLabel="Sunday"/>
     </com.google.android.flexbox.FlexboxLayout>
+
 
 </LinearLayout>

@@ -9,4 +9,7 @@
         <attr name="deselectedIcon" format="integer" />
         <attr name="text" format="string" />
     </declare-styleable>
+    <declare-styleable name="CustomCheckbox">
+        <attr name="textLabel" format="string" />
+    </declare-styleable>
 </resources>

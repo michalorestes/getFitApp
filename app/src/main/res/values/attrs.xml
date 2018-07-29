@@ -11,5 +11,6 @@
     </declare-styleable>
     <declare-styleable name="CustomCheckbox">
         <attr name="textLabel" format="string" />
+        <attr name="backgroundWidth" format="dimension" />
     </declare-styleable>
 </resources>

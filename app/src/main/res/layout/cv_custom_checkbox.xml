@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/background"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:background="@drawable/custom_checkbox_shape">
 
     <TextView
@@ -14,5 +14,7 @@
         android:layout_marginRight="3dp"
         android:layout_marginTop="5dp"
         android:text="Monday"
-        android:textSize="12sp" />
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="12sp"
+        android:layout_gravity="center"/>
 </FrameLayout>

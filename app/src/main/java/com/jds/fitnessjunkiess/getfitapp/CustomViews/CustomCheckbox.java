@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class CustomCheckbox extends FrameLayout implements View.OnClickListener, Checkable {
@@ -48,7 +47,6 @@ public class CustomCheckbox extends FrameLayout implements View.OnClickListener,
     }
   }
 
-
   @Override
   protected void onFinishInflate() {
     super.onFinishInflate();
@@ -65,8 +63,10 @@ public class CustomCheckbox extends FrameLayout implements View.OnClickListener,
   private void updateUi(boolean checked) {
     if (checked) {
       this.layout.setBackground(this.selectedBg);
+      this.itemLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.textColorWhite));
     } else {
       this.layout.setBackground(this.deselectedBg);
+      this.itemLabel.setTextColor(ContextCompat.getColor(getContext(), R.color.secondaryTextColor));
     }
   }
 

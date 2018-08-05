@@ -58,8 +58,7 @@ public class WorkoutViewModel extends ViewModel {
     list.add(w3);
 
     data.setValue(list);
-//    return workout;
-    return data;
+    return workout;
   }
 
   public LiveData<Workout> addWorkout(Workout workout) {

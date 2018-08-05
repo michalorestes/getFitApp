@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.WorkoutViewModelFactory;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutViewModel;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -88,6 +91,7 @@ public class WorkoutsListFragment extends Fragment
   }
 
   public void updateWorkoutsList(List<Workout> workouts, boolean newWorkout) {
+    Log.i("something", workouts.toString());
     this.recycleViewAdapter.swapData(workouts);
     if (newWorkout) {
       recyclerView.smoothScrollToPosition(0);

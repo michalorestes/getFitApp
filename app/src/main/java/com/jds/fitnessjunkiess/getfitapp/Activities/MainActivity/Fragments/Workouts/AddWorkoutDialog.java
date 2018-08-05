@@ -9,6 +9,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,9 +17,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.EditText;
+
+import com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox;
+import com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector.SelectorGroup;
+import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class AddWorkoutDialog extends DialogFragment {
+
+  private SelectorGroup selectorGroup;
+  private EditText workoutName;
+  private CustomCheckbox cbMon;
+  private CustomCheckbox cbTue;
+  private CustomCheckbox cbWed;
+  private CustomCheckbox cbThu;
+  private CustomCheckbox cbFri;
+  private CustomCheckbox cbSat;
+  private CustomCheckbox cbSun;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +62,16 @@ public class AddWorkoutDialog extends DialogFragment {
     }
     setHasOptionsMenu(true);
 
+    this.selectorGroup = rootView.findViewById(R.id.selectorGroup);
+    this.workoutName = rootView.findViewById(R.id.workout_name);
+    this.cbMon = rootView.findViewById(R.id.checkbox_mon);
+    this.cbTue = rootView.findViewById(R.id.checkbox_tue);
+    this.cbWed = rootView.findViewById(R.id.checkbox_wed);
+    this.cbThu = rootView.findViewById(R.id.checkbox_thu);
+    this.cbFri = rootView.findViewById(R.id.checkbox_fri);
+    this.cbSat = rootView.findViewById(R.id.checkbox_sat);
+    this.cbSun = rootView.findViewById(R.id.checkbox_sun);
+
     return rootView;
   }
 
@@ -69,7 +95,7 @@ public class AddWorkoutDialog extends DialogFragment {
     int id = item.getItemId();
 
     if (id == R.id.save) {
-      // handle confirmation button click here
+      this.getResults();
       return true;
     } else if (id == android.R.id.home) {
       // handle close button click here
@@ -78,5 +104,46 @@ public class AddWorkoutDialog extends DialogFragment {
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  public Workout getResults() {
+    Workout workout = new Workout();
+    workout.setName(this.workoutName.getText().toString());
+    workout.setType(this.selectorGroup.getSelectedValue());
+    String schedule = "";
+
+    if (this.cbMon.isChecked()) {
+      schedule += "Monday";
+    }
+
+    if (this.cbTue.isChecked()) {
+      schedule += ",Tuesday";
+    }
+
+    if (this.cbWed.isChecked()) {
+      schedule += ",Wednesday";
+    }
+
+    if (this.cbThu.isChecked()) {
+      schedule += ",Thursday";
+    }
+
+    if (this.cbFri.isChecked()) {
+      schedule += ",Friday";
+    }
+
+    if (this.cbSat.isChecked()) {
+      schedule += ",Saturday";
+    }
+
+    if (this.cbSun.isChecked()) {
+      schedule += ",Sunday";
+    }
+
+    workout.setSchedule(schedule);
+
+    Log.i("something", workout.toString());
+
+    return workout;
   }
 }

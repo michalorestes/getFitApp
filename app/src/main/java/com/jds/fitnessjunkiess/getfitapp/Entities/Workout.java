@@ -25,6 +25,7 @@ public class Workout implements Parcelable {
   @Expose private String type;
   @Expose private List<WorkoutExercise> exercises;
   @Expose private Integer userId;
+  @Expose private String schedule;
 
   public Workout() {
     this.exercises = new ArrayList<>();
@@ -36,6 +37,8 @@ public class Workout implements Parcelable {
     this.id = in.readInt();
     this.name = in.readString();
     this.type = in.readString();
+    this.schedule = in.readString();
+
     in.readList(this.exercises, WorkoutExercise.class.getClassLoader());
   }
 
@@ -53,6 +56,14 @@ public class Workout implements Parcelable {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getSchedule() {
+    return schedule;
+  }
+
+  public void setSchedule(String schedule) {
+    this.schedule = schedule;
   }
 
   public List<WorkoutExercise> getExercises() {
@@ -105,11 +116,13 @@ public class Workout implements Parcelable {
     dest.writeInt(this.id);
     dest.writeString(this.name);
     dest.writeString(this.type);
+    dest.writeString(this.schedule);
     dest.writeList(this.exercises);
   }
 
   @Override
   public String toString() {
-    return "\nName: " + this.getName() + "\n ID: " + this.getId();
+    return "\nName: " + this.getName() + "\n ID: " + this.getId() + "\n" + this.schedule +
+        "\n" + this.type;
   }
 }

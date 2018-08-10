@@ -17,14 +17,16 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Exercises.ExercisesListFragment;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListViewHolderInterface;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.AddWorkoutDialog;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListFragment;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.profile.ProfileFragment;
 import com.jds.fitnessjunkiess.getfitapp.Entities.User;
+import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-  private User user;
+  public static User user;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
     this.user = new User();
     Intent intent = getIntent();
     User u = intent.getParcelableExtra("userData");
+    u.setId(7);
+    MainActivity.user = u;
   }
 
   @Override

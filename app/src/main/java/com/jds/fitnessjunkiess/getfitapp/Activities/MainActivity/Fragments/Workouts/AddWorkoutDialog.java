@@ -1,7 +1,8 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts;
 
-
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,7 +10,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,14 +17,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
 import com.jds.fitnessjunkiess.getfitapp.CustomViews.CustomCheckbox;
 import com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector.SelectorGroup;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class AddWorkoutDialog extends DialogFragment {
+
+  public interface ActionsInterface {
+    void onSaveAction(Workout result);
+  }
+
+  //TODO: cannot use static
+  private static AddWorkoutDialog singletonInstance;
+  private ActionsInterface context;
 
   private SelectorGroup selectorGroup;
   private EditText workoutName;
@@ -35,6 +44,19 @@ public class AddWorkoutDialog extends DialogFragment {
   private CustomCheckbox cbFri;
   private CustomCheckbox cbSat;
   private CustomCheckbox cbSun;
+
+  public static AddWorkoutDialog getSingletonInstance(ActionsInterface context) {
+    if (AddWorkoutDialog.singletonInstance == null) {
+      AddWorkoutDialog.singletonInstance = new AddWorkoutDialog();
+      AddWorkoutDialog.singletonInstance.setContext(context);
+    }
+
+    return AddWorkoutDialog.singletonInstance;
+  }
+
+  public void setContext(ActionsInterface context) {
+    this.context = context;
+  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +117,7 @@ public class AddWorkoutDialog extends DialogFragment {
     int id = item.getItemId();
 
     if (id == R.id.save) {
-      this.getResults();
+      this.saveWorkout();
       return true;
     } else if (id == android.R.id.home) {
       // handle close button click here
@@ -104,6 +126,11 @@ public class AddWorkoutDialog extends DialogFragment {
     }
 
     return super.onOptionsItemSelected(item);
+  }
+
+  private void saveWorkout() {
+    this.context.onSaveAction(this.getResults());
+    this.dismiss();
   }
 
   public Workout getResults() {
@@ -141,9 +168,15 @@ public class AddWorkoutDialog extends DialogFragment {
     }
 
     workout.setSchedule(schedule);
-
-    Log.i("something", workout.toString());
+    workout.setUserId(MainActivity.user.getId());
 
     return workout;
+  }
+
+  //TODO: Needs to be moved somewhere else later
+  public void hideKeyboardFrom(Context context, View view) {
+    InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    view.clearFocus();
   }
 }

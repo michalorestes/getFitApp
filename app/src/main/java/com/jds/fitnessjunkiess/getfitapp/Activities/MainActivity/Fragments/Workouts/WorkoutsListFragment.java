@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListRecycleViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListViewHolderInterface;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.WorkoutViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.DaggerWorkoutViewModelFactoryComponent;
 import com.jds.fitnessjunkiess.getfitapp.DI.DaggerComponents.WorkoutViewModelFactoryComponent;
@@ -23,13 +24,11 @@ import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.Factories.WorkoutViewModelFactory;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutViewModel;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class WorkoutsListFragment extends Fragment
-    implements View.OnClickListener, WorkoutListViewHolderInterface {
+    implements View.OnClickListener, WorkoutListViewHolderInterface, AddWorkoutDialog.ActionsInterface {
 
   private RecyclerView recyclerView;
   private WorkoutListRecycleViewAdapter recycleViewAdapter;
@@ -57,8 +56,10 @@ public class WorkoutsListFragment extends Fragment
     this.workoutViewModel =
         ViewModelProviders.of(this, workoutViewModelFactory).get(WorkoutViewModel.class);
 
-    workoutViewModel.init(7);
-    workoutViewModel.getWorkout().observe(this, w -> this.updateWorkoutsList(w, false));
+    workoutViewModel.init(MainActivity.user.getId());
+    workoutViewModel
+        .getWorkout()
+        .observe(this, w -> this.updateWorkoutsList(w, false));
   }
 
   @Override
@@ -84,7 +85,7 @@ public class WorkoutsListFragment extends Fragment
     switch (v.getId()) {
       case R.id.floating_action_add_workout:
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        AddWorkoutDialog dialogTest = new AddWorkoutDialog();
+        AddWorkoutDialog dialogTest = AddWorkoutDialog.getSingletonInstance(this);
         dialogTest.show(fragmentTransaction, "tag");
         break;
     }
@@ -110,5 +111,11 @@ public class WorkoutsListFragment extends Fragment
 
     workoutView.putExtra("workoutData", workout);
     startActivity(workoutView);
+  }
+
+  @Override
+  public void onSaveAction(Workout result) {
+    this.workoutViewModel.addWorkout(result);
+    this.updateWorkoutsList(this.workoutViewModel.getWorkout().getValue(), true);
   }
 }

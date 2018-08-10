@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.Initialisation.InitialisationActivity">
+        <activity android:name=".Activities.Initialisation.InitialisationActivity"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.MainActivity.MainActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
+        <activity android:name=".Activities.MainActivity.MainActivity" android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".Activities.LoginActivity.LoginActivity" />
         <activity android:name=".Activities.WorkoutViewActivity.WorkoutViewActivity"></activity>
     </application>

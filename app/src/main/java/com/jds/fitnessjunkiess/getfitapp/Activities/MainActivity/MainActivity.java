@@ -1,5 +1,7 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Exercises.ExercisesListFragment;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListViewHolderInterface;
@@ -24,60 +28,44 @@ import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
   public static User user;
+  private Button button;
+  private TextView text;
+  private JellyBeanViewModel jellyBean;
+  private int value;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    Toolbar myToolbar = findViewById(R.id.my_toolbar);
-    setSupportActionBar(myToolbar);
-    ActionBar actionBar = getSupportActionBar();
 
-    BottomNavigationView navigationItemView = findViewById(R.id.navigation);
+    button = findViewById(R.id.testBtn);
+    text = findViewById(R.id.testTxt);
+    jellyBean = ViewModelProviders.of(this).get(JellyBeanViewModel.class);
 
-    WorkoutsListFragment workoutsListFragment = WorkoutsListFragment.getInstance();
-    getSupportFragmentManager()
-        .beginTransaction()
-        .add(R.id.main_layout, workoutsListFragment)
-        .commit();
+    button.setOnClickListener(this);
 
-    navigationItemView.setOnNavigationItemSelectedListener(
-        item -> {
-          Fragment selectedFragment = null;
-          switch (item.getItemId()) {
-            case R.id.action_workouts:
-              selectedFragment = WorkoutsListFragment.getInstance();
-              break;
 
-            case R.id.action_exercises:
-              selectedFragment = ExercisesListFragment.getInstance();
-              break;
+    Observer<Integer> observable = integer -> {
+      text.setText(jellyBean.getAmount().getValue() + "");
+    };
 
-            case R.id.action_profile:
-              selectedFragment = ProfileFragment.getInstance();
-              break;
-          }
+    jellyBean.getAmount().observe(this, observable);
 
-          FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-          fragmentTransaction.replace(R.id.main_layout, selectedFragment);
-          fragmentTransaction.commit();
-
-          return true;
-        });
-
-    this.user = new User();
-    Intent intent = getIntent();
-    User u = intent.getParcelableExtra("userData");
-    u.setId(7);
-    MainActivity.user = u;
   }
 
   @Override
   public void onBackPressed() {
     super.onBackPressed();
     getSupportFragmentManager().popBackStackImmediate();
+  }
+
+  @Override
+  public void onClick(View v) {
+    value += 2;
+    jellyBean.setAmount(value);
   }
 }

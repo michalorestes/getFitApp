@@ -56,6 +56,7 @@ public class WorkoutsListFragment extends Fragment
     this.workoutViewModel =
         ViewModelProviders.of(this, workoutViewModelFactory).get(WorkoutViewModel.class);
 
+    //TODO: pass user is using bundle
     workoutViewModel.init(MainActivity.user.getId());
     workoutViewModel
         .getWorkout()
@@ -85,14 +86,14 @@ public class WorkoutsListFragment extends Fragment
     switch (v.getId()) {
       case R.id.floating_action_add_workout:
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        AddWorkoutDialog dialogTest = AddWorkoutDialog.getSingletonInstance(this);
+        AddWorkoutDialog dialogTest = new AddWorkoutDialog();
         dialogTest.show(fragmentTransaction, "tag");
         break;
     }
   }
 
   public void updateWorkoutsList(List<Workout> workouts, boolean newWorkout) {
-    Log.i("something", workouts.toString());
+//    Log.i("something", workouts.toString());
     this.recycleViewAdapter.swapData(workouts);
     if (newWorkout) {
       recyclerView.smoothScrollToPosition(0);

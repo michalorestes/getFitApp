@@ -31,10 +31,6 @@ public class AddWorkoutDialog extends DialogFragment {
     void onSaveAction(Workout result);
   }
 
-  //TODO: cannot use static
-  private static AddWorkoutDialog singletonInstance;
-  private ActionsInterface context;
-
   private SelectorGroup selectorGroup;
   private EditText workoutName;
   private CustomCheckbox cbMon;
@@ -44,19 +40,6 @@ public class AddWorkoutDialog extends DialogFragment {
   private CustomCheckbox cbFri;
   private CustomCheckbox cbSat;
   private CustomCheckbox cbSun;
-
-  public static AddWorkoutDialog getSingletonInstance(ActionsInterface context) {
-    if (AddWorkoutDialog.singletonInstance == null) {
-      AddWorkoutDialog.singletonInstance = new AddWorkoutDialog();
-      AddWorkoutDialog.singletonInstance.setContext(context);
-    }
-
-    return AddWorkoutDialog.singletonInstance;
-  }
-
-  public void setContext(ActionsInterface context) {
-    this.context = context;
-  }
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -129,7 +112,8 @@ public class AddWorkoutDialog extends DialogFragment {
   }
 
   private void saveWorkout() {
-    this.context.onSaveAction(this.getResults());
+    ActionsInterface context2 = (ActionsInterface) getParentFragment();
+    context2.onSaveAction(this.getResults());
     this.dismiss();
   }
 

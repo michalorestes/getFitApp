@@ -1,5 +1,8 @@
 package com.jds.fitnessjunkiess.getfitapp.Entities;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,6 +11,7 @@ import com.google.gson.annotations.Expose;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity(tableName = "workouts")
 public class Workout implements Parcelable {
   public static final Parcelable.Creator CREATOR =
       new Parcelable.Creator() {
@@ -21,12 +25,15 @@ public class Workout implements Parcelable {
       };
 
   @Expose
+  @PrimaryKey(autoGenerate = true)
   private Integer id;
   @Expose
   private String name;
   @Expose
   private String type;
+
   @Expose
+  @Ignore
   private List<WorkoutExercise> exercises;
   @Expose
   private Integer userId;

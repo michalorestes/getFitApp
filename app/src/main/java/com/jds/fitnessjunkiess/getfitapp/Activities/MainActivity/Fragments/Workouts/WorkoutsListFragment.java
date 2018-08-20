@@ -1,8 +1,11 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -12,18 +15,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListRecycleViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListViewHolderInterface;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Dialogs.AddWorkoutDialog;
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.WorkoutViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
+import com.jds.fitnessjunkiess.getfitapp.Repositories.WorkoutsRepository;
+import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutsViewModel;
+
+import java.util.List;
 
 public class WorkoutsListFragment extends Fragment
     implements View.OnClickListener, WorkoutListViewHolderInterface, AddWorkoutDialog.ActionsInterface {
 
   private static final String TAG = "WORKOUT_LIST_FRAGMENT";
+
+  private WorkoutsViewModel workoutsViewModel;
+
 
   public WorkoutsListFragment() {}
 
@@ -35,6 +44,16 @@ public class WorkoutsListFragment extends Fragment
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
+    this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
+    this.workoutsViewModel.getData().observe(this, new Observer<List<Workout>>() {
+      @Override
+      public void onChanged(@Nullable List<Workout> workouts) {
+        assert workouts != null;
+        for (Workout w : workouts) {
+          w.toString();
+        }
+      }
+    });
   }
 
   @Override
@@ -83,7 +102,7 @@ public class WorkoutsListFragment extends Fragment
 
   @Override
   public void onSaveAction(Workout result) {
-    //TODO: handle adding new workout here
+    this.workoutsViewModel.insert(result);
     Log.i(TAG, "On save action triggered");
   }
 }

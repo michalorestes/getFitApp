@@ -17,9 +17,12 @@ public class WorkoutExercise extends Exercise implements Parcelable {
         }
       };
 
-  @Expose private int sets;
-  @Expose private int reps;
-  @Expose private int exerciseAssignmentId;
+  @Expose
+  private int sets;
+  @Expose
+  private int reps;
+  @Expose
+  private int exerciseAssignmentId;
 
   public WorkoutExercise(Parcel in) {
     this.exerciseAssignmentId = in.readInt();

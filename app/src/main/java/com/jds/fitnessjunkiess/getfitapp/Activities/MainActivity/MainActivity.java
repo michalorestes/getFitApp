@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Exercises.ExercisesListFragment;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListFragment;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.profile.ProfileFragment;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Profile.ProfileFragment;
 import com.jds.fitnessjunkiess.getfitapp.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.R;
 

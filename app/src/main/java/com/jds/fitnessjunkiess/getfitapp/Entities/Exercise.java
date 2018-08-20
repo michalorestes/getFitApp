@@ -50,7 +50,6 @@ public class Exercise {
   }
 
   public String getMuscleGroups() {
-    System.out.println(this.muscleGroups);
     return this.muscleGroups;
   }
 

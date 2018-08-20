@@ -20,12 +20,18 @@ public class Workout implements Parcelable {
         }
       };
 
-  @Expose private Integer id;
-  @Expose private String name;
-  @Expose private String type;
-  @Expose private List<WorkoutExercise> exercises;
-  @Expose private Integer userId;
-  @Expose private String schedule;
+  @Expose
+  private Integer id;
+  @Expose
+  private String name;
+  @Expose
+  private String type;
+  @Expose
+  private List<WorkoutExercise> exercises;
+  @Expose
+  private Integer userId;
+  @Expose
+  private String schedule;
 
   public Workout() {
     this.exercises = new ArrayList<>();
@@ -74,20 +80,6 @@ public class Workout implements Parcelable {
     this.exercises = exercises;
   }
 
-  public Exercise findExercise(Integer exerciseId) {
-    for (Exercise e : this.getExercises()) {
-      if (e.getId() == exerciseId) {
-        return e;
-      }
-    }
-
-    return null;
-  }
-
-  public Integer getUserId() {
-    return userId;
-  }
-
   public void setUserId(Integer userId) {
     this.userId = userId;
   }
@@ -100,9 +92,23 @@ public class Workout implements Parcelable {
     this.type = type;
   }
 
+  public Integer getUserId() {
+    return userId;
+  }
+
   @Override
   public boolean equals(Object o) {
     return o instanceof Workout && (this.getId()).equals(((Workout) o).getId());
+  }
+
+  public Exercise findExercise(Integer exerciseId) {
+    for (Exercise e : this.getExercises()) {
+      if (e.getId() == exerciseId) {
+        return e;
+      }
+    }
+
+    return null;
   }
 
   @Override

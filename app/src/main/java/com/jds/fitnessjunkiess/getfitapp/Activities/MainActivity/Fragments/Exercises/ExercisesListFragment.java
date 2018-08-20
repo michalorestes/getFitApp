@@ -2,19 +2,11 @@ package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Exer
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Adapters.ExercisesListAdapter;
-import com.jds.fitnessjunkiess.getfitapp.Entities.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ExercisesListFragment extends Fragment {
 

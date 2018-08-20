@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Dialogs;
 
 import android.app.Activity;
 import android.app.Dialog;

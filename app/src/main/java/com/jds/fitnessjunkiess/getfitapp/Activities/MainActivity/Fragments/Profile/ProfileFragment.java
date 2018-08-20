@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.profile;
+package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Profile;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

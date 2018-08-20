@@ -32,7 +32,7 @@ public class WorkoutsListFragment extends Fragment
   private static final String TAG = "WORKOUT_LIST_FRAGMENT";
 
   private WorkoutsViewModel workoutsViewModel;
-
+  private WorkoutListRecycleViewAdapter recycleViewAdapter;
 
   public WorkoutsListFragment() {}
 
@@ -48,9 +48,8 @@ public class WorkoutsListFragment extends Fragment
     this.workoutsViewModel.getData().observe(this, new Observer<List<Workout>>() {
       @Override
       public void onChanged(@Nullable List<Workout> workouts) {
-        assert workouts != null;
-        for (Workout w : workouts) {
-          w.toString();
+        if (workouts != null) {
+          recycleViewAdapter.updateDataSet(workouts);
         }
       }
     });
@@ -65,8 +64,8 @@ public class WorkoutsListFragment extends Fragment
     RecyclerView.LayoutManager recyclerViewLayoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
-    WorkoutListRecycleViewAdapter recycleViewAdapter = new WorkoutListRecycleViewAdapter(this);
-    recyclerView.setAdapter(recycleViewAdapter);
+    this.recycleViewAdapter = new WorkoutListRecycleViewAdapter(this);
+    recyclerView.setAdapter(this.recycleViewAdapter);
 
     FloatingActionButton actionButton = view.findViewById(R.id.floating_action_add_workout);
     actionButton.setOnClickListener(this);

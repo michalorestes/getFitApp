@@ -47,7 +47,7 @@ public class WorkoutListRecycleViewAdapter extends RecyclerView.Adapter<WorkoutL
     return this.dataSet.size();
   }
 
-  public void swapData(List<Workout> data) {
+  public void updateDataSet(List<Workout> data) {
     this.dataSet = data;
     notifyDataSetChanged();
   }

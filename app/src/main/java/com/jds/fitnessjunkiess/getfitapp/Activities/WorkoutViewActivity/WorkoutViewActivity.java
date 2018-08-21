@@ -14,6 +14,7 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class WorkoutViewActivity extends AppCompatActivity implements WorkoutExerciseListInterface {
 
+  private static final String TAG = "WORKOUT_ACTIVITY";
   private Workout workout;
 
   @Override
@@ -22,7 +23,7 @@ public class WorkoutViewActivity extends AppCompatActivity implements WorkoutExe
     setContentView(R.layout.activity_workout_view);
     Intent intent = getIntent();
     this.workout = intent.getParcelableExtra("workoutData");
-
+    Log.i(TAG, workout.toString());
     FragmentManager fragmentManager = getSupportFragmentManager();
     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 

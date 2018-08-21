@@ -106,15 +106,16 @@ public class WorkoutsListFragment extends Fragment
   }
 
   @Override
-  public void onWorkoutSelected(Workout workoutId) {
+  public void onWorkoutSelected(Workout workout) {
     Intent workoutView = new Intent(getContext(), WorkoutViewActivity.class);
-//    workoutView.putExtra("workoutData", workout);
+    workoutView.putExtra("workoutData", workout);
     startActivity(workoutView);
   }
 
   @Override
   public void onSaveAction(Workout result) {
     this.workoutsViewModel.insert(result);
+    //TODO: Open newly added workout screen
     Log.i(TAG, "On save action triggered");
   }
 }

@@ -24,4 +24,6 @@ public interface WorkoutDao {
   void update(Workout workout);
   @Delete
   void delete(Workout workout);
+  @Query("DELETE FROM workouts")
+  void deleteAll();
 }

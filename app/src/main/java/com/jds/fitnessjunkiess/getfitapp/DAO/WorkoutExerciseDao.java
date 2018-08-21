@@ -20,4 +20,7 @@ public interface WorkoutExerciseDao {
   void update(WorkoutExercise workout);
   @Delete
   void delete(WorkoutExercise workout);
+
+  @Query("DELETE FROM workout_exercises")
+  void deleteAll();
 }

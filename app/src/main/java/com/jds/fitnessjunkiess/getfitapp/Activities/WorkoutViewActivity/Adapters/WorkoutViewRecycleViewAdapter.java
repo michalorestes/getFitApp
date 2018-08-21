@@ -30,7 +30,7 @@ public class WorkoutViewRecycleViewAdapter extends RecyclerView.Adapter<WorkoutV
 
   @Override
   public void onBindViewHolder(WorkoutViewViewHolder holder, int position) {
-    holder.exerciseName.setText(this.exercises.get(position).getName());
+//    holder.exerciseName.setText(this.exercises.get(position).getName());
     holder.sets.setText(String.valueOf(this.exercises.get(position).getSets() + " sets"));
     holder.reps.setText(String.valueOf(this.exercises.get(position).getReps() + " reps"));
     holder.icon.setImageResource(R.drawable.body_weight_exercise_type);

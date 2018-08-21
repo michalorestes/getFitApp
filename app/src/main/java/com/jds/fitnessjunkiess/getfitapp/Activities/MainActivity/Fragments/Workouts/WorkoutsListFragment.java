@@ -20,8 +20,10 @@ import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Worko
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Dialogs.AddWorkoutDialog;
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.WorkoutViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Entities.WorkoutExercise;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.Repositories.WorkoutsRepository;
+import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutExerciseViewModel;
 import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutsViewModel;
 
 import java.util.List;
@@ -45,6 +47,25 @@ public class WorkoutsListFragment extends Fragment
     super.onCreate(savedInstanceState);
 
     this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
+    WorkoutExerciseViewModel workoutExerciseViewModel = ViewModelProviders.of(this).get(WorkoutExerciseViewModel.class);
+    workoutExerciseViewModel.selectAll(1).observe(this, new Observer<List<WorkoutExercise>>() {
+      @Override
+      public void onChanged(@Nullable List<WorkoutExercise> workoutExercises) {
+        if (workoutExercises != null) {
+          Log.d(TAG, "Size: " + workoutExercises.size());
+        }
+      }
+    });
+
+    WorkoutExercise workoutExercise = new WorkoutExercise();
+    workoutExercise.setId(0);
+    workoutExercise.setWorkoutId(1);
+    workoutExercise.setExerciseId(11);
+    workoutExercise.setReps(111);
+    workoutExercise.setLength("traalal");
+
+    workoutExerciseViewModel.insert(workoutExercise);
+
     this.workoutsViewModel.getData().observe(this, new Observer<List<Workout>>() {
       @Override
       public void onChanged(@Nullable List<Workout> workouts) {
@@ -85,16 +106,8 @@ public class WorkoutsListFragment extends Fragment
   }
 
   @Override
-  public void onWorkoutSelected(int workoutId) {
+  public void onWorkoutSelected(Workout workoutId) {
     Intent workoutView = new Intent(getContext(), WorkoutViewActivity.class);
-    //TODO: Neat use of streams to find selected workout might be re-used in the near future
-//    Workout workout =
-//        Objects.requireNonNull(this.workoutViewModel.getWorkout().getValue())
-//            .stream()
-//            .filter(w -> w.getId() == workoutId)
-//            .findFirst()
-//            .get();
-//
 //    workoutView.putExtra("workoutData", workout);
     startActivity(workoutView);
   }

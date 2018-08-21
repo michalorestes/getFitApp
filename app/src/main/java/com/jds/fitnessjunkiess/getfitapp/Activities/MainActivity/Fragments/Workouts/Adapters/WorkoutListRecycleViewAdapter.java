@@ -38,8 +38,8 @@ public class WorkoutListRecycleViewAdapter extends RecyclerView.Adapter<WorkoutL
     holder.title.setText(this.dataSet.get(position).getName());
     holder.subTitle.setText(
         String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises");
-    holder.icon.setImageResource(R.drawable.dumbell_icon);
-    holder.workoutIndex = this.dataSet.get(position).getId();
+    holder.icon.setImageResource(this.getWorkoutIcon(this.dataSet.get(position).getType()));
+    holder.workoutIndex = this.dataSet.get(position);
   }
 
   @Override
@@ -50,5 +50,19 @@ public class WorkoutListRecycleViewAdapter extends RecyclerView.Adapter<WorkoutL
   public void updateDataSet(List<Workout> data) {
     this.dataSet = data;
     notifyDataSetChanged();
+  }
+
+
+  private int getWorkoutIcon(String workoutType) {
+    switch (workoutType) {
+      case "Interval":
+        return R.drawable.inverval_workout_icon;
+            case "Cardio":
+        return R.drawable.cardio_workout_icon;
+      case "Weights":
+        return R.drawable.dumbell_icon;
+    }
+
+    return 0;
   }
 }

@@ -13,8 +13,11 @@ import java.util.List;
 
 @Dao()
 public interface WorkoutDao {
+  //TODO: select based on user id
   @Query("SELECT * FROM workouts")
   LiveData<List<Workout>> selectAll();
+  @Query("SELECT * FROM workouts WHERE id = :id")
+  Workout selectOne(final int id);
   @Insert
   void insert(Workout workout);
   @Update

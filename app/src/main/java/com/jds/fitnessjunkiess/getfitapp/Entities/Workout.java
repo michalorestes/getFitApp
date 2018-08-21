@@ -108,16 +108,6 @@ public class Workout implements Parcelable {
     return o instanceof Workout && (this.getId()).equals(((Workout) o).getId());
   }
 
-  public Exercise findExercise(Integer exerciseId) {
-    for (Exercise e : this.getExercises()) {
-      if (e.getId() == exerciseId) {
-        return e;
-      }
-    }
-
-    return null;
-  }
-
   @Override
   public int describeContents() {
     return 0;

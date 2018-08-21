@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 app:deselectedIcon="@drawable/deselected_hiit"
                 app:selectedIcon="@drawable/inverval_workout_icon"
-                app:text="HIIT" />
+                app:text="Interval" />
 
             <Space
                 android:layout_width="40dp"

@@ -7,15 +7,18 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.jds.fitnessjunkiess.getfitapp.DAO.WorkoutDao;
+import com.jds.fitnessjunkiess.getfitapp.DAO.WorkoutExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Entities.WorkoutExercise;
 
-@Database(entities = {Workout.class}, version = 1, exportSchema = false)
+@Database(entities = {Workout.class, WorkoutExercise.class}, version = 3, exportSchema = false)
 public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
   private static WorkoutRoomDatabase instance;
   private final static String DB_NAME = "WORKOUTS";
 
   public abstract WorkoutDao workoutDao();
+  public abstract WorkoutExerciseDao workoutExerciseDao();
 
   public static WorkoutRoomDatabase getDb(final Context context) {
     if (instance == null) {

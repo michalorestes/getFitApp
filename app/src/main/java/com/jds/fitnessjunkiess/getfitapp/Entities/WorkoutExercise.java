@@ -1,41 +1,74 @@
 package com.jds.fitnessjunkiess.getfitapp.Entities;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 
-public class WorkoutExercise extends Exercise implements Parcelable {
-  public static final Parcelable.Creator CREATOR =
-      new Parcelable.Creator() {
-        public WorkoutExercise createFromParcel(Parcel in) {
-          return new WorkoutExercise(in);
-        }
+import static android.arch.persistence.room.ForeignKey.CASCADE;
 
-        public WorkoutExercise[] newArray(int size) {
-          return new WorkoutExercise[size];
-        }
-      };
+@Entity(
+  tableName = "workout_exercises"
+//  foreignKeys =
+//    @ForeignKey(
+//        entity = Workout.class,
+//        parentColumns = "id",
+//        childColumns = "workoutId",
+//        onDelete = CASCADE
+//    )
+)
+public class WorkoutExercise {
 
-  @Expose
+  @PrimaryKey(autoGenerate = true)
+  private int id;
+  private int exerciseId;
+  private int workoutId;
+  private String length;
+  private String rest;
   private int sets;
-  @Expose
   private int reps;
-  @Expose
-  private int exerciseAssignmentId;
 
-  public WorkoutExercise(Parcel in) {
-    this.exerciseAssignmentId = in.readInt();
-    this.sets = in.readInt();
-    this.reps = in.readInt();
+  public int getId() {
+    return id;
   }
 
-  public int getExerciseAssignmentId() {
-    return exerciseAssignmentId;
+  public void setId(int id) {
+    this.id = id;
   }
 
-  public void setExerciseAssignmentId(int exerciseAssignmentId) {
-    this.exerciseAssignmentId = exerciseAssignmentId;
+  public int getExerciseId() {
+    return exerciseId;
+  }
+
+  public void setExerciseId(int exerciseId) {
+    this.exerciseId = exerciseId;
+  }
+
+  public int getWorkoutId() {
+    return workoutId;
+  }
+
+  public void setWorkoutId(int workoutId) {
+    this.workoutId = workoutId;
+  }
+
+  public String getLength() {
+    return length;
+  }
+
+  public void setLength(String length) {
+    this.length = length;
+  }
+
+  public String getRest() {
+    return rest;
+  }
+
+  public void setRest(String rest) {
+    this.rest = rest;
   }
 
   public int getSets() {
@@ -52,17 +85,5 @@ public class WorkoutExercise extends Exercise implements Parcelable {
 
   public void setReps(int reps) {
     this.reps = reps;
-  }
-
-  @Override
-  public int describeContents() {
-    return 0;
-  }
-
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-    dest.writeInt(this.exerciseAssignmentId);
-    dest.writeInt(this.sets);
-    dest.writeInt(this.reps);
   }
 }

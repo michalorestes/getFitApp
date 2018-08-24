@@ -18,8 +18,8 @@ public class WorkoutExerciseRepository {
     this.dao = database.workoutExerciseDao();
   }
 
-  public LiveData<List<WorkoutExercise>> selectAll(int workoutId) {
-    return this.dao.selectAll(workoutId);
+  public LiveData<List<WorkoutExercise>> selectAll() {
+    return this.dao.selectAll();
   }
 
   public void insert(WorkoutExercise workoutExercise) {

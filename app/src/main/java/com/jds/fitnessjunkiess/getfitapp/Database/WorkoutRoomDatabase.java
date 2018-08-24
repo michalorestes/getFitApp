@@ -90,7 +90,6 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
       workoutDao.insert(workout3);
 
       WorkoutExercise workoutExercise1 = new WorkoutExercise();
-      workoutExercise1.setId(1);
       workoutExercise1.setLength("232");
       workoutExercise1.setReps(11);
       workoutExercise1.setRest("1354");

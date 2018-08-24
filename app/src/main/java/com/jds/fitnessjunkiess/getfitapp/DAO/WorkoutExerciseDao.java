@@ -12,15 +12,14 @@ import java.util.List;
 
 @Dao
 public interface WorkoutExerciseDao {
-  @Query("SELECT * FROM workout_exercises WHERE workoutId = :workoutId")
-  LiveData<List<WorkoutExercise>> selectAll(final int workoutId);
+  @Query("SELECT * FROM workout_exercises")
+  LiveData<List<WorkoutExercise>> selectAll();
   @Insert
   void insert(WorkoutExercise workout);
   @Update
   void update(WorkoutExercise workout);
   @Delete
   void delete(WorkoutExercise workout);
-
   @Query("DELETE FROM workout_exercises")
   void deleteAll();
 }

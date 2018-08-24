@@ -19,9 +19,9 @@ public class WorkoutExerciseViewModel extends AndroidViewModel {
     this.repository = new WorkoutExerciseRepository(application);
   }
 
-  public LiveData<List<WorkoutExercise>> selectAll(int workoutId) {
+  public LiveData<List<WorkoutExercise>> selectAll() {
     if (this.data == null) {
-      this.data = this.repository.selectAll(workoutId);
+      this.data = this.repository.selectAll();
     }
 
     return this.data;

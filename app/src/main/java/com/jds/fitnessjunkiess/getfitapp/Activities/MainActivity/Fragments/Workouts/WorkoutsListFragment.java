@@ -35,6 +35,7 @@ public class WorkoutsListFragment extends Fragment
 
   private WorkoutsViewModel workoutsViewModel;
   private WorkoutListRecycleViewAdapter recycleViewAdapter;
+  private RecyclerView recyclerView;
 
   public WorkoutsListFragment() {}
 
@@ -47,24 +48,6 @@ public class WorkoutsListFragment extends Fragment
     super.onCreate(savedInstanceState);
 
     this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
-    WorkoutExerciseViewModel workoutExerciseViewModel = ViewModelProviders.of(this).get(WorkoutExerciseViewModel.class);
-    workoutExerciseViewModel.selectAll(1).observe(this, new Observer<List<WorkoutExercise>>() {
-      @Override
-      public void onChanged(@Nullable List<WorkoutExercise> workoutExercises) {
-        if (workoutExercises != null) {
-          Log.d(TAG, "Size: " + workoutExercises.size());
-        }
-      }
-    });
-
-    WorkoutExercise workoutExercise = new WorkoutExercise();
-    workoutExercise.setId(0);
-    workoutExercise.setWorkoutId(1);
-    workoutExercise.setExerciseId(11);
-    workoutExercise.setReps(111);
-    workoutExercise.setLength("traalal");
-
-    workoutExerciseViewModel.insert(workoutExercise);
 
     this.workoutsViewModel.getData().observe(this, new Observer<List<Workout>>() {
       @Override
@@ -80,7 +63,7 @@ public class WorkoutsListFragment extends Fragment
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_workouts_list, container, false);
-    RecyclerView recyclerView = view.findViewById(R.id.workoutsList);
+    this.recyclerView = view.findViewById(R.id.workoutsList);
 
     RecyclerView.LayoutManager recyclerViewLayoutManager = new LinearLayoutManager(getContext());
     recyclerView.setLayoutManager(recyclerViewLayoutManager);
@@ -107,15 +90,18 @@ public class WorkoutsListFragment extends Fragment
 
   @Override
   public void onWorkoutSelected(Workout workout) {
-    Intent workoutView = new Intent(getContext(), WorkoutViewActivity.class);
-    workoutView.putExtra("workoutData", workout);
-    startActivity(workoutView);
+    this.startWorkoutViewActivity(workout);
   }
 
   @Override
   public void onSaveAction(Workout result) {
     this.workoutsViewModel.insert(result);
-    //TODO: Open newly added workout screen
-    Log.i(TAG, "On save action triggered");
+    this.recyclerView.smoothScrollToPosition(this.recycleViewAdapter.getItemCount()-1);
+  }
+
+  private void startWorkoutViewActivity(Workout workout) {
+    Intent workoutView = new Intent(getContext(), WorkoutViewActivity.class);
+    workoutView.putExtra("workoutData", workout);
+    startActivity(workoutView);
   }
 }

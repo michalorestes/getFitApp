@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector;
+package com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector.OnItemToggledListener;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class SelectorItem extends LinearLayout implements View.OnClickListener {

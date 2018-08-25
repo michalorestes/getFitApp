@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.CustomViews;
+package com.jds.fitnessjunkiess.getfitapp.CompoundViews;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector;
+package com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.CustomViews.Selector;
+package com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector;
 
 interface OnItemToggledListener {
   void onItemToggedStateChanged(boolean checked, SelectorItem view);

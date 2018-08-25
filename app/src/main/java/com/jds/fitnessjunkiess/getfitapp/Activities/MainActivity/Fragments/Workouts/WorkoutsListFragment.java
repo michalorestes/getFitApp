@@ -11,25 +11,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListRecycleViewAdapter;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListViewHolderInterface;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Dialogs.AddWorkoutDialog;
+import com.jds.fitnessjunkiess.getfitapp.Dialogs.WorkoutDetailsDialog;
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.WorkoutViewActivity;
-import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
-import com.jds.fitnessjunkiess.getfitapp.Entities.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
-import com.jds.fitnessjunkiess.getfitapp.Repositories.WorkoutsRepository;
-import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutExerciseViewModel;
-import com.jds.fitnessjunkiess.getfitapp.ViewModels.WorkoutsViewModel;
+import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.WorkoutsViewModel;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.*;
 
 import java.util.List;
 
 public class WorkoutsListFragment extends Fragment
-    implements View.OnClickListener, WorkoutListViewHolderInterface, AddWorkoutDialog.ActionsInterface {
+    implements View.OnClickListener, WorkoutListViewHolder.OnSelectedInterface, WorkoutDetailsDialog.ActionsInterface {
 
   private static final String TAG = "WORKOUT_LIST_FRAGMENT";
 
@@ -82,7 +78,7 @@ public class WorkoutsListFragment extends Fragment
     switch (v.getId()) {
       case R.id.floating_action_add_workout:
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        AddWorkoutDialog dialogTest = new AddWorkoutDialog();
+        WorkoutDetailsDialog dialogTest = new WorkoutDetailsDialog();
         dialogTest.show(fragmentTransaction, "tag");
         break;
     }

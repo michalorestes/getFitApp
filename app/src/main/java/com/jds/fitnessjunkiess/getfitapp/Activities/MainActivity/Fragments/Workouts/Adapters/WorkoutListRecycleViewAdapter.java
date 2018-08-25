@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jds.fitnessjunkiess.getfitapp.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 import java.util.ArrayList;
@@ -15,12 +15,12 @@ import java.util.List;
 public class WorkoutListRecycleViewAdapter extends RecyclerView.Adapter<WorkoutListViewHolder> {
 
   private List<Workout> dataSet;
-  private WorkoutListViewHolderInterface workoutListViewHolderInterface;
+  private WorkoutListViewHolder.OnSelectedInterface onSelectedInterface;
 
   public WorkoutListRecycleViewAdapter(
-      WorkoutListViewHolderInterface workoutListViewHolderInterface) {
+      WorkoutListViewHolder.OnSelectedInterface onSelectedInterface) {
     this.dataSet = new ArrayList<>();
-    this.workoutListViewHolderInterface = workoutListViewHolderInterface;
+    this.onSelectedInterface = onSelectedInterface;
   }
 
   @NonNull
@@ -30,7 +30,7 @@ public class WorkoutListRecycleViewAdapter extends RecyclerView.Adapter<WorkoutL
         LayoutInflater.from(parent.getContext())
             .inflate(R.layout.workout_card_layout, parent, false);
 
-    return new WorkoutListViewHolder(workoutCard, this.workoutListViewHolderInterface);
+    return new WorkoutListViewHolder(workoutCard, this.onSelectedInterface);
   }
 
   @Override

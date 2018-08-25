@@ -12,22 +12,30 @@
         <item name="android:textColorPrimary">@color/primaryTextColor</item>
         <item name="android:textColorSecondary">@color/secondaryTextColor</item>
         <item name="android:colorBackground">@color/colorBackground</item>
+        <!--<item name="android:homeAsUpIndicator">@color/textColorWhite</item>-->
     </style>
 
     <style name="AppTheme.AppBar" parent="AppTheme">
+        <item name="android:textColorSecondary">@color/textColorWhite</item>
         <item name="android:textColorPrimary">@color/textColorWhite</item>
     </style>
+
+    <style name="AppTheme.AppBar.Dialog" parent="AppTheme.AppBar">
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="AppTheme.Button" parent="AppTheme">
         <item name="android:textColorPrimary">@color/textColorWhite</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="AppTheme.FullScreenDialog" parent="AppTheme" >
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsFloating">false</item>
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.TextBox" parent="AppTheme">

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
-import com.jds.fitnessjunkiess.getfitapp.Entities.User;
+import com.jds.fitnessjunkiess.getfitapp.Data.Entities.User;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class InitialisationActivity extends AppCompatActivity {

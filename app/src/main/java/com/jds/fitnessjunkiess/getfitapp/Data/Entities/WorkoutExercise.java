@@ -1,6 +1,7 @@
 package com.jds.fitnessjunkiess.getfitapp.Data.Entities;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity(
@@ -18,10 +19,13 @@ public class WorkoutExercise {
   @PrimaryKey(autoGenerate = true)
   private int id;
   private int exerciseId;
+  @Ignore
+  private String exerciseName;
   private int workoutId;
   private String length;
   private String rest;
   private int sets;
+
   private int reps;
 
   public int getId() {
@@ -34,6 +38,14 @@ public class WorkoutExercise {
 
   public int getExerciseId() {
     return exerciseId;
+  }
+
+  public String getExerciseName() {
+    return exerciseName;
+  }
+
+  public void setExerciseName(String exerciseName) {
+    this.exerciseName = exerciseName;
   }
 
   public void setExerciseId(int exerciseId) {

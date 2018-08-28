@@ -7,11 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.WorkoutExercise;
 import com.jds.fitnessjunkiess.getfitapp.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +32,9 @@ public class WorkoutViewViewAdapter extends RecyclerView.Adapter<WorkoutViewView
 
   @Override
   public void onBindViewHolder(WorkoutViewViewHolder holder, int position) {
-    holder.setName(this.dataSet.get(position).getExerciseName());
-    holder.setSets(this.dataSet.get(position).getSets());
-    holder.setReps(this.dataSet.get(position).getReps());
+    holder.setName(this.dataSet.get(position).exerciseName);
+    holder.setSets(this.dataSet.get(position).sets);
+    holder.setReps(this.dataSet.get(position).reps);
   }
 
   @Override

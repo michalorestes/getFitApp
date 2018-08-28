@@ -5,9 +5,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +29,9 @@ public class Workout implements Parcelable {
   private String name;
   @Expose
   private String type;
-
   @Expose
   @Ignore
-  private List<WorkoutExercise> exercises;
+  private List<WorkoutExerciseAssignment> exercises;
   @Expose
   private Integer userId;
   @Expose
@@ -52,7 +49,7 @@ public class Workout implements Parcelable {
     this.type = in.readString();
     this.schedule = in.readString();
 
-    in.readList(this.exercises, WorkoutExercise.class.getClassLoader());
+    in.readList(this.exercises, WorkoutExerciseAssignment.class.getClassLoader());
   }
 
   public Integer getId() {
@@ -79,11 +76,11 @@ public class Workout implements Parcelable {
     this.schedule = schedule;
   }
 
-  public List<WorkoutExercise> getExercises() {
+  public List<WorkoutExerciseAssignment> getExercises() {
     return exercises;
   }
 
-  public void setExercises(List<WorkoutExercise> exercises) {
+  public void setExercises(List<WorkoutExerciseAssignment> exercises) {
     this.exercises = exercises;
   }
 

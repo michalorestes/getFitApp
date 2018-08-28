@@ -1,6 +1,9 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,17 +11,17 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import com.jds.fitnessjunkiess.getfitapp.Activities.AddExercise.AddExerciseActivity;
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.Adapters.WorkoutViewViewAdapter;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.WorkoutExerciseViewModel;
 import com.jds.fitnessjunkiess.getfitapp.Dialogs.WorkoutDetailsDialog;
 import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.WorkoutExercise;
 import com.jds.fitnessjunkiess.getfitapp.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class WorkoutViewActivity extends AppCompatActivity {
@@ -27,7 +30,7 @@ public class WorkoutViewActivity extends AppCompatActivity {
   private Workout workout;
   private RecyclerView recyclerView;
   private WorkoutViewViewAdapter workoutViewViewAdapter;
-
+  private WorkoutExerciseViewModel workoutExerciseViewModel;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -45,28 +48,23 @@ public class WorkoutViewActivity extends AppCompatActivity {
       actionBar.setDisplayHomeAsUpEnabled(true);
       actionBar.setDisplayShowHomeEnabled(true);
     }
-    //TODO: test data to be removed
-    WorkoutExercise workoutExercise = new WorkoutExercise();
-    workoutExercise.setReps(12);
-    workoutExercise.setSets(5);
-    workoutExercise.setExerciseName("test name");
-
-    WorkoutExercise workoutExercise2 = new WorkoutExercise();
-    workoutExercise2.setReps(9);
-    workoutExercise2.setSets(3);
-    workoutExercise2.setExerciseName("Push ups");
-
-    List<WorkoutExercise> workoutExercises = new ArrayList<>();
-    workoutExercises.add(workoutExercise);
-    workoutExercises.add(workoutExercise2);
-
+    
+    this.workoutExerciseViewModel = ViewModelProviders.of(this).get(WorkoutExerciseViewModel.class); 
+    
+    this.workoutExerciseViewModel.selectAll(this.workout.getId()).observe(this, new Observer<List<WorkoutExercise>>() {
+      @Override
+      public void onChanged(@Nullable List<WorkoutExercise> workoutExercises) {
+        Log.d(TAG, "onChanged: we have some data :)");
+        if (workoutExercises != null) {
+          workoutViewViewAdapter.updateDataSet(workoutExercises);
+        }
+      }
+    });
+    
     this.recyclerView = findViewById(R.id.workout_view_recycle_viewer);
     RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
     this.recyclerView.setLayoutManager(manager);
     this.workoutViewViewAdapter = new WorkoutViewViewAdapter();
-
-    this.workoutViewViewAdapter.updateDataSet(workoutExercises);
-
     this.recyclerView.setAdapter(this.workoutViewViewAdapter);
   }
 

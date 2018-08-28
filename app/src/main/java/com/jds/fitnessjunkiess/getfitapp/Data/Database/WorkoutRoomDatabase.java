@@ -8,13 +8,14 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-
+import com.jds.fitnessjunkiess.getfitapp.Data.DAO.ExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutExerciseDao;
+import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExerciseAssignment;
 
-@Database(entities = {Workout.class, WorkoutExercise.class}, version = 3, exportSchema = false)
+@Database(entities = {Workout.class, WorkoutExerciseAssignment.class, Exercise.class}, version = 5, exportSchema = false)
 public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
   private static WorkoutRoomDatabase instance;
@@ -22,6 +23,7 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
   public abstract WorkoutDao workoutDao();
   public abstract WorkoutExerciseDao workoutExerciseDao();
+  public abstract ExerciseDao exerciseDao();
 
   public static WorkoutRoomDatabase getDb(final Context context) {
     if (instance == null) {
@@ -53,51 +55,32 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
     private final WorkoutDao workoutDao;
     private final WorkoutExerciseDao workoutExerciseDao;
+    private final ExerciseDao exerciseDao;
 
     PopulateDbAsync(WorkoutRoomDatabase db) {
       workoutDao = db.workoutDao();
       workoutExerciseDao = db.workoutExerciseDao();
+      exerciseDao = db.exerciseDao();
     }
 
     @Override
     protected Void doInBackground(final Void... params) {
       workoutDao.deleteAll();
+      exerciseDao.deleteAll();
       workoutExerciseDao.deleteAll();
 
-      Workout workout1 = new Workout();
-      workout1.setUserId(7);
-      workout1.setName("Massive biceps");
-      workout1.setId(1);
-      workout1.setSchedule("Monday,Tuesday,Friday");
-      workout1.setType("Weights");
+      for (Workout w : WorkoutsTestData.getData()) {
+        workoutDao.insert(w);
+      }
 
-      Workout workout2 = new Workout();
-      workout2.setUserId(7);
-      workout2.setName("Shreded");
-      workout2.setId(2);
-      workout2.setSchedule("Tuesday,Friday");
-      workout2.setType("Interval");
+      for (Exercise e : ExercisesTestData.getData()) {
+        exerciseDao.insert(e);
+      }
 
-      Workout workout3 = new Workout();
-      workout3.setUserId(7);
-      workout3.setName("6 pack ABS");
-      workout3.setId(3);
-      workout3.setSchedule("Saturday");
-      workout3.setType("Cardio");
+      for (WorkoutExerciseAssignment wea : WorkoutExerciseAssignmentTestData.getData()) {
+        workoutExerciseDao.insert(wea);
+      }
 
-      workoutDao.insert(workout1);
-      workoutDao.insert(workout2);
-      workoutDao.insert(workout3);
-
-      WorkoutExercise workoutExercise1 = new WorkoutExercise();
-      workoutExercise1.setLength("22Workout");
-      workoutExercise1.setReps(11);
-      workoutExercise1.setRest("13");
-      workoutExercise1.setSets(14);
-      workoutExercise1.setExerciseId(1);
-      workoutExercise1.setWorkoutId(1);
-
-      workoutExerciseDao.insert(workoutExercise1);
       return null;
     }
   }

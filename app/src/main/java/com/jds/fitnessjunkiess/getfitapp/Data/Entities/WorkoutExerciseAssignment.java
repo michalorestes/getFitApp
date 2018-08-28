@@ -1,31 +1,20 @@
 package com.jds.fitnessjunkiess.getfitapp.Data.Entities;
 
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity(
-  tableName = "workout_exercises"
-//  foreignKeys =
-//    @ForeignKey(
-//        entity = Workout.class,
-//        parentColumns = "id",
-//        childColumns = "workoutId",
-//        onDelete = CASCADE
-//    )
-)
-public class WorkoutExercise {
+@Entity
+public class WorkoutExerciseAssignment {
 
   @PrimaryKey(autoGenerate = true)
   private int id;
   private int exerciseId;
-  @Ignore
-  private String exerciseName;
   private int workoutId;
-  private String length;
-  private String rest;
+  private int userId;
+  private String lengthTime;
+  private String restTime;
+  private String sprintTime;
   private int sets;
-
   private int reps;
 
   public int getId() {
@@ -40,14 +29,6 @@ public class WorkoutExercise {
     return exerciseId;
   }
 
-  public String getExerciseName() {
-    return exerciseName;
-  }
-
-  public void setExerciseName(String exerciseName) {
-    this.exerciseName = exerciseName;
-  }
-
   public void setExerciseId(int exerciseId) {
     this.exerciseId = exerciseId;
   }
@@ -60,20 +41,36 @@ public class WorkoutExercise {
     this.workoutId = workoutId;
   }
 
-  public String getLength() {
-    return length;
+  public int getUserId() {
+    return userId;
   }
 
-  public void setLength(String length) {
-    this.length = length;
+  public void setUserId(int userId) {
+    this.userId = userId;
   }
 
-  public String getRest() {
-    return rest;
+  public String getLengthTime() {
+    return lengthTime;
   }
 
-  public void setRest(String rest) {
-    this.rest = rest;
+  public void setLengthTime(String lengthTime) {
+    this.lengthTime = lengthTime;
+  }
+
+  public String getRestTime() {
+    return restTime;
+  }
+
+  public void setRestTime(String restTime) {
+    this.restTime = restTime;
+  }
+
+  public String getSprintTime() {
+    return sprintTime;
+  }
+
+  public void setSprintTime(String sprintTime) {
+    this.sprintTime = sprintTime;
   }
 
   public int getSets() {

@@ -16,14 +16,12 @@ public class WorkoutListViewHolder extends RecyclerView.ViewHolder {
   }
 
   public TextView title;
-  public TextView subTitle;
   public ImageView icon;
   public Workout workoutIndex;
 
   WorkoutListViewHolder(View card, WorkoutListViewHolder.OnSelectedInterface onSelectedInterface) {
     super(card);
     this.title = card.findViewById(R.id.workout_card_title);
-    this.subTitle = card.findViewById(R.id.workout_card_sub_title);
     this.icon = card.findViewById(R.id.icon);
 
     card.setOnClickListener(

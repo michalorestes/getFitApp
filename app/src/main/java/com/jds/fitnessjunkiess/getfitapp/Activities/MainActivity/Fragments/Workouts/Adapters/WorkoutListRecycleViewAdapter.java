@@ -36,8 +36,6 @@ public class WorkoutListRecycleViewAdapter extends RecyclerView.Adapter<WorkoutL
   @Override
   public void onBindViewHolder(WorkoutListViewHolder holder, int position) {
     holder.title.setText(this.dataSet.get(position).getName());
-    holder.subTitle.setText(
-        String.valueOf(this.dataSet.get(position).getExercises().size()) + " exercises");
     holder.icon.setImageResource(this.getWorkoutIcon(this.dataSet.get(position).getType()));
     holder.workoutIndex = this.dataSet.get(position);
   }

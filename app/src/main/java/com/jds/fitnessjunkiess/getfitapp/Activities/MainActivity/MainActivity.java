@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Exercises.ExercisesListFragment;
+import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.ExercisesHomeScreen.ExercisesHomeScreenFragment;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.WorkoutsListFragment;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Profile.ProfileFragment;
 import com.jds.fitnessjunkiess.getfitapp.Data.Entities.User;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
               break;
 
             case R.id.action_exercises:
-              selectedFragment = ExercisesListFragment.getInstance();
+              selectedFragment = ExercisesHomeScreenFragment.getInstance();
               break;
 
             case R.id.action_profile:

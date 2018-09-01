@@ -3,7 +3,7 @@ package com.jds.fitnessjunkiess.getfitapp.Data.Entities;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "exercises")
 public class Exercise {
 
   @PrimaryKey(autoGenerate = true)

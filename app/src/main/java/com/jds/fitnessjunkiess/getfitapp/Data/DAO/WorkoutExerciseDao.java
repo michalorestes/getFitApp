@@ -28,7 +28,7 @@ public interface WorkoutExerciseDao {
       "e.muscleGroups AS exerciseMuscleGroups, wea.id, wea.userId, wea.workoutId, wea.lengthTime, wea.reps, " +
       "wea.restTime, wea.sprintTime, wea.sets " +
       "FROM WorkoutExerciseAssignment wea " +
-      "INNER JOIN Exercise e ON wea.exerciseId = e.id " +
+      "INNER JOIN exercises e ON wea.exerciseId = e.id " +
       "WHERE wea.workoutId = :workoutId")
   LiveData<List<WorkoutExercise>> getWorkoutExercises(int workoutId);
 }

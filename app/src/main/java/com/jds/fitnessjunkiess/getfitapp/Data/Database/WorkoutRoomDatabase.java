@@ -9,13 +9,20 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.ExerciseDao;
+import com.jds.fitnessjunkiess.getfitapp.Data.DAO.MuscleGroupDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Exercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.Entities.MuscleGroup;
 import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
 import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExerciseAssignment;
 
-@Database(entities = {Workout.class, WorkoutExerciseAssignment.class, Exercise.class}, version = 5, exportSchema = false)
+@Database(entities = {
+    Workout.class,
+    WorkoutExerciseAssignment.class,
+    Exercise.class,
+    MuscleGroup.class
+}, version = 6, exportSchema = false)
 public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
   private static WorkoutRoomDatabase instance;
@@ -24,6 +31,7 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
   public abstract WorkoutDao workoutDao();
   public abstract WorkoutExerciseDao workoutExerciseDao();
   public abstract ExerciseDao exerciseDao();
+  public abstract MuscleGroupDao muscleGroupDao();
 
   public static WorkoutRoomDatabase getDb(final Context context) {
     if (instance == null) {
@@ -56,11 +64,13 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
     private final WorkoutDao workoutDao;
     private final WorkoutExerciseDao workoutExerciseDao;
     private final ExerciseDao exerciseDao;
+    private final MuscleGroupDao muscleGroupDao;
 
     PopulateDbAsync(WorkoutRoomDatabase db) {
       workoutDao = db.workoutDao();
       workoutExerciseDao = db.workoutExerciseDao();
       exerciseDao = db.exerciseDao();
+      muscleGroupDao = db.muscleGroupDao();
     }
 
     @Override
@@ -68,6 +78,7 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
       workoutDao.deleteAll();
       exerciseDao.deleteAll();
       workoutExerciseDao.deleteAll();
+//      muscleGroupDao.deleteAll();
 
       for (Workout w : WorkoutsTestData.getData()) {
         workoutDao.insert(w);
@@ -80,6 +91,10 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
       for (WorkoutExerciseAssignment wea : WorkoutExerciseAssignmentTestData.getData()) {
         workoutExerciseDao.insert(wea);
       }
+//
+//      for (MuscleGroup mg : MuscleGroupTestData.getData()) {
+//        muscleGroupDao.insert(mg);
+//      }
 
       return null;
     }

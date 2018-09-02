@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="5dp"></android.support.v7.widget.RecyclerView>
+            android:paddingTop="5dp" />
     </LinearLayout>
 <!-- This is where a new framelayout needs to be added for FAB -->
 </FrameLayout>

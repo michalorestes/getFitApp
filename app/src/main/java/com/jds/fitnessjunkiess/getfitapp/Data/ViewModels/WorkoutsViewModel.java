@@ -16,7 +16,7 @@ public class WorkoutsViewModel extends AndroidViewModel {
   public WorkoutsViewModel(Application application) {
     super(application);
     this.repository = new WorkoutsRepository(application);
-    this.data = this.repository.getData();
+    this.data= this.repository.getData();
   }
 
   public LiveData<List<Workout>> getData() {

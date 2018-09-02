@@ -17,11 +17,12 @@ android {
         }
     }
     compileOptions {
-        targetCompatibility 1.8
-        sourceCompatibility 1.8
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
     productFlavors {
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
@@ -50,16 +51,13 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
     //support libraries with dagger 2
     implementation 'com.google.dagger:dagger-android-support:2.15'
-
     // Room components
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$rootProject.roomVersion"
     androidTestImplementation "android.arch.persistence.room:testing:$rootProject.roomVersion"
-
-// Lifecycle components
+    // Lifecycle components
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
     implementation 'com.android.support:design:27.1.1'
-
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
 }

@@ -24,7 +24,8 @@
             android:name=".Activities.MainActivity.MainActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".Activities.WorkoutViewActivity.WorkoutViewActivity" />
-        <activity android:name=".Activities.AddExercise.AddExerciseActivity"></activity>
+        <activity android:name=".Activities.AddExercise.AddExerciseActivity" />
+        <activity android:name=".Activities.ExercisesView.ExercisesViewActivity"></activity>
     </application>
 
 </manifest>

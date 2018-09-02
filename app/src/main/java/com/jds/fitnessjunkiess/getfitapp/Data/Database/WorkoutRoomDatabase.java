@@ -75,22 +75,22 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
     @Override
     protected Void doInBackground(final Void... params) {
-      workoutDao.deleteAll();
-      exerciseDao.deleteAll();
-      workoutExerciseDao.deleteAll();
+//      workoutDao.deleteAll();
+//      exerciseDao.deleteAll();
+//      workoutExerciseDao.deleteAll();
 //      muscleGroupDao.deleteAll();
-
-      for (Workout w : WorkoutsTestData.getData()) {
-        workoutDao.insert(w);
-      }
-
-      for (Exercise e : ExercisesTestData.getData()) {
-        exerciseDao.insert(e);
-      }
-
-      for (WorkoutExerciseAssignment wea : WorkoutExerciseAssignmentTestData.getData()) {
-        workoutExerciseDao.insert(wea);
-      }
+//
+//      for (Workout w : WorkoutsTestData.getData()) {
+//        workoutDao.insert(w);
+//      }
+//
+//      for (Exercise e : ExercisesTestData.getData()) {
+//        exerciseDao.insert(e);
+//      }
+//
+//      for (WorkoutExerciseAssignment wea : WorkoutExerciseAssignmentTestData.getData()) {
+//        workoutExerciseDao.insert(wea);
+//      }
 //
 //      for (MuscleGroup mg : MuscleGroupTestData.getData()) {
 //        muscleGroupDao.insert(mg);

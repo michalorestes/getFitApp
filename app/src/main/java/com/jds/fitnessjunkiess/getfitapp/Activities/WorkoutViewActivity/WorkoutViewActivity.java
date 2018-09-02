@@ -51,13 +51,10 @@ public class WorkoutViewActivity extends AppCompatActivity {
     
     this.workoutExerciseViewModel = ViewModelProviders.of(this).get(WorkoutExerciseViewModel.class); 
     
-    this.workoutExerciseViewModel.selectAll(this.workout.getId()).observe(this, new Observer<List<WorkoutExercise>>() {
-      @Override
-      public void onChanged(@Nullable List<WorkoutExercise> workoutExercises) {
-        Log.d(TAG, "onChanged: we have some data :)");
-        if (workoutExercises != null) {
-          workoutViewViewAdapter.updateDataSet(workoutExercises);
-        }
+    this.workoutExerciseViewModel.selectAll(this.workout.getId()).observe(this, workoutExercises -> {
+      Log.d(TAG, "onChanged: we have some data :)");
+      if (workoutExercises != null) {
+        workoutViewViewAdapter.updateDataSet(workoutExercises);
       }
     });
     

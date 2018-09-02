@@ -1,13 +1,16 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.ExercisesHomeScreen;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.jds.fitnessjunkiess.getfitapp.Activities.ExercisesView.ExercisesViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.ExercisesHomeScreen.Adapters.MuscleGroupsAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.MuscleGroupViewModel;
 import com.jds.fitnessjunkiess.getfitapp.R;
@@ -44,6 +47,11 @@ public class ExercisesHomeScreenFragment extends Fragment {
   public View onCreateView(
       LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_exercises_list, container, false);
+    Button viewAllExercisesBtn = view.findViewById(R.id.view_all_exercises_btn);
+    viewAllExercisesBtn.setOnClickListener(v -> {
+      Intent intent = new Intent(getContext(), ExercisesViewActivity.class);
+      startActivity(intent);
+    });
 //
 //    GridView gridView = view.findViewById(R.id.muscle_group_grid_view);
 //    gridView.setAdapter(this.muscleGroupsAdapter);

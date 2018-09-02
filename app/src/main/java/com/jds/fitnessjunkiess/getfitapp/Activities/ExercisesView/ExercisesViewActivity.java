@@ -43,8 +43,8 @@ public class ExercisesViewActivity extends AppCompatActivity implements View.OnC
     recyclerView.setAdapter(recyclerViewerAdapter);
 
     this.exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
+
     this.exerciseViewModel.setFilters("", "");
-//    this.exerciseViewModel.selectAll();
     this.exerciseViewModel.select().observe(this, exercises -> {
       if (exercises != null) {
         this.recyclerViewerAdapter.updateDataset(exercises);
@@ -68,11 +68,6 @@ public class ExercisesViewActivity extends AppCompatActivity implements View.OnC
 
   @Override
   public void onClick(View v) {
-    this.exerciseViewModel.setFilters("Biceps", "weight");
-    this.exerciseViewModel.select().observe(this, exercises -> {
-      if (exercises != null) {
-        this.recyclerViewerAdapter.updateDataset(exercises);
-      }
-    });
+    this.exerciseViewModel.setFilterMutableLiveData("Bice", "weight");
   }
 }

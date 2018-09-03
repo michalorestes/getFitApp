@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.WorkoutListRecycleViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Dialogs.WorkoutDetailsDialog;
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.WorkoutViewActivity;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.WorkoutsViewModel;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.Workouts.Adapters.*;

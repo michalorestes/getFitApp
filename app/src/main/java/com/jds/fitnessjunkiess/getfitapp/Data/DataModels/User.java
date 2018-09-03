@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.Data.Entities;
+package com.jds.fitnessjunkiess.getfitapp.Data.DataModels;
 
 import android.os.Parcel;
 import android.os.Parcelable;

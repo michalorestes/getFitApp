@@ -2,15 +2,11 @@ package com.jds.fitnessjunkiess.getfitapp.Data.Repositories;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.ExerciseDao;
-import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.Database.WorkoutRoomDatabase;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Exercise;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExerciseAssignment;
-import com.jds.fitnessjunkiess.getfitapp.Pojo.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
 
 import java.util.List;
 

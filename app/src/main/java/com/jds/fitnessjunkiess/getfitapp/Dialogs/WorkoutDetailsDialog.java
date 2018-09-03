@@ -14,7 +14,7 @@ import android.widget.EditText;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
 import com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox;
 import com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector.SelectorGroup;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class WorkoutDetailsDialog extends DialogFragment {

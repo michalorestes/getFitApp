@@ -1,6 +1,6 @@
 package com.jds.fitnessjunkiess.getfitapp.Data.Database;
 
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 import java.util.ArrayList;

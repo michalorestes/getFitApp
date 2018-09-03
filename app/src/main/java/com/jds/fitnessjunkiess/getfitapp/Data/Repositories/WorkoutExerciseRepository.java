@@ -5,7 +5,7 @@ import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.Database.WorkoutRoomDatabase;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExerciseAssignment;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.WorkoutExerciseAssignment;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.WorkoutExercise;
 
 import java.util.List;

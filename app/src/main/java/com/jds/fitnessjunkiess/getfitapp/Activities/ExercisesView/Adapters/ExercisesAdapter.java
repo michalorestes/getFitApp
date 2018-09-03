@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Exercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;

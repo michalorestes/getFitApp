@@ -20,10 +20,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <Button android:id="@+id/view_all_exercises_btn" android:text="All" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-                    <Button android:text="Weights" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-                    <Button android:text="Body weight" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-                    <Button android:text="Cardio" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
-                    <Button android:text="Custom exercises" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_weights_exercises_btn" android:text="Weights" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_body_weight_exercises_btn" android:text="Body weight" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_cardio_exercises_btn" android:text="Cardio" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_custom_exercises_btn" android:text="Custom exercises" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
                 </LinearLayout>
             </HorizontalScrollView>
         </TableRow>
@@ -31,8 +31,8 @@
             <TextView android:text="Search by muscle group:" android:layout_span="3"/>
         </TableRow>
         <TableRow>
-            <Button android:text="Abs" android:padding="20dp"/>
-            <Button android:text="Biceps" android:padding="20dp"/>
+            <Button android:id="@+id/view_abs_exercises_btn" android:text="Abs" android:padding="20dp"/>
+            <Button android:id="@+id/view_biceps_exercises_btn" android:text="Biceps" android:padding="20dp"/>
             <Button android:text="Back" android:padding="20dp"/>
         </TableRow>
         <TableRow>

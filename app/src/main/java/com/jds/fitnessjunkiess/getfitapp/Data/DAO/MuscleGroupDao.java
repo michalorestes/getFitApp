@@ -7,8 +7,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Exercise;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.MuscleGroup;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.MuscleGroup;
 
 import java.util.List;
 

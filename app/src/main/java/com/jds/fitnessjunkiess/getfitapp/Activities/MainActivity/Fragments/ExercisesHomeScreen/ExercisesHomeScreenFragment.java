@@ -12,10 +12,12 @@ import android.widget.Button;
 
 import com.jds.fitnessjunkiess.getfitapp.Activities.ExercisesView.ExercisesViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.ExercisesHomeScreen.Adapters.MuscleGroupsAdapter;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.MuscleGroupViewModel;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.ExercisesFilter;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
-public class ExercisesHomeScreenFragment extends Fragment {
+public class ExercisesHomeScreenFragment extends Fragment implements View.OnClickListener {
 
   private final String TAG = "EXERCISES SCREEN";
 
@@ -45,17 +47,46 @@ public class ExercisesHomeScreenFragment extends Fragment {
 
   @Override
   public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_exercises_list, container, false);
-    Button viewAllExercisesBtn = view.findViewById(R.id.view_all_exercises_btn);
-    viewAllExercisesBtn.setOnClickListener(v -> {
-      Intent intent = new Intent(getContext(), ExercisesViewActivity.class);
-      startActivity(intent);
-    });
-//
-//    GridView gridView = view.findViewById(R.id.muscle_group_grid_view);
-//    gridView.setAdapter(this.muscleGroupsAdapter);
+    Button allExercises = view.findViewById(R.id.view_all_exercises_btn);
+    Button biceps = view.findViewById(R.id.view_biceps_exercises_btn);
+
+    allExercises.setOnClickListener(this);
+    biceps.setOnClickListener(this);
 
     return view;
+  }
+
+  @Override
+  public void onClick(View v) {
+    ExercisesFilter exercisesFilter = new ExercisesFilter();
+
+    switch (v.getId()) {
+      case R.id.view_all_exercises_btn:
+        break;
+      case R.id.view_weights_exercises_btn:
+        exercisesFilter.type = "Weights";
+        break;
+      case R.id.view_body_weight_exercises_btn:
+        break;
+      case R.id.view_cardio_exercises_btn:
+        break;
+      case R.id.view_custom_exercises_btn:
+        break;
+      case R.id.view_abs_exercises_btn:
+        break;
+      case R.id.view_biceps_exercises_btn:
+        exercisesFilter.muscleGroup = "Biceps";
+        break;
+    }
+
+    this.openExercisesViewActivity(exercisesFilter);
+  }
+
+  private void openExercisesViewActivity(ExercisesFilter exercisesFilter) {
+    Intent intent = new Intent(getContext(), ExercisesViewActivity.class);
+    intent.putExtra("exerciseFilters", exercisesFilter);
+    startActivity(intent);
   }
 }

@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.MuscleGroup;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.MuscleGroup;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 import java.util.ArrayList;

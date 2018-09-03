@@ -4,7 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExerciseAssignment;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.WorkoutExerciseAssignment;
 import com.jds.fitnessjunkiess.getfitapp.Data.Repositories.WorkoutExerciseRepository;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.WorkoutExercise;
 

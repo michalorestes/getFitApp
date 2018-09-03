@@ -4,12 +4,9 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.jds.fitnessjunkiess.getfitapp.Data.DAO.ExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.MuscleGroupDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.Database.WorkoutRoomDatabase;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Exercise;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.MuscleGroup;
-import com.jds.fitnessjunkiess.getfitapp.Pojo.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.MuscleGroup;
 
 import java.util.List;
 

@@ -7,10 +7,9 @@ import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
 
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Exercise;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.Data.Repositories.ExercisesRepository;
-import com.jds.fitnessjunkiess.getfitapp.Data.Repositories.WorkoutsRepository;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.ExercisesFilter;
 
 import java.util.List;
 
@@ -25,9 +24,7 @@ public class ExerciseViewModel extends AndroidViewModel {
     this.repository = new ExercisesRepository(application);
     this.filterMutableLiveData = new MutableLiveData<>();
 
-    ExercisesFilter filter = new ExercisesFilter();
-    filter.muscleGroup = "";
-    filter.type = "";
+    ExercisesFilter filter = new ExercisesFilter("", "");
     this.filterMutableLiveData.setValue(filter);
 
     LiveData<List<Exercise>> source = Transformations.switchMap(
@@ -41,10 +38,6 @@ public class ExerciseViewModel extends AndroidViewModel {
 
   }
 
-  public void selectAll() {
-//    this.data = this.repository.selectAll();
-  }
-
   public LiveData<List<Exercise>> select() {
     return data;
   }
@@ -53,10 +46,7 @@ public class ExerciseViewModel extends AndroidViewModel {
     this.repository.insert(exercise);
   }
 
-  public void setFilterMutableLiveData(String muscleGroups, String type) {
-    ExercisesFilter filter1 = new ExercisesFilter();
-    filter1.muscleGroup = muscleGroups;
-    filter1.type = type;
-    this.filterMutableLiveData.setValue(filter1);
+  public void setFilterMutableLiveData(ExercisesFilter exercisesFilter) {
+    this.filterMutableLiveData.setValue(exercisesFilter);
   }
 }

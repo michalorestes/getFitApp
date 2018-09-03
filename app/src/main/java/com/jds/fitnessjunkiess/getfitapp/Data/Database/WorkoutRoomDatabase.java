@@ -12,10 +12,10 @@ import com.jds.fitnessjunkiess.getfitapp.Data.DAO.ExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.MuscleGroupDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutExerciseDao;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Exercise;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.MuscleGroup;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.WorkoutExerciseAssignment;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.MuscleGroup;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.WorkoutExerciseAssignment;
 
 @Database(entities = {
     Workout.class,

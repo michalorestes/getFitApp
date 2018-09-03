@@ -1,9 +1,7 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +17,8 @@ import com.jds.fitnessjunkiess.getfitapp.Activities.AddExercise.AddExerciseActiv
 import com.jds.fitnessjunkiess.getfitapp.Activities.WorkoutViewActivity.Adapters.WorkoutViewViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.WorkoutExerciseViewModel;
 import com.jds.fitnessjunkiess.getfitapp.Dialogs.WorkoutDetailsDialog;
-import com.jds.fitnessjunkiess.getfitapp.Data.Entities.Workout;
-import com.jds.fitnessjunkiess.getfitapp.Pojo.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
-import java.util.List;
 
 public class WorkoutViewActivity extends AppCompatActivity {
 

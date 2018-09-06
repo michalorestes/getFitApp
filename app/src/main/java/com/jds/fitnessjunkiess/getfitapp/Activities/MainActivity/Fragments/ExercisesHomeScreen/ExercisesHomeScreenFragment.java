@@ -1,26 +1,17 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.ExercisesHomeScreen;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.jds.fitnessjunkiess.getfitapp.Activities.ExercisesView.ExercisesViewActivity;
-import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.ExercisesHomeScreen.Adapters.MuscleGroupsAdapter;
-import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
-import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.MuscleGroup;
-import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.MuscleGroupViewModel;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.ExerciseTypes;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.ExercisesFilter;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.MuscleGroups;
 import com.jds.fitnessjunkiess.getfitapp.R;
-
-import java.util.ArrayList;
 
 public class ExercisesHomeScreenFragment extends Fragment implements View.OnClickListener {
 

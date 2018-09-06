@@ -2,17 +2,37 @@ package com.jds.fitnessjunkiess.getfitapp.Data.DataModels;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import com.jds.fitnessjunkiess.getfitapp.Data.TypeConverters.ExercisePropertiesTypeConverter;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.ExerciseTypes;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.MuscleGroupKeys;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Entity(tableName = "exercises")
 public class Exercise {
 
   @PrimaryKey(autoGenerate = true)
   private int id;
+  private int userId;
   private String name;
   private String picture;
   private String instructions;
   private String type;
-  private String muscleGroups;
+
+  @TypeConverters(ExercisePropertiesTypeConverter.class)
+  private Map<String, List<String>> muscleGroups;
+
+  public Exercise() {
+    this.muscleGroups = new HashMap<>();
+    this.muscleGroups.put(MuscleGroupKeys.PRIMARY, new ArrayList<String>());
+    this.muscleGroups.put(MuscleGroupKeys.OTHER, new ArrayList<String>());
+    this.muscleGroups.get(MuscleGroupKeys.PRIMARY).add("");
+  }
 
   public int getId() {
     return id;
@@ -20,6 +40,14 @@ public class Exercise {
 
   public void setId(int id) {
     this.id = id;
+  }
+
+  public int getUserId() {
+    return userId;
+  }
+
+  public void setUserId(int userId) {
+    this.userId = userId;
   }
 
   public String getName() {
@@ -54,12 +82,27 @@ public class Exercise {
     return type;
   }
 
-  public String getMuscleGroups() {
+  public Map<String, List<String>> getMuscleGroups() {
     return this.muscleGroups;
   }
 
-  public void setMuscleGroups(String muscleGroups) {
+  public void setMuscleGroups(Map<String, List<String>> muscleGroups) {
     this.muscleGroups = muscleGroups;
+  }
+
+  public List<String> getMuscleGroupsByKey(String muscleGroupKey) {
+    return this.muscleGroups.get(muscleGroupKey);
+  }
+
+  public void setMuscleGroupsByKey(String muscleGroupKey, String muscleGroup) {
+    if (muscleGroupKey.equals(MuscleGroupKeys.PRIMARY)) {
+     this.muscleGroups.get(muscleGroupKey).set(0, muscleGroup);
+    } else {
+      List<String> otherMuscleGroups = this.muscleGroups.get(MuscleGroupKeys.OTHER);
+      if (!otherMuscleGroups.contains(muscleGroup)) {
+        this.muscleGroups.get(MuscleGroupKeys.OTHER).add(muscleGroup);
+      }
+    }
   }
 
   @Override

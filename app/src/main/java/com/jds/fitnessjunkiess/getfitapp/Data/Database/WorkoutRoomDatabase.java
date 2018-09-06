@@ -22,7 +22,7 @@ import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.WorkoutExerciseAssignme
     WorkoutExerciseAssignment.class,
     Exercise.class,
     MuscleGroup.class
-}, version = 6, exportSchema = false)
+}, version = 9, exportSchema = false)
 public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
   private static WorkoutRoomDatabase instance;
@@ -75,26 +75,26 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
     @Override
     protected Void doInBackground(final Void... params) {
-//      workoutDao.deleteAll();
+      workoutDao.deleteAll();
       exerciseDao.deleteAll();
-//      workoutExerciseDao.deleteAll();
-//      muscleGroupDao.deleteAll();
+      workoutExerciseDao.deleteAll();
+      muscleGroupDao.deleteAll();
 //
-//      for (Workout w : WorkoutsTestData.getData()) {
-//        workoutDao.insert(w);
-//      }
+      for (Workout w : WorkoutsTestData.getData()) {
+        workoutDao.insert(w);
+      }
 //
       for (Exercise e : ExercisesTestData.getData()) {
         exerciseDao.insert(e);
       }
 //
-//      for (WorkoutExerciseAssignment wea : WorkoutExerciseAssignmentTestData.getData()) {
-//        workoutExerciseDao.insert(wea);
-//      }
-//
-//      for (MuscleGroup mg : MuscleGroupTestData.getData()) {
-//        muscleGroupDao.insert(mg);
-//      }
+      for (WorkoutExerciseAssignment wea : WorkoutExerciseAssignmentTestData.getData()) {
+        workoutExerciseDao.insert(wea);
+      }
+
+      for (MuscleGroup mg : MuscleGroupTestData.getData()) {
+        muscleGroupDao.insert(mg);
+      }
 
       return null;
     }

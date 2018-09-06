@@ -2,6 +2,8 @@ package com.jds.fitnessjunkiess.getfitapp.Data.Database;
 
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.ExerciseTypes;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.MuscleGroupKeys;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.MuscleGroups;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,8 @@ public class ExercisesTestData {
     exercise.setId(1);
     exercise.setName("Pull ups ");
     exercise.setInstructions("Grab the handle and pull yourself upwards.");
-    exercise.setMuscleGroups("Biceps, back");
+    exercise.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.BACK);
+    exercise.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.BICEPS);
     exercise.setType(ExerciseTypes.BODY_WEIGHT);
     exercise.setPicture("https://nourl.com/img.png");
 
@@ -20,7 +23,7 @@ public class ExercisesTestData {
     exercise2.setId(2);
     exercise2.setName("Biceps curl");
     exercise2.setInstructions("Pull the weight upwards.");
-    exercise2.setMuscleGroups("Biceps");
+    exercise2.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.BICEPS);
     exercise2.setType(ExerciseTypes.WEIGHTS);
     exercise2.setPicture("https://nourl.com/img.png");
 
@@ -28,7 +31,7 @@ public class ExercisesTestData {
     exercise3.setId(3);
     exercise3.setName("Crunches");
     exercise3.setInstructions("Lay down on the floow and exercise your abs.");
-    exercise3.setMuscleGroups("ABS");
+    exercise3.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.ABS);
     exercise3.setType(ExerciseTypes.BODY_WEIGHT);
     exercise3.setPicture("https://nourl.com/img.png");
 
@@ -36,7 +39,9 @@ public class ExercisesTestData {
     exercise4.setId(4);
     exercise4.setName("Deadlift");
     exercise4.setInstructions("Lift up heavy weights.");
-    exercise4.setMuscleGroups("Lower back");
+    exercise4.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.BACK);
+    exercise4.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.LEGS);
+    exercise4.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.ABS);
     exercise4.setType(ExerciseTypes.WEIGHTS);
     exercise4.setPicture("https://nourl.com/img.png");
 

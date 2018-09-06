@@ -28,14 +28,10 @@ public class ExerciseViewModel extends AndroidViewModel {
     this.filterMutableLiveData.setValue(filter);
 
     LiveData<List<Exercise>> source = Transformations.switchMap(
-        this.filterMutableLiveData, value -> repository.filterSelect(value.muscleGroup, value.type)
+        this.filterMutableLiveData, value -> repository.filterSelect(value.muscleGroupsToString(), value.exerciseTypesToString())
     );
 
     this.data.addSource(source, val -> this.data.setValue(val));
-  }
-
-  public void setFilters(String muscleGroups, String type) {
-
   }
 
   public LiveData<List<Exercise>> select() {

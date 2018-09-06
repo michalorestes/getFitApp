@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.CompoundViews;
+package com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector.SelectorItem;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 public class CustomCheckbox extends FrameLayout implements View.OnClickListener, Checkable {
@@ -90,5 +92,9 @@ public class CustomCheckbox extends FrameLayout implements View.OnClickListener,
   @Override
   public void onClick(View v) {
     this.toggle();
+  }
+
+  public String getValue() {
+    return this.itemLabel.getText().toString();
   }
 }

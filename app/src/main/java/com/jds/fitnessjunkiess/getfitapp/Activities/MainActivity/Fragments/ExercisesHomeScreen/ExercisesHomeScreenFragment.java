@@ -13,16 +13,18 @@ import android.widget.Button;
 import com.jds.fitnessjunkiess.getfitapp.Activities.ExercisesView.ExercisesViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.Fragments.ExercisesHomeScreen.Adapters.MuscleGroupsAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.MuscleGroup;
 import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.MuscleGroupViewModel;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.ExerciseTypes;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.ExercisesFilter;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.MuscleGroups;
 import com.jds.fitnessjunkiess.getfitapp.R;
+
+import java.util.ArrayList;
 
 public class ExercisesHomeScreenFragment extends Fragment implements View.OnClickListener {
 
   private final String TAG = "EXERCISES SCREEN";
-
-  private MuscleGroupViewModel muscleGroupViewModel;
-  private MuscleGroupsAdapter muscleGroupsAdapter;
 
   public ExercisesHomeScreenFragment() {}
 
@@ -31,29 +33,36 @@ public class ExercisesHomeScreenFragment extends Fragment implements View.OnClic
   }
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-
-    this.muscleGroupsAdapter = new MuscleGroupsAdapter(getContext());
-
-    this.muscleGroupViewModel = ViewModelProviders.of(this).get(MuscleGroupViewModel.class);
-    muscleGroupViewModel.selectAll().observe(this, muscleGroups -> {
-      if (muscleGroups != null) {
-        Log.d(TAG, "onCreate: Displaying exercises muscle groups" + muscleGroups.toString());
-        this.muscleGroupsAdapter.updateDataSet(muscleGroups);
-      }
-    });
-  }
-
-  @Override
   public View onCreateView(
     LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_exercises_list, container, false);
+
     Button allExercises = view.findViewById(R.id.view_all_exercises_btn);
+
+    Button weights = view.findViewById(R.id.view_weights_exercises_btn);
+    Button bodyWeights = view.findViewById(R.id.view_body_weight_exercises_btn);
+    Button cardio = view.findViewById(R.id.view_cardio_exercises_btn);
+    Button customExercises = view.findViewById(R.id.view_custom_exercises_btn);
+
+    Button abs = view.findViewById(R.id.view_abs_exercises_btn);
     Button biceps = view.findViewById(R.id.view_biceps_exercises_btn);
+    Button back = view.findViewById(R.id.view_back_exercises_btn);
+    Button legs = view.findViewById(R.id.view_legs_exercises_btn);
+    Button triceps = view.findViewById(R.id.view_triceps_exercises_btn);
+    Button chest = view.findViewById(R.id.view_chest_exercises_btn);
 
     allExercises.setOnClickListener(this);
+    bodyWeights.setOnClickListener(this);
+    weights.setOnClickListener(this);
+    cardio.setOnClickListener(this);
+    customExercises.setOnClickListener(this);
+
+    abs.setOnClickListener(this);
     biceps.setOnClickListener(this);
+    back.setOnClickListener(this);
+    legs.setOnClickListener(this);
+    triceps.setOnClickListener(this);
+    chest.setOnClickListener(this);
 
     return view;
   }
@@ -64,20 +73,25 @@ public class ExercisesHomeScreenFragment extends Fragment implements View.OnClic
 
     switch (v.getId()) {
       case R.id.view_all_exercises_btn:
+        exercisesFilter.types.add(ExerciseTypes.ALL);
         break;
       case R.id.view_weights_exercises_btn:
-        exercisesFilter.type = "Weights";
+        exercisesFilter.types.add(ExerciseTypes.WEIGHTS);
         break;
       case R.id.view_body_weight_exercises_btn:
+        exercisesFilter.types.add(ExerciseTypes.BODY_WEIGHT);
         break;
       case R.id.view_cardio_exercises_btn:
+        exercisesFilter.types.add(ExerciseTypes.CARDIO);
         break;
       case R.id.view_custom_exercises_btn:
+        //TODO: How will custom exercises work???
         break;
       case R.id.view_abs_exercises_btn:
+        exercisesFilter.muscleGroup.add(MuscleGroups.ABS);
         break;
       case R.id.view_biceps_exercises_btn:
-        exercisesFilter.muscleGroup = "Biceps";
+        exercisesFilter.muscleGroup.add(MuscleGroups.BICEPS);
         break;
     }
 

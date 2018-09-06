@@ -21,6 +21,7 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 public class ExercisesViewActivity extends AppCompatActivity {
 
   private ExercisesAdapter recyclerViewerAdapter;
+  private ExercisesFilter exerciseFilters;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,13 @@ public class ExercisesViewActivity extends AppCompatActivity {
     setContentView(R.layout.activity_exercises_view);
 
     Workout activeWorkout = this.getActiveWorkout();
-    ExercisesFilter exercisesFilter = this.getExercisesFilter();
+    this.exerciseFilters = this.getExerciseFilters();
 
     this.setUpActionBar();
     this.setUpRecyclerViewer();
 
     ExerciseViewModel exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
-    exerciseViewModel.setFilterMutableLiveData(exercisesFilter);
+    exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
     exerciseViewModel.select().observe(this, exercises -> {
       if (exercises != null) {
         this.recyclerViewerAdapter.updateDataset(exercises);
@@ -46,7 +47,7 @@ public class ExercisesViewActivity extends AppCompatActivity {
     return getIntent().getExtras().getParcelable("activeWorkout");
   }
 
-  private ExercisesFilter getExercisesFilter() {
+  private ExercisesFilter getExerciseFilters() {
     ExercisesFilter exercisesFilter = getIntent().getExtras().getParcelable("exerciseFilters");
     if (exercisesFilter == null) {
       exercisesFilter = new ExercisesFilter("", "");
@@ -99,7 +100,10 @@ public class ExercisesViewActivity extends AppCompatActivity {
 
   public void openFiltersDialog() {
     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-    ExerciseFilterDialog dialogTest = new ExerciseFilterDialog();
-    dialogTest.show(fragmentTransaction, "135555");
+    ExerciseFilterDialog filterDialog = new ExerciseFilterDialog();
+    Bundle bundle = new Bundle();
+    bundle.putParcelable("exerciseFilters", this.exerciseFilters);
+    filterDialog.setArguments(bundle);
+    filterDialog.show(fragmentTransaction, "135555");
   }
 }

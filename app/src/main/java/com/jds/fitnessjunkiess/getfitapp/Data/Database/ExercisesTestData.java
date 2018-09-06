@@ -1,6 +1,8 @@
 package com.jds.fitnessjunkiess.getfitapp.Data.Database;
 
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
+import com.jds.fitnessjunkiess.getfitapp.Pojo.ExerciseTypes;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class ExercisesTestData {
     exercise.setName("Pull ups ");
     exercise.setInstructions("Grab the handle and pull yourself upwards.");
     exercise.setMuscleGroups("Biceps, back");
-    exercise.setType("Body weight");
+    exercise.setType(ExerciseTypes.BODY_WEIGHT);
     exercise.setPicture("https://nourl.com/img.png");
 
     Exercise exercise2 = new Exercise();
@@ -19,7 +21,7 @@ public class ExercisesTestData {
     exercise2.setName("Biceps curl");
     exercise2.setInstructions("Pull the weight upwards.");
     exercise2.setMuscleGroups("Biceps");
-    exercise2.setType("Free weights");
+    exercise2.setType(ExerciseTypes.WEIGHTS);
     exercise2.setPicture("https://nourl.com/img.png");
 
     Exercise exercise3 = new Exercise();
@@ -27,7 +29,7 @@ public class ExercisesTestData {
     exercise3.setName("Crunches");
     exercise3.setInstructions("Lay down on the floow and exercise your abs.");
     exercise3.setMuscleGroups("ABS");
-    exercise3.setType("Body weight");
+    exercise3.setType(ExerciseTypes.BODY_WEIGHT);
     exercise3.setPicture("https://nourl.com/img.png");
 
     Exercise exercise4 = new Exercise();
@@ -35,14 +37,14 @@ public class ExercisesTestData {
     exercise4.setName("Deadlift");
     exercise4.setInstructions("Lift up heavy weights.");
     exercise4.setMuscleGroups("Lower back");
-    exercise4.setType("Weights");
+    exercise4.setType(ExerciseTypes.WEIGHTS);
     exercise4.setPicture("https://nourl.com/img.png");
 
     Exercise exercise5 = new Exercise();
     exercise5.setId(5);
     exercise5.setName("Trademil Run");
     exercise5.setInstructions("Continue running");
-    exercise5.setType("Cardio");
+    exercise5.setType(ExerciseTypes.CARDIO);
     exercise5.setPicture("https://nourl.com/img.png");
 
     List<Exercise> exercises = new ArrayList<>();

@@ -13,28 +13,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Workout Type:"/>
-
-        <LinearLayout
+        <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckboxGroup
+            android:id="@+id/exercise_filters_types"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:textLabel="Cardio"/>
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:textLabel="Body Weight"/>
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:textLabel="Weights"/>
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:textLabel="Custom"/>
-        </LinearLayout>
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/cardio_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="Cardio"/>
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/body_weight_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="Body Weight"/>
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/weights_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="Weights"/>
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/custom_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="Custom"/>
+            </LinearLayout>
+        </com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckboxGroup>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,26 +51,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
+            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckboxGroup
+                android:id="@+id/exercise_filters_muscle_groups"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:textLabel="Back"/>
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:textLabel="Bicpes"/>
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:textLabel="ABS"/>
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:textLabel="Triceps"/>
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:textLabel="Legs"/>
+                app:alignContent="center"
+                app:alignItems="center"
+                app:flexWrap="wrap"
+                app:showDivider="beginning|middle|end"
+                app:showDividerHorizontal="beginning|middle|end"
+                app:showDividerVertical="beginning|middle|end">
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/back_mg_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="Back"/>
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/biceps_mg_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="Bicpes"/>
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/abs_mg_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="ABS"/>
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/triceps_mg_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="Triceps"/>
+                <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+                    android:id="@+id/legs_mg_customcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:textLabel="Legs"/>
+            </com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckboxGroup>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

@@ -79,7 +79,7 @@ public class ExercisesHomeScreenFragment extends Fragment implements View.OnClic
         //TODO: How will custom exercises work???
         break;
       case R.id.view_abs_exercises_btn:
-        exercisesFilter.muscleGroup.add(MuscleGroups.ABS);
+        exercisesFilter.muscleGroup.add(MuscleGroups.CORE);
         break;
       case R.id.view_biceps_exercises_btn:
         exercisesFilter.muscleGroup.add(MuscleGroups.BICEPS);

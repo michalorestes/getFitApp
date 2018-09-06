@@ -67,9 +67,9 @@ public class ExerciseFilterDialog extends DialogFragment {
 
     this.checkboxMap.put(MuscleGroups.BACK, rootView.findViewById(R.id.back_mg_customcheckbox));
     this.checkboxMap.put(MuscleGroups.BICEPS, rootView.findViewById(R.id.biceps_mg_customcheckbox));
-    this.checkboxMap.put(MuscleGroups.ABS, rootView.findViewById(R.id.abs_mg_customcheckbox));
+    this.checkboxMap.put(MuscleGroups.CORE, rootView.findViewById(R.id.abs_mg_customcheckbox));
     this.checkboxMap.put(MuscleGroups.TRICEPS, rootView.findViewById(R.id.triceps_mg_customcheckbox));
-    this.checkboxMap.put(MuscleGroups.LEGS, rootView.findViewById(R.id.legs_mg_customcheckbox));
+    this.checkboxMap.put(MuscleGroups.QUADRICEPS, rootView.findViewById(R.id.legs_mg_customcheckbox));
 
     this.setFiltersOnUi();
 

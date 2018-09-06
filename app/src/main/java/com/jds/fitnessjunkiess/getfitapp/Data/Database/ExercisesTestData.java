@@ -31,7 +31,7 @@ public class ExercisesTestData {
     exercise3.setId(3);
     exercise3.setName("Crunches");
     exercise3.setInstructions("Lay down on the floow and exercise your abs.");
-    exercise3.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.ABS);
+    exercise3.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.CORE);
     exercise3.setType(ExerciseTypes.BODY_WEIGHT);
     exercise3.setPicture("https://nourl.com/img.png");
 
@@ -40,8 +40,9 @@ public class ExercisesTestData {
     exercise4.setName("Deadlift");
     exercise4.setInstructions("Lift up heavy weights.");
     exercise4.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.BACK);
-    exercise4.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.LEGS);
-    exercise4.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.ABS);
+    exercise4.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.HAMSTRINGS);
+    exercise4.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.QUADRICEPS);
+    exercise4.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.CORE);
     exercise4.setType(ExerciseTypes.WEIGHTS);
     exercise4.setPicture("https://nourl.com/img.png");
 

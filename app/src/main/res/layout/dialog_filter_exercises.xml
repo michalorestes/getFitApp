@@ -24,7 +24,7 @@
                     android:id="@+id/all_types_customcheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:textLabel="All"/>
+                    app:textLabel="Any"/>
                 <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
                     android:id="@+id/cardio_customcheckbox"
                     android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
                     android:id="@+id/all_muscle_groups_mg_customcheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:textLabel="All"/>
+                    app:textLabel="Any"/>
                 <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
                     android:id="@+id/back_mg_customcheckbox"
                     android:layout_width="wrap_content"

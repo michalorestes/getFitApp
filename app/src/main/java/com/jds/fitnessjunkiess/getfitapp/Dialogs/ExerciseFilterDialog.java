@@ -44,8 +44,8 @@ public class ExerciseFilterDialog extends DialogFragment {
   }
 
   private void setFiltersOnUi() {
-    this.updateExerciseTypesFilter();
-    this.updateMuscleGroupsFilter();
+//    this.updateExerciseTypesFilter();
+//    this.updateMuscleGroupsFilter();
   }
 
   private void updateMuscleGroupsFilter() {
@@ -132,26 +132,26 @@ public class ExerciseFilterDialog extends DialogFragment {
     LayoutInflater inflater = getActivity().getLayoutInflater();
     View rootView = inflater.inflate(R.layout.dialog_filter_exercises, null);
 
-    this.typesCheckboxMap.put(ExerciseTypes.ALL, rootView.findViewById(R.id.all_types_customcheckbox));
-    this.typesCheckboxMap.put(ExerciseTypes.BODY_WEIGHT, rootView.findViewById(R.id.body_weight_customcheckbox));
-    this.typesCheckboxMap.put(ExerciseTypes.WEIGHTS, rootView.findViewById(R.id.weights_customcheckbox));
-    this.typesCheckboxMap.put(ExerciseTypes.CARDIO, rootView.findViewById(R.id.cardio_customcheckbox));
-    this.typesCheckboxMap.put(ExerciseTypes.CUSTOM, rootView.findViewById(R.id.custom_customcheckbox));
-
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.ALL, rootView.findViewById(R.id.all_muscle_groups_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.BACK, rootView.findViewById(R.id.back_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.BICEPS, rootView.findViewById(R.id.biceps_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.CORE, rootView.findViewById(R.id.core_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.CHEST, rootView.findViewById(R.id.chest_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.CALVES, rootView.findViewById(R.id.calves_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.FOREARMS, rootView.findViewById(R.id.forearms_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.HAMSTRINGS, rootView.findViewById(R.id.hamstrings_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.TRAPEZIUS, rootView.findViewById(R.id.trapezious_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.TRICEPS, rootView.findViewById(R.id.triceps_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.SHOULDERS, rootView.findViewById(R.id.shoulders_mg_customcheckbox));
-    this.muscleGroupsCheckboxMap.put(MuscleGroups.QUADRICEPS, rootView.findViewById(R.id.quadriceps_mg_customcheckbox));
-
-    this.setFiltersOnUi();
+//    this.typesCheckboxMap.put(ExerciseTypes.ALL, rootView.findViewById(R.id.all_types_customcheckbox));
+//    this.typesCheckboxMap.put(ExerciseTypes.BODY_WEIGHT, rootView.findViewById(R.id.body_weight_customcheckbox));
+//    this.typesCheckboxMap.put(ExerciseTypes.WEIGHTS, rootView.findViewById(R.id.weights_customcheckbox));
+//    this.typesCheckboxMap.put(ExerciseTypes.CARDIO, rootView.findViewById(R.id.cardio_customcheckbox));
+//    this.typesCheckboxMap.put(ExerciseTypes.CUSTOM, rootView.findViewById(R.id.custom_customcheckbox));
+//
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.ALL, rootView.findViewById(R.id.all_muscle_groups_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.BACK, rootView.findViewById(R.id.back_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.BICEPS, rootView.findViewById(R.id.biceps_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.CORE, rootView.findViewById(R.id.core_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.CHEST, rootView.findViewById(R.id.chest_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.CALVES, rootView.findViewById(R.id.calves_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.FOREARMS, rootView.findViewById(R.id.forearms_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.HAMSTRINGS, rootView.findViewById(R.id.hamstrings_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.TRAPEZIUS, rootView.findViewById(R.id.trapezious_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.TRICEPS, rootView.findViewById(R.id.triceps_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.SHOULDERS, rootView.findViewById(R.id.shoulders_mg_customcheckbox));
+//    this.muscleGroupsCheckboxMap.put(MuscleGroups.QUADRICEPS, rootView.findViewById(R.id.quadriceps_mg_customcheckbox));
+//
+//    this.setFiltersOnUi();
 
     builder.setView(rootView)
         .setPositiveButton("Awesome", new DialogInterface.OnClickListener() {

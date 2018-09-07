@@ -18,10 +18,11 @@ import com.jds.fitnessjunkiess.getfitapp.Dialogs.ExerciseFilterDialog;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.ExercisesFilter;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
-public class ExercisesViewActivity extends AppCompatActivity {
+public class ExercisesViewActivity extends AppCompatActivity implements ExerciseFilterDialog.ActionsInterface {
 
   private ExercisesAdapter recyclerViewerAdapter;
   private ExercisesFilter exerciseFilters;
+  private ExerciseViewModel exerciseViewModel;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,9 @@ public class ExercisesViewActivity extends AppCompatActivity {
     this.setUpActionBar();
     this.setUpRecyclerViewer();
 
-    ExerciseViewModel exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
-    exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
-    exerciseViewModel.select().observe(this, exercises -> {
+    this.exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
+    this.exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
+    this.exerciseViewModel.select().observe(this, exercises -> {
       if (exercises != null) {
         this.recyclerViewerAdapter.updateDataset(exercises);
       }
@@ -105,5 +106,15 @@ public class ExercisesViewActivity extends AppCompatActivity {
     bundle.putParcelable("exerciseFilters", this.exerciseFilters);
     filterDialog.setArguments(bundle);
     filterDialog.show(fragmentTransaction, "135555");
+  }
+
+  @Override
+  public void onPositiveClick(ExercisesFilter exerciseFilters) {
+    this.exerciseFilters.types.clear();
+    this.exerciseFilters.muscleGroup.clear();
+    this.exerciseFilters.types.addAll(exerciseFilters.types);
+    this.exerciseFilters.muscleGroup.addAll(exerciseFilters.muscleGroup);
+
+    exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
   }
 }

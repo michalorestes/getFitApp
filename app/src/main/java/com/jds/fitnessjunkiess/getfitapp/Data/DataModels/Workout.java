@@ -24,7 +24,7 @@ public class Workout implements Parcelable {
 
   @Expose
   @PrimaryKey(autoGenerate = true)
-  private Integer id;
+  private int id;
   @Expose
   private String name;
   @Expose
@@ -52,11 +52,11 @@ public class Workout implements Parcelable {
     in.readList(this.exercises, WorkoutExerciseAssignment.class.getClassLoader());
   }
 
-  public Integer getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(int id) {
     this.id = id;
   }
 
@@ -102,7 +102,7 @@ public class Workout implements Parcelable {
 
   @Override
   public boolean equals(Object o) {
-    return o instanceof Workout && (this.getId()).equals(((Workout) o).getId());
+    return o instanceof Workout && this.getId() == (((Workout) o).getId());
   }
 
   @Override

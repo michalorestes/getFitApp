@@ -1,6 +1,7 @@
 package com.jds.fitnessjunkiess.getfitapp.Activities.ExercisesView;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,27 +15,39 @@ import android.view.MenuItem;
 import com.jds.fitnessjunkiess.getfitapp.Activities.ExercisesView.Adapters.ExercisesAdapter;
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
 import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.ExerciseViewModel;
+import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.WorkoutsViewModel;
 import com.jds.fitnessjunkiess.getfitapp.Dialogs.ExerciseFilterDialog;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.ExercisesFilter;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
-public class ExercisesViewActivity extends AppCompatActivity implements ExerciseFilterDialog.ActionsInterface {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ExercisesViewActivity extends AppCompatActivity implements ExerciseFilterDialog.ActionsInterface, ExercisesAdapter.OnDropDownClickInterface {
 
   private ExercisesAdapter recyclerViewerAdapter;
   private ExercisesFilter exerciseFilters;
   private ExerciseViewModel exerciseViewModel;
-
+  private WorkoutsViewModel workoutsViewModel;
+  List<Workout> workouts;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_exercises_view);
 
     Workout activeWorkout = this.getActiveWorkout();
+    this.workouts = new ArrayList<>();
     this.exerciseFilters = this.getExerciseFilters();
 
     this.setUpActionBar();
     this.setUpRecyclerViewer();
-
+    this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
+    this.workoutsViewModel.getData().observe(this, workoutList -> {
+      workouts.clear();
+      if (workoutList != null) {
+        workouts.addAll(workoutList);
+      }
+    });
     this.exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
     this.exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
     this.exerciseViewModel.select().observe(this, exercises -> {
@@ -73,7 +86,7 @@ public class ExercisesViewActivity extends AppCompatActivity implements Exercise
     RecyclerView recyclerView = findViewById(R.id.exercise_view_recycle_viewer);
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
     recyclerView.setLayoutManager(layoutManager);
-    this.recyclerViewerAdapter = new ExercisesAdapter();
+    this.recyclerViewerAdapter = new ExercisesAdapter(this);
     recyclerView.setAdapter(recyclerViewerAdapter);
   }
 
@@ -116,5 +129,15 @@ public class ExercisesViewActivity extends AppCompatActivity implements Exercise
     this.exerciseFilters.muscleGroup.addAll(exerciseFilters.muscleGroup);
 
     exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
+  }
+
+  @Override
+  public Context getAppContext() {
+    return getApplicationContext();
+  }
+
+  @Override
+  public List<Workout> getWorkoutsList() {
+    return this.workouts;
   }
 }

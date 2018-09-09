@@ -12,9 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.jds.fitnessjunkiess.getfitapp.Activities.ExercisesView.Adapters.ExercisesAdapter;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.WorkoutExerciseAssignment;
 import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.ExerciseViewModel;
+import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.WorkoutExerciseAssignmentViewModel;
 import com.jds.fitnessjunkiess.getfitapp.Data.ViewModels.WorkoutsViewModel;
 import com.jds.fitnessjunkiess.getfitapp.Dialogs.ExerciseFilterDialog;
 import com.jds.fitnessjunkiess.getfitapp.Pojo.ExercisesFilter;
@@ -23,12 +28,14 @@ import com.jds.fitnessjunkiess.getfitapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExercisesViewActivity extends AppCompatActivity implements ExerciseFilterDialog.ActionsInterface, ExercisesAdapter.OnDropDownClickInterface {
+public class ExercisesViewActivity extends AppCompatActivity
+    implements ExerciseFilterDialog.ActionsInterface, ExercisesAdapter.OnDropDownClickInterface {
 
   private ExercisesAdapter recyclerViewerAdapter;
   private ExercisesFilter exerciseFilters;
   private ExerciseViewModel exerciseViewModel;
   private WorkoutsViewModel workoutsViewModel;
+  private WorkoutExerciseAssignmentViewModel workoutExerciseAssignmentViewModel;
   List<Workout> workouts;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,10 @@ public class ExercisesViewActivity extends AppCompatActivity implements Exercise
 
     this.setUpActionBar();
     this.setUpRecyclerViewer();
+
+    this.workoutExerciseAssignmentViewModel =
+        ViewModelProviders.of(this).get(WorkoutExerciseAssignmentViewModel.class);
+
     this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
     this.workoutsViewModel.getData().observe(this, workoutList -> {
       workouts.clear();
@@ -139,5 +150,17 @@ public class ExercisesViewActivity extends AppCompatActivity implements Exercise
   @Override
   public List<Workout> getWorkoutsList() {
     return this.workouts;
+  }
+
+  @Override
+  public void insertExerciseAssignment(Exercise exercise, Workout workout) {
+    WorkoutExerciseAssignment exerciseAssignment = new WorkoutExerciseAssignment();
+    exerciseAssignment.setExerciseId(exercise.getId());
+    exerciseAssignment.setWorkoutId(workout.getId());
+    this.workoutExerciseAssignmentViewModel.insert(exerciseAssignment);
+    Toast.makeText(
+        getApplicationContext(),
+        exercise.getName() + " added to " + workout.getName(),
+        Toast.LENGTH_LONG).show();
   }
 }

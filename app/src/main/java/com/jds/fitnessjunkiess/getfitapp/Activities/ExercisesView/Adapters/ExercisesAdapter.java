@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.jds.fitnessjunkiess.getfitapp.Activities.MainActivity.MainActivity;
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
+import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.WorkoutExerciseAssignment;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
   public interface OnDropDownClickInterface {
     Context getAppContext();
     List<Workout> getWorkoutsList();
+    void insertExerciseAssignment(Exercise exercise, Workout workout);
   }
 
   private List<Exercise> data;
@@ -53,16 +55,18 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
       PopupMenu popupMenu = new PopupMenu(this.onDropDownClickInterface.getAppContext(), v);
       List<Workout> workouts = this.onDropDownClickInterface.getWorkoutsList();
       for (int i = 0; i < workouts.size(); i++){
-        popupMenu.getMenu().add(0, workouts.get(i).getId(), i,  workouts.get(i).getName());
+        popupMenu.getMenu().add(0, i, i,  workouts.get(i).getName());
       }
 
       popupMenu.setOnMenuItemClickListener(popupItem -> {
-        Log.d("------>", "onBindViewHolder: " + popupItem.getItemId() + " " + popupItem.getTitle());
+        this.onDropDownClickInterface.insertExerciseAssignment(
+            this.data.get(position), workouts.get(popupItem.getItemId())
+        );
+
         return true;
       });
 
       popupMenu.show();
-
     });
   }
 
@@ -81,18 +85,18 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.Exer
     private TextView exerciseName;
     private ImageButton imageButton;
 
-    public ExerciseViewHolder(View itemView) {
+    ExerciseViewHolder(View itemView) {
       super(itemView);
 
       this.exerciseName = itemView.findViewById(R.id.exercise_name_txt);
       this.imageButton = itemView.findViewById(R.id.add_to_workout_btn);
     }
 
-    public ImageButton getImageButton() {
+    ImageButton getImageButton() {
       return  this.imageButton;
     }
 
-    public void setExerciseName(String exerciseName) {
+    void setExerciseName(String exerciseName) {
       this.exerciseName.setText(exerciseName);
     }
   }

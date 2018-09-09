@@ -12,6 +12,7 @@ import com.jds.fitnessjunkiess.getfitapp.Data.DAO.ExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.MuscleGroupDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutExerciseDao;
+import com.jds.fitnessjunkiess.getfitapp.Data.DAO.WorkoutExercisesAssignmentDao;
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.MuscleGroup;
 import com.jds.fitnessjunkiess.getfitapp.Data.DataModels.Workout;
@@ -32,6 +33,7 @@ public abstract class WorkoutRoomDatabase extends RoomDatabase{
   public abstract WorkoutExerciseDao workoutExerciseDao();
   public abstract ExerciseDao exerciseDao();
   public abstract MuscleGroupDao muscleGroupDao();
+  public abstract WorkoutExercisesAssignmentDao workoutExercisesAssignmentDao();
 
   public static WorkoutRoomDatabase getDb(final Context context) {
     if (instance == null) {

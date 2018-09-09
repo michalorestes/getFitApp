@@ -2,7 +2,7 @@ package com.jds.fitnessjunkiess.getfitapp.Data.DataModels;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-
+//TODO: Name idea: ExerciseAssignment
 @Entity
 public class WorkoutExerciseAssignment {
 

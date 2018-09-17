@@ -23,28 +23,31 @@ import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseAssignme
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutsViewModel;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilter;
 import com.jds.fitnessjunkiess.getfitapp.R;
+import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.AbstractExercisesAdapter;
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.ExercisesAdapter;
+import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.WorkoutContextExercisesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExercisesViewActivity extends AppCompatActivity
-    implements ExerciseFilterDialog.ActionsInterface, ExercisesAdapter.OnDropDownClickInterface {
+    implements ExerciseFilterDialog.ActionsInterface, ExercisesAdapter.OnItemMenuClickInterface {
 
-  private ExercisesAdapter recyclerViewerAdapter;
+  private AbstractExercisesAdapter recyclerViewerAdapter;
   private ExercisesFilter exerciseFilters;
   private ExerciseViewModel exerciseViewModel;
   private WorkoutsViewModel workoutsViewModel;
   private WorkoutExerciseAssignmentViewModel workoutExerciseAssignmentViewModel;
   List<Workout> workouts;
   private SearchView search;
+  private Workout activeWorkout;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_exercises_view);
 
-    Workout activeWorkout = this.getActiveWorkout();
+    activeWorkout = this.getActiveWorkout();
     this.workouts = new ArrayList<>();
     this.exerciseFilters = this.getExerciseFilters();
 
@@ -54,24 +57,23 @@ public class ExercisesViewActivity extends AppCompatActivity
     this.workoutExerciseAssignmentViewModel =
         ViewModelProviders.of(this).get(WorkoutExerciseAssignmentViewModel.class);
 
-    this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
-    this.workoutsViewModel.getData().observe(this, workoutList -> {
-      workouts.clear();
-      if (workoutList != null) {
-        workouts.addAll(workoutList);
-      }
-    });
+    if (this.activeWorkout == null) {
+      this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
+      this.workoutsViewModel.getData().observe(this, workoutList -> {
+        workouts.clear();
+        if (workoutList != null) {
+          workouts.addAll(workoutList);
+        }
+      });
+    }
+
     this.exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
     this.exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
     this.exerciseViewModel.select().observe(this, exercises -> {
       if (exercises != null) {
-        this.recyclerViewerAdapter.updateDataset(exercises);
+        this.recyclerViewerAdapter.updateDataSet(exercises);
       }
     });
-  }
-
-  private Workout getActiveWorkout() {
-    return getIntent().getExtras().getParcelable("activeWorkout");
   }
 
   private ExercisesFilter getExerciseFilters() {
@@ -81,6 +83,10 @@ public class ExercisesViewActivity extends AppCompatActivity
     }
 
     return exercisesFilter;
+  }
+
+  private Workout getActiveWorkout() {
+    return getIntent().getExtras().getParcelable("workoutContext");
   }
 
   private void setUpActionBar() {
@@ -99,7 +105,12 @@ public class ExercisesViewActivity extends AppCompatActivity
     RecyclerView recyclerView = findViewById(R.id.exercise_view_recycle_viewer);
     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
     recyclerView.setLayoutManager(layoutManager);
-    this.recyclerViewerAdapter = new ExercisesAdapter(this);
+    if (this.activeWorkout == null) {
+      this.recyclerViewerAdapter = new ExercisesAdapter(this);
+    } else {
+      this.recyclerViewerAdapter = new WorkoutContextExercisesAdapter(this);
+    }
+
     recyclerView.setAdapter(recyclerViewerAdapter);
   }
 
@@ -108,7 +119,9 @@ public class ExercisesViewActivity extends AppCompatActivity
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.activity_exercises_view, menu);
     this.search = (SearchView) menu.findItem(R.id.search_option).getActionView();
-
+    if (this.activeWorkout != null) {
+      menu.findItem(R.id.save_changes_option).setVisible(true);
+    }
     return true;
   }
 
@@ -169,6 +182,18 @@ public class ExercisesViewActivity extends AppCompatActivity
     Toast.makeText(
         getApplicationContext(),
         exercise.getName() + " added to " + workout.getName(),
+        Toast.LENGTH_LONG).show();
+  }
+
+  @Override
+  public void insertExerciseAssignment(Exercise exercise) {
+    WorkoutExerciseAssignment exerciseAssignment = new WorkoutExerciseAssignment();
+    exerciseAssignment.setExerciseId(exercise.getId());
+    exerciseAssignment.setWorkoutId(this.activeWorkout.getId());
+    this.workoutExerciseAssignmentViewModel.insert(exerciseAssignment);
+    Toast.makeText(
+        getApplicationContext(),
+        exercise.getName() + " added to " + this.activeWorkout.getName(),
         Toast.LENGTH_LONG).show();
   }
 }

@@ -10,4 +10,9 @@
         android:title="Filter exercises"
         app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_filter_list_white_24dp" />
+    <item android:id="@+id/save_changes_option"
+        android:title="Done"
+        app:showAsAction="always"
+        android:icon="@drawable/baseline_done_all_white_24dp"
+        android:visible="false"/>
 </menu>

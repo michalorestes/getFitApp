@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.AddExerciseActivity;
+import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.ExercisesViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseViewModel;
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout;
@@ -72,7 +73,8 @@ public class WorkoutViewActivity extends AppCompatActivity {
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.action_add_exercise:
-        Intent intent = new Intent(getApplicationContext(), AddExerciseActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ExercisesViewActivity.class);
+        intent.putExtra("workoutContext", this.workout);
         startActivity(intent);
         break;
       case R.id.action_edit_workout:

@@ -9,4 +9,7 @@
     <string name="bottom_nav_workouts">Workouts</string>
     <string name="bottom_nav_exercises">Exercises</string>
     <string name="bottom_nav_profile">Profile</string>
+
+    <string name="search_label">test</string>
+    <string name="search_hint">hint test</string>
 </resources>

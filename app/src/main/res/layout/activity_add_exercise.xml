@@ -3,5 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.AddExercise.AddExerciseActivity">
+    tools:context=".features.exercisesDatabase.AddExerciseActivity">
 </android.support.constraint.ConstraintLayout>

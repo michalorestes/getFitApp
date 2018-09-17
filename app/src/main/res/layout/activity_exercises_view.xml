@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.ExercisesView.ExercisesViewActivity">
+    tools:context=".features.exercisesDatabase.ExercisesViewActivity" android:animateLayoutChanges="true">
 
     <LinearLayout
         android:layout_width="match_parent"

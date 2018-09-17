@@ -62,7 +62,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-        <com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector.SelectorGroup
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.selector.SelectorGroup
             android:id="@+id/selectorGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7">
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector.SelectorItem
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.selector.SelectorItem
                 android:id="@+id/weight_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content" />
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector.SelectorItem
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.selector.SelectorItem
                 android:id="@+id/hiit_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,14 +99,14 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content" />
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector.SelectorItem
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.selector.SelectorItem
                 android:id="@+id/cardio_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:deselectedIcon="@drawable/deselected_cardio"
                 app:selectedIcon="@drawable/cardio_workout_icon"
                 app:text="Cardio" />
-        </com.jds.fitnessjunkiess.getfitapp.CompoundViews.Selector.SelectorGroup>
+        </com.jds.fitnessjunkiess.getfitapp.compoundViews.selector.SelectorGroup>
 
         <TextView
             android:id="@+id/textView8"
@@ -117,7 +117,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectorGroup" />
 
-        <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckboxGroup
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckboxGroup
             android:id="@+id/flexboxLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
             app:showDividerHorizontal="beginning|middle|end"
             app:showDividerVertical="beginning|middle|end">
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
                 android:id="@+id/checkbox_mon"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="1dp" />
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
                 android:id="@+id/checkbox_tue"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
                 tools:layout_editor_absoluteX="85dp"
                 tools:layout_editor_absoluteY="5dp" />
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
                 android:id="@+id/checkbox_wed"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 tools:layout_editor_absoluteX="165dp"
                 tools:layout_editor_absoluteY="5dp" />
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
                 android:id="@+id/checkbox_thu"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                 tools:layout_editor_absoluteX="245dp"
                 tools:layout_editor_absoluteY="5dp" />
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
                 android:id="@+id/checkbox_fri"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                 tools:layout_editor_absoluteX="5dp"
                 tools:layout_editor_absoluteY="49dp" />
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
                 android:id="@+id/checkbox_sat"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                 tools:layout_editor_absoluteX="85dp"
                 tools:layout_editor_absoluteY="49dp" />
 
-            <com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckbox
+            <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
                 android:id="@+id/checkbox_sun"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
                 app:textLabel="Sunday"
                 tools:layout_editor_absoluteX="165dp"
                 tools:layout_editor_absoluteY="49dp" />
-</com.jds.fitnessjunkiess.getfitapp.CompoundViews.CustomCheckbox.CustomCheckboxGroup>
+</com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckboxGroup>
 
     </android.support.constraint.ConstraintLayout>
 

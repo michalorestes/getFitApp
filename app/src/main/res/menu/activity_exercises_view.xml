@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/search_option"
         android:title="Search exercises"
-        app:showAsAction="always"
+        app:showAsAction="collapseActionView|always"
+        app:actionViewClass="android.support.v7.widget.SearchView"
         android:icon="@drawable/baseline_search_white_24dp" />
     <item android:id="@+id/filter_option"
         android:title="Filter exercises"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_filter_list_white_24dp" />
 </menu>

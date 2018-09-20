@@ -2,6 +2,7 @@ package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -31,35 +32,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExercisesViewActivity extends AppCompatActivity
-    implements ExerciseFilterDialog.ActionsInterface, ExercisesAdapter.OnItemMenuClickInterface {
+    implements ExerciseFilterDialog.ActionsInterface, ExercisesListFragment.OnFragmentInteractionListener {
 
-  private AbstractExercisesAdapter recyclerViewerAdapter;
   private ExercisesFilter exerciseFilters;
   private ExerciseViewModel exerciseViewModel;
-  private WorkoutsViewModel workoutsViewModel;
   private WorkoutExerciseAssignmentViewModel workoutExerciseAssignmentViewModel;
-  List<Workout> workouts;
-  private SearchView search;
+  private List<Workout> workouts;
   private Workout activeWorkout;
+  private ExercisesListFragment exercisesListFragment;
+  private WorkoutsViewModel workoutsViewModel;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_exercises_view);
 
-    activeWorkout = this.getActiveWorkout();
+    activeWorkout = this.getIntent().getExtras().getParcelable("workoutContext");
     this.workouts = new ArrayList<>();
     this.exerciseFilters = this.getExerciseFilters();
-
+    this.exercisesListFragment = new ExercisesListFragment();
     this.setUpActionBar();
-    this.setUpRecyclerViewer();
+
+    FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    fragmentTransaction
+        .add(R.id.exercise_list_fragment_container, this.exercisesListFragment)
+        .commit();
 
     this.workoutExerciseAssignmentViewModel =
         ViewModelProviders.of(this).get(WorkoutExerciseAssignmentViewModel.class);
+    this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
+    this.exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
+  }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
     if (this.activeWorkout == null) {
-      this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
-      this.workoutsViewModel.getData().observe(this, workoutList -> {
+      workoutsViewModel.getData().observe(this, workoutList -> {
         workouts.clear();
         if (workoutList != null) {
           workouts.addAll(workoutList);
@@ -67,26 +77,28 @@ public class ExercisesViewActivity extends AppCompatActivity
       });
     }
 
-    this.exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
     this.exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
     this.exerciseViewModel.select().observe(this, exercises -> {
       if (exercises != null) {
-        this.recyclerViewerAdapter.updateDataSet(exercises);
+        this.exercisesListFragment.updateDataSet(exercises);
       }
     });
   }
 
-  private ExercisesFilter getExerciseFilters() {
-    ExercisesFilter exercisesFilter = getIntent().getExtras().getParcelable("exerciseFilters");
-    if (exercisesFilter == null) {
-      exercisesFilter = new ExercisesFilter("", "");
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    super.onOptionsItemSelected(item);
+
+    switch (item.getItemId()) {
+      case R.id.filter_option:
+        this.openFiltersDialog();
+        break;
+      case android.R.id.home:
+        onBackPressed();
+        break;
     }
 
-    return exercisesFilter;
-  }
-
-  private Workout getActiveWorkout() {
-    return getIntent().getExtras().getParcelable("workoutContext");
+    return true;
   }
 
   private void setUpActionBar() {
@@ -101,47 +113,13 @@ public class ExercisesViewActivity extends AppCompatActivity
     }
   }
 
-  private void setUpRecyclerViewer() {
-    RecyclerView recyclerView = findViewById(R.id.exercise_view_recycle_viewer);
-    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-    recyclerView.setLayoutManager(layoutManager);
-    if (this.activeWorkout == null) {
-      this.recyclerViewerAdapter = new ExercisesAdapter(this);
-    } else {
-      this.recyclerViewerAdapter = new WorkoutContextExercisesAdapter(this);
+  private ExercisesFilter getExerciseFilters() {
+    ExercisesFilter exercisesFilter = getIntent().getExtras().getParcelable("exerciseFilters");
+    if (exercisesFilter == null) {
+      exercisesFilter = new ExercisesFilter("", "");
     }
 
-    recyclerView.setAdapter(recyclerViewerAdapter);
-  }
-
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    MenuInflater inflater = getMenuInflater();
-    inflater.inflate(R.menu.activity_exercises_view, menu);
-    this.search = (SearchView) menu.findItem(R.id.search_option).getActionView();
-    if (this.activeWorkout != null) {
-      menu.findItem(R.id.save_changes_option).setVisible(true);
-    }
-    return true;
-  }
-
-  @Override
-  public boolean onOptionsItemSelected(MenuItem item) {
-    super.onOptionsItemSelected(item);
-
-    switch (item.getItemId()) {
-      case R.id.filter_option:
-        this.openFiltersDialog();
-        break;
-      case R.id.search_option:
-//        onSearchRequested();
-        break;
-      case android.R.id.home:
-        onBackPressed();
-        break;
-    }
-
-    return true;
+    return exercisesFilter;
   }
 
   public void openFiltersDialog() {
@@ -154,18 +132,8 @@ public class ExercisesViewActivity extends AppCompatActivity
   }
 
   @Override
-  public void onPositiveClick(ExercisesFilter exerciseFilters) {
-    this.exerciseFilters.types.clear();
-    this.exerciseFilters.muscleGroup.clear();
-    this.exerciseFilters.types.addAll(exerciseFilters.types);
-    this.exerciseFilters.muscleGroup.addAll(exerciseFilters.muscleGroup);
-
-    exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
-  }
-
-  @Override
-  public Context getAppContext() {
-    return getApplicationContext();
+  public Workout getActiveWorkout() {
+    return this.activeWorkout;
   }
 
   @Override
@@ -174,26 +142,27 @@ public class ExercisesViewActivity extends AppCompatActivity
   }
 
   @Override
-  public void insertExerciseAssignment(Exercise exercise, Workout workout) {
-    WorkoutExerciseAssignment exerciseAssignment = new WorkoutExerciseAssignment();
-    exerciseAssignment.setExerciseId(exercise.getId());
-    exerciseAssignment.setWorkoutId(workout.getId());
-    this.workoutExerciseAssignmentViewModel.insert(exerciseAssignment);
-    Toast.makeText(
-        getApplicationContext(),
-        exercise.getName() + " added to " + workout.getName(),
-        Toast.LENGTH_LONG).show();
+  public void insertExerciseAssignment(WorkoutExerciseAssignment workoutExerciseAssignment) {
+    this.workoutExerciseAssignmentViewModel.insert(workoutExerciseAssignment);
   }
 
   @Override
-  public void insertExerciseAssignment(Exercise exercise) {
-    WorkoutExerciseAssignment exerciseAssignment = new WorkoutExerciseAssignment();
-    exerciseAssignment.setExerciseId(exercise.getId());
-    exerciseAssignment.setWorkoutId(this.activeWorkout.getId());
-    this.workoutExerciseAssignmentViewModel.insert(exerciseAssignment);
-    Toast.makeText(
-        getApplicationContext(),
-        exercise.getName() + " added to " + this.activeWorkout.getName(),
-        Toast.LENGTH_LONG).show();
+  public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.activity_exercises_view, menu);
+    if (this.activeWorkout != null) {
+      menu.findItem(R.id.save_changes_option).setVisible(true);
+    }
+    return true;
+  }
+
+  @Override
+  public void onPositiveClick(ExercisesFilter exerciseFilters) {
+    this.exerciseFilters.types.clear();
+    this.exerciseFilters.muscleGroup.clear();
+    this.exerciseFilters.types.addAll(exerciseFilters.types);
+    this.exerciseFilters.muscleGroup.addAll(exerciseFilters.muscleGroup);
+
+    exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
   }
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.homeScreen.fragments.ExercisesHomeScreenFragment">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="0,1,2">
+        <TableRow>
+            <TextView android:text="Search by exercise type:" android:layout_span="3"/>
+        </TableRow>
+        <TableRow>
+            <HorizontalScrollView android:layout_span="3">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button android:id="@+id/view_all_exercises_btn" android:text="All" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_weights_exercises_btn" android:text="Weights" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_body_weight_exercises_btn" android:text="Body weight" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_cardio_exercises_btn" android:text="Cardio" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_custom_exercises_btn" android:text="Custom exercises" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+        </TableRow>
+        <TableRow>
+            <TextView android:text="Search by muscle group:" android:layout_span="3"/>
+        </TableRow>
+        <TableRow>
+            <HorizontalScrollView android:layout_span="3">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <Button android:id="@+id/view_abs_exercises_btn" android:text="Abs" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_biceps_exercises_btn" android:text="Biceps" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
+                    <Button android:id="@+id/view_back_exercises_btn" android:text="Back" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                    <Button android:id="@+id/view_legs_exercises_btn" android:text="Legs" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                    <Button android:id="@+id/view_triceps_exercises_btn" android:text="Triceps" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                    <Button android:id="@+id/view_chest_exercises_btn" android:text="Chest" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                    <Button android:id="@+id/view_shoulders_exercises_btn" android:text="Shoulders" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                    <Button android:id="@+id/view_forearms_exercises_btn" android:text="Forearms" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                    <Button android:id="@+id/view_quads_exercises_btn" android:text="Quads" android:padding="20dp" android:layout_height="wrap_content" android:layout_width="wrap_content" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </TableRow>
+        <TableRow>
+            <LinearLayout android:orientation="vertical" android:layout_span="3">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favourite exercise 1"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="View all"/>
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+</ScrollView>

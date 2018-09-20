@@ -26,7 +26,7 @@ public class ExercisesHomeScreenFragment extends Fragment implements View.OnClic
   @Override
   public View onCreateView(
     LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_exercises_list, container, false);
+    View view = inflater.inflate(R.layout.fragment_exercises_home_screen, container, false);
 
     Button allExercises = view.findViewById(R.id.view_all_exercises_btn);
 

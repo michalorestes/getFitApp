@@ -4,7 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
-public class AddExerciseActivity extends AppCompatActivity {
+public class AddExerciseActivityJava extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

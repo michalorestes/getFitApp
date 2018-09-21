@@ -1,5 +1,6 @@
 package com.jds.fitnessjunkiess.getfitapp.data.dataModels;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
@@ -21,7 +22,7 @@ public class Exercise {
   private String name;
   private String picture;
   private String instructions;
-  private String type;
+  private String type = "";
 
   @TypeConverters(ExercisePropertiesTypeConverter.class)
   private Map<String, List<String>> muscleGroups;
@@ -95,7 +96,7 @@ public class Exercise {
 
   public void setMuscleGroupsByKey(String muscleGroupKey, String muscleGroup) {
     if (muscleGroupKey.equals(MuscleGroupKeys.PRIMARY)) {
-     this.muscleGroups.get(muscleGroupKey).set(0, muscleGroup);
+      this.muscleGroups.get(muscleGroupKey).set(0, muscleGroup);
     } else {
       List<String> otherMuscleGroups = this.muscleGroups.get(MuscleGroupKeys.OTHER);
       if (!otherMuscleGroups.contains(muscleGroup)) {

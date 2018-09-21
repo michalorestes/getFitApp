@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.AddExerciseActivity;
+
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.ExercisesViewActivity;
 import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewViewAdapter;
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseViewModel;

@@ -2,6 +2,7 @@ package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -28,11 +29,15 @@ import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.Abs
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.ExercisesAdapter;
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.WorkoutContextExercisesAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExercisesViewActivity extends AppCompatActivity
-    implements ExerciseFilterDialog.ActionsInterface, ExercisesListFragment.OnFragmentInteractionListener {
+    implements ExerciseFilterDialog.ActionsInterface,
+    ExercisesListFragment.OnFragmentInteractionListener,
+    AddCustomExerciseDialog.OnFragmentInteractionInterface {
 
   private ExercisesFilter exerciseFilters;
   private ExerciseViewModel exerciseViewModel;
@@ -41,11 +46,18 @@ public class ExercisesViewActivity extends AppCompatActivity
   private Workout activeWorkout;
   private ExercisesListFragment exercisesListFragment;
   private WorkoutsViewModel workoutsViewModel;
+  private FloatingActionButton addCustomExerciseBtn;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_exercises_view);
+
+    this.addCustomExerciseBtn = this.findViewById(R.id.add_custom_exercise_button);
+    this.addCustomExerciseBtn.setOnClickListener( v -> {
+      AddCustomExerciseDialog addCustomExerciseDialog = new AddCustomExerciseDialog();
+      addCustomExerciseDialog.show(getSupportFragmentManager(), "addCustomExerciseDialog");
+    });
 
     activeWorkout = this.getIntent().getExtras().getParcelable("workoutContext");
     this.workouts = new ArrayList<>();
@@ -164,5 +176,10 @@ public class ExercisesViewActivity extends AppCompatActivity
     this.exerciseFilters.muscleGroup.addAll(exerciseFilters.muscleGroup);
 
     exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
+  }
+
+  @Override
+  public void saveCustomExercise(@NotNull Exercise exercise) {
+    this.exerciseViewModel.insert(exercise);
   }
 }

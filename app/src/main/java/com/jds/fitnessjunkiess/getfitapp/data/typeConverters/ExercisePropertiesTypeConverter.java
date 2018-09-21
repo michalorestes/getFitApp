@@ -26,5 +26,4 @@ public class ExercisePropertiesTypeConverter {
 
     return gson.toJson(muscleGroups);
   }
-
 }

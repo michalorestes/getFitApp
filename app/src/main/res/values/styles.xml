@@ -35,7 +35,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsFloating">false</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/textColorWhite</item>
     </style>
 
     <style name="AppTheme.TextBox" parent="AppTheme">

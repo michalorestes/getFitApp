@@ -33,12 +33,6 @@ public class WorkoutDetailsDialog extends DialogFragment {
   private CustomCheckbox cbSat;
   private CustomCheckbox cbSun;
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme_FullScreenDialog);
-  }
-
   @Nullable
   @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

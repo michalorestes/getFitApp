@@ -24,8 +24,10 @@
             android:name=".features.MainActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".features.workout.WorkoutViewActivity" />
-        <activity android:name=".features.exercisesDatabase.AddExerciseActivity" />
-        <activity android:name=".features.exercisesDatabase.ExercisesViewActivity" android:launchMode="singleTop">
+        <activity android:name=".features.exercisesDatabase.AddExerciseActivityJava" />
+        <activity android:name=".features.exercisesDatabase.ExercisesViewActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout;
@@ -172,5 +173,6 @@ public class ExercisesViewActivity extends AppCompatActivity
   @Override
   public void saveCustomExercise(@NotNull Exercise exercise) {
     this.exerciseViewModel.insert(exercise);
+    Toast.makeText(getApplicationContext(), "New custom exercise created", Toast.LENGTH_SHORT).show();
   }
 }

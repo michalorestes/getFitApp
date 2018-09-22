@@ -1,13 +1,10 @@
 package com.jds.fitnessjunkiess.getfitapp.data.dataModels;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
-
 import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExercisePropertiesTypeConverter;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroupKeys;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +20,7 @@ public class Exercise {
   private String picture;
   private String instructions;
   private String type = "";
+  private boolean isCustom = false;
 
   @TypeConverters(ExercisePropertiesTypeConverter.class)
   private Map<String, List<String>> muscleGroups;
@@ -80,6 +78,14 @@ public class Exercise {
 
   public String getType() {
     return type;
+  }
+
+  public boolean isCustom() {
+    return isCustom;
+  }
+
+  public void setCustom(boolean custom) {
+    isCustom = custom;
   }
 
   public Map<String, List<String>> getMuscleGroups() {

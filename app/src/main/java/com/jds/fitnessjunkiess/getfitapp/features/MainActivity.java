@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
               break;
 
             case R.id.action_exercises:
-              selectedFragment = ExercisesHomeScreenFragment.getInstance();
+              selectedFragment = ExercisesHomeScreenFragment.Companion.getInstance();
               break;
 
             case R.id.action_profile:

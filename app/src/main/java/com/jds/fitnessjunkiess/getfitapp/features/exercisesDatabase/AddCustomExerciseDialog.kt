@@ -20,8 +20,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroupKeys
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroups
 
-class AddCustomExerciseDialog : DialogFragment()
-{
+class AddCustomExerciseDialog : DialogFragment() {
 
     private lateinit var exerciseName: TextInputEditText
     private var mListener: OnFragmentInteractionInterface? = null
@@ -40,10 +39,14 @@ class AddCustomExerciseDialog : DialogFragment()
 
     //TODO: currently this dialog only accepts basic info for a exercise
     //TODO: implement extra info (e.g. description, instructions etc)
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
-    {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val rootView: View = inflater.inflate(R.layout.fragment_dialog_add_custom_exercise, container, false)
+        val rootView: View =
+            inflater.inflate(R.layout.fragment_dialog_add_custom_exercise, container, false)
         this.exerciseName = rootView.findViewById(R.id.exercise_name)
         this.exerciseTypesRadioGroup = rootView.findViewById(R.id.exercise_type_radio_group)
         this.primaryMuscleGroupSpinner = rootView.findViewById(R.id.primary_muscle_groups_spinner)
@@ -75,8 +78,7 @@ class AddCustomExerciseDialog : DialogFragment()
         return rootView
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog
-    {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(context, R.style.AppTheme)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
@@ -92,31 +94,29 @@ class AddCustomExerciseDialog : DialogFragment()
         }
     }
 
-    private fun saveWorkout()
-    {
+    private fun saveWorkout() {
         this.mListener?.saveCustomExercise(this.collectInformationFromUi())
         this.dismiss()
     }
 
-    private fun collectInformationFromUi(): Exercise
-    {
+    private fun collectInformationFromUi(): Exercise {
         val exercise = Exercise()
         exercise.name = this.exerciseName.text.toString()
         exercise.type = this.getSelectedExerciseType()
+        exercise.isCustom = true
         exercise.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, this.getPrimaryMuscleGroup())
-        this.getOtherMuscleGroups().forEach{
-            muscleGroup -> exercise.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, muscleGroup)
+        this.getOtherMuscleGroups().forEach { muscleGroup ->
+            exercise.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, muscleGroup)
         }
         exercise.userId = 10 //todo; needs to use real username
 
         return exercise
     }
 
-    private fun getSelectedExerciseType(): String
-    {
+    private fun getSelectedExerciseType(): String {
         val selectedTypeId = this.exerciseTypesRadioGroup.checkedRadioButtonId
 
-        return when(selectedTypeId) {
+        return when (selectedTypeId) {
             R.id.body_weight_radio_button -> ExerciseTypes.BODY_WEIGHT
             R.id.cardio_radio_button -> ExerciseTypes.CARDIO
             R.id.weights_radio_button -> ExerciseTypes.WEIGHTS
@@ -126,9 +126,8 @@ class AddCustomExerciseDialog : DialogFragment()
         }
     }
 
-    private fun getPrimaryMuscleGroup(): String
-    {
-        return when(this.primaryMuscleGroupSpinner.selectedItemId.toInt()) {
+    private fun getPrimaryMuscleGroup(): String {
+        return when (this.primaryMuscleGroupSpinner.selectedItemId.toInt()) {
             0 -> MuscleGroups.CORE
             1 -> MuscleGroups.BICEPS
             2 -> MuscleGroups.BACK
@@ -142,8 +141,7 @@ class AddCustomExerciseDialog : DialogFragment()
         }
     }
 
-    private fun getOtherMuscleGroups(): ArrayList<String>
-    {
+    private fun getOtherMuscleGroups(): ArrayList<String> {
         val muscleGroups: ArrayList<String> = arrayListOf()
 
         if (this.absCbx.isChecked) muscleGroups.add(MuscleGroups.CORE)
@@ -159,8 +157,7 @@ class AddCustomExerciseDialog : DialogFragment()
         return muscleGroups
     }
 
-    interface OnFragmentInteractionInterface
-    {
+    interface OnFragmentInteractionInterface {
         fun saveCustomExercise(exercise: Exercise)
     }
 }

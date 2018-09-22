@@ -13,7 +13,6 @@ import java.util.List;
 
 @Dao
 public interface ExerciseDao {
-//  @Query("SELECT * FROM exercises WHERE muscleGroups LIKE :muscleGroup AND type LIKE :type")
   @RawQuery(observedEntities = Exercise.class)
   LiveData<List<Exercise>> filterSelect(SimpleSQLiteQuery simpleSQLiteQuery);
   @Query("SELECT * FROM exercises")

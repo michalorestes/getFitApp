@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox;
+import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroups;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//TODO: ExerciseTypes logic needs to be refactor to exclude custom
 public class ExerciseFilterDialog extends DialogFragment implements DialogInterface.OnClickListener, View.OnClickListener {
 
   public interface ActionsInterface {
@@ -108,8 +110,6 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
   @Override
   public void onClick(View v) {
     CustomCheckbox ccb = (CustomCheckbox) v;
-
-
     if (this.typesCheckboxMap.containsValue(v)) {
       if (ccb.getId() != R.id.all_types_customcheckbox) {
         this.typesCheckboxMap.get(ExerciseTypes.ALL).setChecked(false);
@@ -154,13 +154,20 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
     for (String type : this.exercisesFilters.getTypes()) {
       this.typesCheckboxMap.get(type).setChecked(true);
     }
+
+    if (exercisesFilters.isCustom() != null && exercisesFilters.isCustom()) {
+      this.typesCheckboxMap.get(ExerciseTypes.CUSTOM).setChecked(true);
+      this.typesCheckboxMap.get(ExerciseTypes.ALL).setChecked(false);
+    }
   }
 
   private ExercisesFilters getNewFilters() {
     ExercisesFilters exercisesFilter = new ExercisesFilters();
     exercisesFilter.getTypes().addAll(this.getNewTypesFilters());
     exercisesFilter.getMuscleGroups().addAll(this.getNewMuscleGroupsFilters());
-
+    if (this.typesCheckboxMap.get(ExerciseTypes.CUSTOM).isChecked()) {
+      exercisesFilter.setCustom(true);
+    }
     return exercisesFilter;
   }
 
@@ -169,6 +176,10 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
     for (Map.Entry<String, CustomCheckbox> entry : this.typesCheckboxMap.entrySet()) {
       String key = entry.getKey();
       CustomCheckbox checkbox = entry.getValue();
+
+      if (key.equals(ExerciseTypes.CUSTOM)) {
+        continue;
+      }
 
       if (key.equals(ExerciseTypes.ALL) && checkbox.isChecked()) {
         values.clear();

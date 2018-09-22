@@ -164,6 +164,7 @@ public class ExercisesViewActivity extends AppCompatActivity
     this.exerciseFilters.getMuscleGroups().clear();
     this.exerciseFilters.getTypes().addAll(exerciseFilters.getTypes());
     this.exerciseFilters.getMuscleGroups().addAll(exerciseFilters.getMuscleGroups());
+    this.exerciseFilters.setCustom(exerciseFilters.isCustom());
 
     exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
   }

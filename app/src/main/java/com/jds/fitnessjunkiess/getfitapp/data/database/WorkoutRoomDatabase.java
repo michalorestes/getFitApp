@@ -23,7 +23,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.dataModels.WorkoutExerciseAssignme
     WorkoutExerciseAssignment.class,
     Exercise.class,
     MuscleGroup.class
-}, version = 10, exportSchema = false)
+}, version = 11, exportSchema = false)
 public abstract class WorkoutRoomDatabase extends RoomDatabase{
 
   private static WorkoutRoomDatabase instance;

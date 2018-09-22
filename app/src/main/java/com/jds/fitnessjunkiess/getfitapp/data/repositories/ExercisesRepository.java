@@ -48,6 +48,9 @@ public class ExercisesRepository {
 
     StringBuilder subQuery = new StringBuilder();
     subQuery.append("SELECT * FROM exercises WHERE ");
+    if (exercisesFilter.isCustom() != null) {
+      subQuery.append("isCustom = ").append(exercisesFilter.isCustom() ? 1 : 0).append(" AND ");
+    }
 
     for (int i = 0; i < exercisesFilter.getMuscleGroups().size(); i++) {
       if (i != 0) {

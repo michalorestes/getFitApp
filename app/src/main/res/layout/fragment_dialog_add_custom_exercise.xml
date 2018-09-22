@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -9,32 +11,181 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/AppTheme.TextBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayout"
-            style="@style/AppTheme.TextBox"
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/exercise_name"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:padding="5dp">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/exercise_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:hint="Enter workout name"
-                android:inputType="text"
-                android:textSize="14sp" />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="Enter workout name"
+            android:inputType="text"
+            android:textSize="14sp" />
+    </android.support.design.widget.TextInputLayout>
 
-    </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Chose exercise type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <RadioGroup
+        android:id="@+id/exercise_type_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <RadioButton
+            android:id="@+id/cardio_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cardio" />
+
+        <RadioButton
+            android:id="@+id/weights_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weights" />
+
+        <RadioButton
+            android:id="@+id/body_weight_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Body weight" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Chose primary muscle group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/exercise_type_radio_group" />
+
+    <Spinner
+        android:id="@+id/primary_muscle_groups_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:entries="@array/muscle_groups"
+        android:prompt="@string/primary_muscle_groups_spinner_prompt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Chose secondary muscle groups"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/primary_muscle_groups_spinner" />
+
+    <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckboxGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:alignContent="center"
+        app:alignItems="center"
+        app:flexWrap="wrap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/core_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="ABS" />
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/biceps_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="Biceps" />
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/back_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="Back" />
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/legs_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="Legs" />
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/triceps_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="Triceps" />
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/chest_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="Chest" />
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/shoulders_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="Shoulders" />
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/forearms_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="Forearms" />
+
+        <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
+            android:id="@+id/quads_muscle_group_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textLabel="Quads" />
+    </com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckboxGroup>
+</android.support.constraint.ConstraintLayout>

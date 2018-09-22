@@ -162,9 +162,7 @@ public class ExercisesViewActivity extends AppCompatActivity
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.activity_exercises_view, menu);
-    if (this.activeWorkout != null) {
-      menu.findItem(R.id.save_changes_option).setVisible(true);
-    }
+
     return true;
   }
 

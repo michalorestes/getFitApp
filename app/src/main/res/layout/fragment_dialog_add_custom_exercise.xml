@@ -153,10 +153,10 @@
             app:textLabel="Back" />
 
         <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
-            android:id="@+id/legs_muscle_group_checkbox"
+            android:id="@+id/calves_muscle_group_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:textLabel="Legs" />
+            app:textLabel="Calves" />
 
         <com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
             android:id="@+id/triceps_muscle_group_checkbox"

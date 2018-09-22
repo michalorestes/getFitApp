@@ -120,6 +120,8 @@ public class Exercise {
         + getInstructions()
         + " "
         + "Type: "
-        + getType();
+        + getType()
+        + "MuscleGroups"
+        + getMuscleGroups().toString();
   }
 }

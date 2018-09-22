@@ -9,7 +9,7 @@ import android.util.Log;
 import com.jds.fitnessjunkiess.getfitapp.data.dao.ExerciseDao;
 import com.jds.fitnessjunkiess.getfitapp.data.database.WorkoutRoomDatabase;
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise;
-import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilter;
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class ExercisesRepository {
     this.dao = database.exerciseDao();
   }
 
-  public LiveData<List<Exercise>> filterSelect(ExercisesFilter exercisesFilter) {
+  public LiveData<List<Exercise>> filterSelect(ExercisesFilters exercisesFilter) {
     String query = this.buildFilterQuery(exercisesFilter);
     Log.d("------>", query);
     SimpleSQLiteQuery simpleSQLiteQuery = new SimpleSQLiteQuery(query);
@@ -37,26 +37,26 @@ public class ExercisesRepository {
     new insertAsyncTask(this.dao).execute(exercise);
   }
 
-  private String buildFilterQuery(ExercisesFilter exercisesFilter) {
-    if (exercisesFilter.types.size() == 0) {
-      exercisesFilter.types.add("");
+  private String buildFilterQuery(ExercisesFilters exercisesFilter) {
+    if (exercisesFilter.getTypes().size() == 0) {
+      exercisesFilter.getTypes().add("");
     }
 
-    if (exercisesFilter.muscleGroup.size() == 0) {
-      exercisesFilter.muscleGroup.add("");
+    if (exercisesFilter.getMuscleGroups().size() == 0) {
+      exercisesFilter.getMuscleGroups().add("");
     }
 
     StringBuilder subQuery = new StringBuilder();
     subQuery.append("SELECT * FROM exercises WHERE ");
 
-    for (int i = 0; i < exercisesFilter.muscleGroup.size(); i++) {
+    for (int i = 0; i < exercisesFilter.getMuscleGroups().size(); i++) {
       if (i != 0) {
         subQuery.append("OR ");
       }
 
       subQuery
           .append("muscleGroups LIKE '%")
-          .append(exercisesFilter.muscleGroup.get(i))
+          .append(exercisesFilter.getMuscleGroups().get(i))
           .append("%' ");
     }
 
@@ -64,11 +64,11 @@ public class ExercisesRepository {
     query.append("SELECT * FROM (").append(subQuery);
     query.append(") WHERE ");
 
-    for (int i = 0; i < exercisesFilter.types.size(); i++) {
+    for (int i = 0; i < exercisesFilter.getTypes().size(); i++) {
       if (i != 0) {
         query.append("OR ");
       }
-      query.append("type LIKE '%").append(exercisesFilter.types.get(i)).append("%' ");
+      query.append("type LIKE '%").append(exercisesFilter.getTypes().get(i)).append("%' ");
     }
 
     return query.toString();

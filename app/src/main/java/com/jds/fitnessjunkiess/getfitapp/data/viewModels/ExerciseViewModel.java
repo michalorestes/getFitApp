@@ -9,7 +9,7 @@ import android.arch.lifecycle.Transformations;
 
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.data.repositories.ExercisesRepository;
-import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilter;
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class ExerciseViewModel extends AndroidViewModel {
   ExercisesRepository repository;
   MediatorLiveData<List<Exercise>> data = new MediatorLiveData<>();
 
-  private MutableLiveData<ExercisesFilter> filterMutableLiveData;
+  private MutableLiveData<ExercisesFilters> filterMutableLiveData;
 
   public ExerciseViewModel(Application application) {
     super(application);
@@ -25,7 +25,7 @@ public class ExerciseViewModel extends AndroidViewModel {
     this.repository = new ExercisesRepository(application);
     this.filterMutableLiveData = new MutableLiveData<>();
 
-    ExercisesFilter filter = new ExercisesFilter("", "");
+    ExercisesFilters filter = new ExercisesFilters();
     this.filterMutableLiveData.setValue(filter);
 
     LiveData<List<Exercise>> source = Transformations.switchMap(
@@ -45,7 +45,7 @@ public class ExerciseViewModel extends AndroidViewModel {
     this.repository.insert(exercise);
   }
 
-  public void setFilterMutableLiveData(ExercisesFilter exercisesFilter) {
+  public void setFilterMutableLiveData(ExercisesFilters exercisesFilter) {
     this.filterMutableLiveData.setValue(exercisesFilter);
   }
 }

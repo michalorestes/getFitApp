@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes;
-import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilter;
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroups;
 import com.jds.fitnessjunkiess.getfitapp.R;
 
@@ -60,36 +60,36 @@ public class ExercisesHomeScreenFragment extends Fragment implements View.OnClic
 
   @Override
   public void onClick(View v) {
-    ExercisesFilter exercisesFilter = new ExercisesFilter();
+    ExercisesFilters exercisesFilter = new ExercisesFilters();
 
     switch (v.getId()) {
       case R.id.view_all_exercises_btn:
-        exercisesFilter.types.add(ExerciseTypes.ALL);
+        exercisesFilter.getTypes().add(ExerciseTypes.ALL);
         break;
       case R.id.view_weights_exercises_btn:
-        exercisesFilter.types.add(ExerciseTypes.WEIGHTS);
+        exercisesFilter.getTypes().add(ExerciseTypes.WEIGHTS);
         break;
       case R.id.view_body_weight_exercises_btn:
-        exercisesFilter.types.add(ExerciseTypes.BODY_WEIGHT);
+        exercisesFilter.getTypes().add(ExerciseTypes.BODY_WEIGHT);
         break;
       case R.id.view_cardio_exercises_btn:
-        exercisesFilter.types.add(ExerciseTypes.CARDIO);
+        exercisesFilter.getTypes().add(ExerciseTypes.CARDIO);
         break;
       case R.id.view_custom_exercises_btn:
         //TODO: How will custom exercises work???
         break;
       case R.id.view_abs_exercises_btn:
-        exercisesFilter.muscleGroup.add(MuscleGroups.CORE);
+        exercisesFilter.getMuscleGroups().add(MuscleGroups.CORE);
         break;
       case R.id.view_biceps_exercises_btn:
-        exercisesFilter.muscleGroup.add(MuscleGroups.BICEPS);
+        exercisesFilter.getMuscleGroups().add(MuscleGroups.BICEPS);
         break;
     }
 
     this.openExercisesViewActivity(exercisesFilter);
   }
 
-  private void openExercisesViewActivity(ExercisesFilter exercisesFilter) {
+  private void openExercisesViewActivity(ExercisesFilters exercisesFilter) {
     Intent intent = new Intent(getContext(), ExercisesViewActivity.class);
     intent.putExtra("exerciseFilters", exercisesFilter);
     startActivity(intent);

@@ -1,21 +1,16 @@
 package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout;
@@ -23,11 +18,8 @@ import com.jds.fitnessjunkiess.getfitapp.data.dataModels.WorkoutExerciseAssignme
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseViewModel;
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseAssignmentViewModel;
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutsViewModel;
-import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilter;
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters;
 import com.jds.fitnessjunkiess.getfitapp.R;
-import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.AbstractExercisesAdapter;
-import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.ExercisesAdapter;
-import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.WorkoutContextExercisesAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +31,7 @@ public class ExercisesViewActivity extends AppCompatActivity
     ExercisesListFragment.OnFragmentInteractionListener,
     AddCustomExerciseDialog.OnFragmentInteractionInterface {
 
-  private ExercisesFilter exerciseFilters;
+  private ExercisesFilters exerciseFilters;
   private ExerciseViewModel exerciseViewModel;
   private WorkoutExerciseAssignmentViewModel workoutExerciseAssignmentViewModel;
   private List<Workout> workouts;
@@ -125,10 +117,10 @@ public class ExercisesViewActivity extends AppCompatActivity
     }
   }
 
-  private ExercisesFilter getExerciseFilters() {
-    ExercisesFilter exercisesFilter = getIntent().getExtras().getParcelable("exerciseFilters");
+  private ExercisesFilters getExerciseFilters() {
+    ExercisesFilters exercisesFilter = getIntent().getExtras().getParcelable("exerciseFilters");
     if (exercisesFilter == null) {
-      exercisesFilter = new ExercisesFilter("", "");
+      exercisesFilter = new ExercisesFilters();
     }
 
     return exercisesFilter;
@@ -167,11 +159,11 @@ public class ExercisesViewActivity extends AppCompatActivity
   }
 
   @Override
-  public void onPositiveClick(ExercisesFilter exerciseFilters) {
-    this.exerciseFilters.types.clear();
-    this.exerciseFilters.muscleGroup.clear();
-    this.exerciseFilters.types.addAll(exerciseFilters.types);
-    this.exerciseFilters.muscleGroup.addAll(exerciseFilters.muscleGroup);
+  public void onPositiveClick(ExercisesFilters exerciseFilters) {
+    this.exerciseFilters.getTypes().clear();
+    this.exerciseFilters.getMuscleGroups().clear();
+    this.exerciseFilters.getTypes().addAll(exerciseFilters.getTypes());
+    this.exerciseFilters.getMuscleGroups().addAll(exerciseFilters.getMuscleGroups());
 
     exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
   }

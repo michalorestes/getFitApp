@@ -9,11 +9,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+
 import com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes;
-import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilter;
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroups;
 import com.jds.fitnessjunkiess.getfitapp.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,12 +25,14 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
 
   public interface ActionsInterface {
 
-    void onPositiveClick(ExercisesFilter exercisesFilters);
+    void onPositiveClick(ExercisesFilters exercisesFilters);
   }
-  private ExercisesFilter exercisesFilters;
+
+  private ExercisesFilters exercisesFilters;
 
   private Map<String, CustomCheckbox> typesCheckboxMap;
   private Map<String, CustomCheckbox> muscleGroupsCheckboxMap;
+
   @Override
   public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -36,7 +40,7 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
     this.muscleGroupsCheckboxMap = new HashMap<>();
     this.exercisesFilters = getArguments().getParcelable("exerciseFilters");
     if (this.exercisesFilters == null) {
-      this.exercisesFilters = new ExercisesFilter("", "");
+      this.exercisesFilters = new ExercisesFilters();
     }
   }
 
@@ -95,7 +99,7 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
     this.setFiltersOnUi();
 
     builder.setView(rootView)
-        .setPositiveButton("Filter",this)
+        .setPositiveButton("Filter", this)
         .setNegativeButton("Cancel", this);
 
     return builder.create();
@@ -107,9 +111,9 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
 
 
     if (this.typesCheckboxMap.containsValue(v)) {
-      if (ccb.getId() != R.id.all_types_customcheckbox ) {
+      if (ccb.getId() != R.id.all_types_customcheckbox) {
         this.typesCheckboxMap.get(ExerciseTypes.ALL).setChecked(false);
-      } else if (ccb.getId() == R.id.all_types_customcheckbox ) {
+      } else if (ccb.getId() == R.id.all_types_customcheckbox) {
         for (Map.Entry<String, CustomCheckbox> checkbox : this.typesCheckboxMap.entrySet()) {
           checkbox.getValue().setChecked(false);
         }
@@ -119,7 +123,7 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
     if (this.muscleGroupsCheckboxMap.containsValue(v)) {
       if (ccb.getId() != R.id.all_muscle_groups_mg_customcheckbox) {
         this.muscleGroupsCheckboxMap.get(MuscleGroups.ALL).setChecked(false);
-      } else if (ccb.getId() == R.id.all_muscle_groups_mg_customcheckbox ) {
+      } else if (ccb.getId() == R.id.all_muscle_groups_mg_customcheckbox) {
         for (Map.Entry<String, CustomCheckbox> checkbox : this.muscleGroupsCheckboxMap.entrySet()) {
           checkbox.getValue().setChecked(false);
         }
@@ -143,26 +147,26 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
   }
 
   private void setFiltersOnUi() {
-    for (String muscleGroup : this.exercisesFilters.muscleGroup) {
+    for (String muscleGroup : this.exercisesFilters.getMuscleGroups()) {
       this.muscleGroupsCheckboxMap.get(muscleGroup).setChecked(true);
     }
 
-    for (String type : this.exercisesFilters.types) {
+    for (String type : this.exercisesFilters.getTypes()) {
       this.typesCheckboxMap.get(type).setChecked(true);
     }
   }
 
-  private ExercisesFilter getNewFilters() {
-    ExercisesFilter exercisesFilter = new ExercisesFilter();
-    exercisesFilter.types.addAll(this.getNewTypesFilters());
-    exercisesFilter.muscleGroup.addAll(this.getNewMuscleGroupsFilters());
+  private ExercisesFilters getNewFilters() {
+    ExercisesFilters exercisesFilter = new ExercisesFilters();
+    exercisesFilter.getTypes().addAll(this.getNewTypesFilters());
+    exercisesFilter.getMuscleGroups().addAll(this.getNewMuscleGroupsFilters());
 
     return exercisesFilter;
   }
 
   private List<String> getNewTypesFilters() {
     List<String> values = new ArrayList<>();
-    for(Map.Entry<String, CustomCheckbox> entry : this.typesCheckboxMap.entrySet()) {
+    for (Map.Entry<String, CustomCheckbox> entry : this.typesCheckboxMap.entrySet()) {
       String key = entry.getKey();
       CustomCheckbox checkbox = entry.getValue();
 
@@ -182,7 +186,7 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
 
   private List<String> getNewMuscleGroupsFilters() {
     List<String> values = new ArrayList<>();
-    for(Map.Entry<String, CustomCheckbox> entry : this.muscleGroupsCheckboxMap.entrySet()) {
+    for (Map.Entry<String, CustomCheckbox> entry : this.muscleGroupsCheckboxMap.entrySet()) {
       String key = entry.getKey();
       CustomCheckbox checkbox = entry.getValue();
 

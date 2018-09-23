@@ -23,6 +23,9 @@ class ExercisesListFragment : Fragment(),
     private var mListener: OnFragmentInteractionListener? = null
     private lateinit var recyclerViewerAdapter: AbstractExercisesAdapter
 
+    override val workoutsList: List<Workout>
+        get() = mListener?.workoutsList!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,7 +59,9 @@ class ExercisesListFragment : Fragment(),
         if (context is OnFragmentInteractionListener) {
             mListener = context
         } else {
-            throw RuntimeException(context!!.toString() + " must implement OnFragmentInteractionListener")
+            throw RuntimeException(
+                "${context!!.toString()} must implement OnFragmentInteractionListener"
+            )
         }
     }
 
@@ -69,19 +74,11 @@ class ExercisesListFragment : Fragment(),
         this.recyclerViewerAdapter.updateDataSet(exercises)
     }
 
-//    override fun getWorkoutsList(): List<Workout>? {
-//        return this.mListener?.workoutsList
-//    }
-    override fun getWorkoutsList(): List<Workout>? {
-        return this.mListener?.workoutsList
-    }
-
-    override fun insertExerciseAssignment(exercise: Exercise, workout: Workout?) {
+    override fun insertExerciseAssignment(exercise: Exercise, workout: Workout) {
         val exerciseAssignment = WorkoutExerciseAssignment()
         exerciseAssignment.exerciseId = exercise.id
-        if (workout != null) {
-            exerciseAssignment.workoutId = workout.id
-        }
+        exerciseAssignment.workoutId = workout.id
+
         this.mListener?.insertExerciseAssignment(exerciseAssignment)
 
         Toast.makeText(

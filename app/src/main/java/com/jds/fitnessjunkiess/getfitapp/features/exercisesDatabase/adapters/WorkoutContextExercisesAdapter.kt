@@ -23,7 +23,7 @@ class WorkoutContextExercisesAdapter(onItemMenuClickInterface: OnItemMenuClickIn
 
     override fun onBindViewHolder(holder: AbstractExercisesAdapter.ViewHolder, position: Int) {
         holder.exerciseName.text = this.data[position].name
-        holder.imageButton.setOnClickListener { v ->
+        holder.imageButton.setOnClickListener { _ ->
             this.onItemMenuClickInterface
                 .insertExerciseAssignment(this.data[position])
         }

@@ -1,21 +1,24 @@
 package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase;
 
 import android.app.Dialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox;
-import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroups;
 import com.jds.fitnessjunkiess.getfitapp.R;
+import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,13 +28,7 @@ import java.util.Map;
 //TODO: ExerciseTypes logic needs to be refactor to exclude custom
 public class ExerciseFilterDialog extends DialogFragment implements DialogInterface.OnClickListener, View.OnClickListener {
 
-  public interface ActionsInterface {
-
-    void onPositiveClick(ExercisesFilters exercisesFilters);
-  }
-
   private ExercisesFilters exercisesFilters;
-
   private Map<String, CustomCheckbox> typesCheckboxMap;
   private Map<String, CustomCheckbox> muscleGroupsCheckboxMap;
 
@@ -136,10 +133,8 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
   @Override
   public void onClick(DialogInterface dialog, int id) {
     if (id == DialogInterface.BUTTON_POSITIVE) {
-      ActionsInterface parentActivity = (ActionsInterface) getActivity();
-      if (parentActivity != null) {
-        parentActivity.onPositiveClick(getNewFilters());
-      }
+      ExerciseViewModel exerciseViewModel = ViewModelProviders.of(getActivity()).get(ExerciseViewModel.class);
+      exerciseViewModel.setFilterMutableLiveData(getNewFilters());
       dismiss();
     } else if (id == DialogInterface.BUTTON_NEGATIVE) {
       dismiss();

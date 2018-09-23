@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_menu_navigation"
+    app:startDestination="@+id/action_workouts">
+
+
+    <fragment
+        android:id="@+id/action_workouts"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.workout.WorkoutsListFragment"
+        android:label="Workouts"
+        tools:layout="@layout/fragment_workouts_list">
+        <action
+            android:id="@+id/action_action_workouts_to_workoutViewFragment"
+            app:destination="@id/workoutViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_exercises"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.ExercisesHomeScreenFragment"
+        android:label="Exercises">
+        <action
+            android:id="@+id/action_action_exercises_to_browseExercisesFragment"
+            app:destination="@id/browseExercisesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_profile"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/workoutViewFragment"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.workout.WorkoutViewFragment"
+        tools:layout="@layout/fragment_workout_view">
+        <argument
+            android:name="workoutData"
+            app:argType="com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout" />
+        <action
+            android:id="@+id/action_workoutViewFragment_to_browseExercisesFragment"
+            app:destination="@id/browseExercisesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/browseExercisesFragment"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.BrowseExercisesFragment"
+        android:label="BrowseExercisesFragment" >
+        <action
+            android:id="@+id/action_browseExercisesFragment_to_addCustomExerciseDialog"
+            app:destination="@id/addCustomExerciseDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCustomExerciseDialog"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.AddCustomExerciseDialog"
+        android:label="AddCustomExerciseDialog" />
+</navigation>

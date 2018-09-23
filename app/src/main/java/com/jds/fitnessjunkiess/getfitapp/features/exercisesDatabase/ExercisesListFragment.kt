@@ -24,7 +24,7 @@ class ExercisesListFragment : Fragment(),
     private lateinit var recyclerViewerAdapter: AbstractExercisesAdapter
 
     override val workoutsList: List<Workout>
-        get() = mListener?.workoutsList!!
+        get() = mListener!!.workoutsList
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,7 +60,7 @@ class ExercisesListFragment : Fragment(),
             mListener = context
         } else {
             throw RuntimeException(
-                "${context!!.toString()} must implement OnFragmentInteractionListener"
+                "context must implement OnFragmentInteractionListener"
             )
         }
     }

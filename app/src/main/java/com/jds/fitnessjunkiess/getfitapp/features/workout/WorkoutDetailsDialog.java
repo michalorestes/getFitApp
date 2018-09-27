@@ -119,7 +119,7 @@ public class WorkoutDetailsDialog extends DialogFragment {
     }
 
     workout.setSchedule(schedule);
-    workout.setUserId(MainActivity.user.getId());
+//    workout.setUserId(MainActivity.Companion.getUser().getId());
 
     return workout;
   }

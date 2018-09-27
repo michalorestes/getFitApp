@@ -3,9 +3,7 @@ package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import com.jds.fitnessjunkiess.getfitapp.R
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes
@@ -67,12 +65,5 @@ class ExercisesHomeScreenFragment : Fragment(), View.OnClickListener
         val intent = Intent(context, ExercisesViewActivity::class.java)
         intent.putExtra("exerciseFilters", exercisesFilter)
         startActivity(intent)
-    }
-
-    companion object {
-        @JvmStatic
-        fun getInstance(): ExercisesHomeScreenFragment {
-            return ExercisesHomeScreenFragment()
-        }
     }
 }

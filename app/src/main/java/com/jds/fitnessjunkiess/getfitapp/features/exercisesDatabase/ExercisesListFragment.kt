@@ -83,7 +83,7 @@ class ExercisesListFragment : Fragment(),
 
         Toast.makeText(
             context,
-            "${exercise.name} added to ${workout?.name}",
+            "${exercise.name} added to ${workout.name}",
             Toast.LENGTH_LONG
         ).show()
     }

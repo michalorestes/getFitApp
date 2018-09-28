@@ -8,27 +8,27 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import androidx.navigation.findNavController
 import com.jds.fitnessjunkiess.getfitapp.R
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseViewModel
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.ExercisesViewActivity
 import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewViewAdapter
+import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_workout_view.*
 
 class WorkoutViewFragment : Fragment() {
-interface testTest {
-    fun setToolbarTitle(text: String)
-}
+
     private lateinit var workoutExerciseViewModel: WorkoutExerciseViewModel
     private lateinit var workout: Workout
     private lateinit var recyclerViewAdapter: WorkoutViewViewAdapter
 
-    private lateinit var contextCC: testTest
+    private lateinit var actionBarInteractionInterface: OnFragmentActionBarInteractionInterface
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context is testTest) {
-            this.contextCC = context
+        if (context is OnFragmentActionBarInteractionInterface) {
+            this.actionBarInteractionInterface = context
         }
     }
 
@@ -45,6 +45,7 @@ interface testTest {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        actionBarInteractionInterface.setToolbarTitle(this.workout.name)
         return inflater.inflate(R.layout.fragment_workout_view, container, false)
     }
 
@@ -55,8 +56,6 @@ interface testTest {
         this.recycler_view.layoutManager = manager
         this.recycler_view.adapter = this.recyclerViewAdapter
         this.setHasOptionsMenu(true)
-
-        contextCC.setToolbarTitle(this.workout.name)
     }
 
     override fun onStart() {
@@ -74,12 +73,14 @@ interface testTest {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-
         when(item?.itemId) {
             R.id.action_add_exercise -> {
-                val intent = Intent(context, ExercisesViewActivity::class.java)
-                intent.putExtra("workoutContext", this.workout)
-                startActivity(intent)
+                val bundle = Bundle();
+                bundle.putParcelable("selectedWorkout", this.workout)
+                view?.findNavController()?.navigate(
+                    R.id.action_workoutViewFragment_to_browseExercisesFragment,
+                    bundle
+                )
             }
 
             R.id.action_edit_workout -> {

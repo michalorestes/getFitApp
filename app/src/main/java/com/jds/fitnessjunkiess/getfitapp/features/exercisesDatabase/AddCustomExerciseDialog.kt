@@ -1,12 +1,11 @@
 package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase
 
 import android.app.Dialog
-import android.content.Context
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
 import android.support.v4.app.DialogFragment
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,11 +18,10 @@ import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroupKeys
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroups
+import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseViewModel
 
 class AddCustomExerciseDialog : DialogFragment() {
-
     private lateinit var exerciseName: TextInputEditText
-    private var mListener: OnFragmentInteractionInterface? = null
     private lateinit var exerciseTypesRadioGroup: RadioGroup
     private lateinit var primaryMuscleGroupSpinner: Spinner
 
@@ -36,6 +34,14 @@ class AddCustomExerciseDialog : DialogFragment() {
     private lateinit var shouldersCbx: CustomCheckbox
     private lateinit var forearmsCbx: CustomCheckbox
     private lateinit var quadricepsCbx: CustomCheckbox
+
+    private lateinit var exerciseViewModel: ExerciseViewModel
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.exerciseViewModel = ViewModelProviders.of(activity!!).get(ExerciseViewModel::class.java)
+    }
 
     //TODO: currently this dialog only accepts basic info for a exercise
     //TODO: implement extra info (e.g. description, instructions etc)
@@ -85,17 +91,8 @@ class AddCustomExerciseDialog : DialogFragment() {
         return dialog
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionInterface) {
-            this.mListener = context
-        } else {
-            throw Exception("Context must implement OnFragmentInteraction")
-        }
-    }
-
     private fun saveWorkout() {
-        this.mListener?.saveCustomExercise(this.collectInformationFromUi())
+        this.exerciseViewModel.insert(this.collectInformationFromUi())
         this.dismiss()
     }
 
@@ -155,9 +152,5 @@ class AddCustomExerciseDialog : DialogFragment() {
         if (this.quadricepsCbx.isChecked) muscleGroups.add(MuscleGroups.QUADRICEPS)
 
         return muscleGroups
-    }
-
-    interface OnFragmentInteractionInterface {
-        fun saveCustomExercise(exercise: Exercise)
     }
 }

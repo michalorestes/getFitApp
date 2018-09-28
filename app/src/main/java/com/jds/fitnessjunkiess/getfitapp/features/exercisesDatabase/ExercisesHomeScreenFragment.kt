@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
 import android.widget.Button
+import androidx.navigation.findNavController
 import com.jds.fitnessjunkiess.getfitapp.R
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters
@@ -58,12 +59,6 @@ class ExercisesHomeScreenFragment : Fragment(), View.OnClickListener
             R.id.view_biceps_exercises_btn -> exerciseFilters.muscleGroups.add(MuscleGroups.BICEPS)
         }
 
-        this.openExercisesViewActivity(exerciseFilters)
-    }
-
-    private fun openExercisesViewActivity(exercisesFilter: ExercisesFilters) {
-        val intent = Intent(context, ExercisesViewActivity::class.java)
-        intent.putExtra("exerciseFilters", exercisesFilter)
-        startActivity(intent)
+        v.findNavController().navigate(R.id.browseExercisesFragment)
     }
 }

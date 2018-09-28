@@ -34,7 +34,7 @@ abstract class AbstractExercisesAdapter(
     }
 
     interface OnItemMenuClickInterface {
-        val workoutsList: List<Workout>
+        fun getWorkoutsList(): List<Workout>?
         fun insertExerciseAssignment(exercise: Exercise, workout: Workout)
         fun insertExerciseAssignment(exercise: Exercise)
     }

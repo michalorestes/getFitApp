@@ -23,14 +23,14 @@ class ExercisesAdapter(
         holder.exerciseName.text = this.data[position].name
         holder.imageButton.setOnClickListener { v ->
             val popupMenu = PopupMenu(this.context, v)
-            this.onItemMenuClickInterface.workoutsList.forEachIndexed { i, workout ->
+            this.onItemMenuClickInterface.getWorkoutsList()?.forEachIndexed { i, workout ->
                 popupMenu.menu.add(0, i, i, workout.name)
             }
 
             popupMenu.setOnMenuItemClickListener { popupItem ->
                 this.onItemMenuClickInterface.insertExerciseAssignment(
                     this.data[position],
-                    this.onItemMenuClickInterface.workoutsList[popupItem.itemId]
+                    this.onItemMenuClickInterface.getWorkoutsList()!![popupItem.itemId]
                 )
                 true
             }

@@ -28,16 +28,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExercisesViewActivity extends AppCompatActivity
-    implements ExerciseFilterDialog.ActionsInterface,
-    ExercisesListFragment.OnFragmentInteractionListener,
-    AddCustomExerciseDialog.OnFragmentInteractionInterface {
+    implements ExerciseFilterDialog.ActionsInterface {
 
   private ExercisesFilters exerciseFilters;
   private ExerciseViewModel exerciseViewModel;
-  private WorkoutExerciseAssignmentViewModel workoutExerciseAssignmentViewModel;
   private List<Workout> workouts;
   private Workout activeWorkout;
-  private ExercisesListFragment exercisesListFragment;
   private WorkoutsViewModel workoutsViewModel;
   private FloatingActionButton addCustomExerciseBtn;
 
@@ -55,17 +51,8 @@ public class ExercisesViewActivity extends AppCompatActivity
     activeWorkout = this.getIntent().getExtras().getParcelable("workoutContext");
     this.workouts = new ArrayList<>();
     this.exerciseFilters = this.getExerciseFilters();
-    this.exercisesListFragment = new ExercisesListFragment();
     this.setUpActionBar();
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    fragmentTransaction
-        .add(R.id.exercise_list_fragment_container, this.exercisesListFragment)
-        .commit();
-
-    this.workoutExerciseAssignmentViewModel =
-        ViewModelProviders.of(this).get(WorkoutExerciseAssignmentViewModel.class);
     this.workoutsViewModel = ViewModelProviders.of(this).get(WorkoutsViewModel.class);
     this.exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel.class);
   }
@@ -85,7 +72,7 @@ public class ExercisesViewActivity extends AppCompatActivity
     this.exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
     this.exerciseViewModel.select().observe(this, exercises -> {
       if (exercises != null) {
-        this.exercisesListFragment.updateDataSet(exercises);
+//        this.exercisesListFragment.updateDataSet(exercises);
       }
     });
   }
@@ -137,21 +124,6 @@ public class ExercisesViewActivity extends AppCompatActivity
   }
 
   @Override
-  public Workout getActiveWorkout() {
-    return this.activeWorkout;
-  }
-
-  @Override
-  public List<Workout> getWorkoutsList() {
-    return this.workouts;
-  }
-
-  @Override
-  public void insertExerciseAssignment(WorkoutExerciseAssignment workoutExerciseAssignment) {
-    this.workoutExerciseAssignmentViewModel.insert(workoutExerciseAssignment);
-  }
-
-  @Override
   public boolean onCreateOptionsMenu(Menu menu) {
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.activity_exercises_view, menu);
@@ -168,11 +140,5 @@ public class ExercisesViewActivity extends AppCompatActivity
     this.exerciseFilters.setCustom(exerciseFilters.isCustom());
 
     exerciseViewModel.setFilterMutableLiveData(exerciseFilters);
-  }
-
-  @Override
-  public void saveCustomExercise(@NotNull Exercise exercise) {
-    this.exerciseViewModel.insert(exercise);
-    Toast.makeText(getApplicationContext(), "New custom exercise created", Toast.LENGTH_SHORT).show();
   }
 }

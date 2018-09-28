@@ -7,10 +7,10 @@ import androidx.navigation.NavController
 import com.jds.fitnessjunkiess.getfitapp.R
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.jds.fitnessjunkiess.getfitapp.features.workout.WorkoutViewFragment
+import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), WorkoutViewFragment.testTest {
+class MainActivity : AppCompatActivity(), OnFragmentActionBarInteractionInterface {
     override fun setToolbarTitle(text: String) {
         supportActionBar!!.title = text
     }

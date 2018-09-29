@@ -18,8 +18,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutsViewModel;
 
-public class WorkoutsListFragment extends Fragment
-    implements View.OnClickListener, WorkoutDetailsDialog.ActionsInterface {
+public class WorkoutsListFragment extends Fragment implements View.OnClickListener {
 
   private static final String TAG = "WORKOUT_LIST_FRAGMENT";
 
@@ -93,11 +92,5 @@ public class WorkoutsListFragment extends Fragment
         dialogTest.show(fragmentTransaction, "tag");
         break;
     }
-  }
-
-  @Override
-  public void onSaveAction(Workout result) {
-    this.workoutsViewModel.insert(result);
-    this.recyclerView.smoothScrollToPosition(this.recycleViewAdapter.getItemCount()-1);
   }
 }

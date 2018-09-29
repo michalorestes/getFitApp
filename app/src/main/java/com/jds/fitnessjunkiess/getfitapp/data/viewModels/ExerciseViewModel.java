@@ -48,4 +48,8 @@ public class ExerciseViewModel extends AndroidViewModel {
   public void setFilterMutableLiveData(ExercisesFilters exercisesFilter) {
     this.filterMutableLiveData.setValue(exercisesFilter);
   }
+
+  public ExercisesFilters getExercisesFilter() {
+    return this.filterMutableLiveData.getValue();
+  }
 }

@@ -144,9 +144,6 @@ class BrowseExercisesFragment : Fragment(),
     private fun openFiltersDialog() {
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         val filterDialog = ExerciseFilterDialog()
-        val bundle = Bundle()
-        bundle.putParcelable("exerciseFilters", this.exercisesFilters)
-        filterDialog.arguments = bundle
         filterDialog.show(fragmentTransaction, "exercisesFilterDialog")
     }
 

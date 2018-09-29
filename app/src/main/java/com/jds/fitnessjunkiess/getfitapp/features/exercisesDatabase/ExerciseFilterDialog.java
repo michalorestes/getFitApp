@@ -37,10 +37,8 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
     super.onCreate(savedInstanceState);
     this.typesCheckboxMap = new HashMap<>();
     this.muscleGroupsCheckboxMap = new HashMap<>();
-    this.exercisesFilters = getArguments().getParcelable("exerciseFilters");
-    if (this.exercisesFilters == null) {
-      this.exercisesFilters = new ExercisesFilters();
-    }
+    ExerciseViewModel exerciseViewModel = ViewModelProviders.of(getActivity()).get(ExerciseViewModel.class);
+    this.exercisesFilters = exerciseViewModel.getExercisesFilter();
   }
 
   @NonNull

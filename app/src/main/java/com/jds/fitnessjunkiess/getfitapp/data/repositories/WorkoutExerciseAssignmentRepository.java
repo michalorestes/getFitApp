@@ -20,6 +20,10 @@ public class WorkoutExerciseAssignmentRepository {
     new insertAsyncTask(this.workoutExercisesAssignmentDao).execute(workoutExerciseAssignment);
   }
 
+  public void update(WorkoutExerciseAssignment workoutExerciseAssignment) {
+    new updateAsyncTask(this.workoutExercisesAssignmentDao).execute(workoutExerciseAssignment);
+  }
+
   private static class insertAsyncTask extends AsyncTask<WorkoutExerciseAssignment, Void, Void> {
 
     private WorkoutExercisesAssignmentDao mAsyncTaskDao;
@@ -31,6 +35,21 @@ public class WorkoutExerciseAssignmentRepository {
     @Override
     protected Void doInBackground(final WorkoutExerciseAssignment ... params) {
       mAsyncTaskDao.insert(params[0]);
+      return null;
+    }
+  }
+
+  private static class updateAsyncTask extends AsyncTask<WorkoutExerciseAssignment, Void, Void> {
+
+    private WorkoutExercisesAssignmentDao mAsyncTaskDao;
+
+    updateAsyncTask(WorkoutExercisesAssignmentDao dao) {
+      mAsyncTaskDao = dao;
+    }
+
+    @Override
+    protected Void doInBackground(final WorkoutExerciseAssignment ... params) {
+      mAsyncTaskDao.update(params[0]);
       return null;
     }
   }

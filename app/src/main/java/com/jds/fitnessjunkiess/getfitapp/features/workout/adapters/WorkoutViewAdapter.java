@@ -12,12 +12,18 @@ import com.jds.fitnessjunkiess.getfitapp.data.pojo.WorkoutExercise;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WorkoutViewViewAdapter extends RecyclerView.Adapter<WorkoutViewViewAdapter.WorkoutViewViewHolder> {
+public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.WorkoutViewViewHolder> {
+
+  public interface OnItemClickListener {
+    void onItemClick(View view, WorkoutExercise workoutExercise);
+  }
 
   private List<WorkoutExercise> dataSet;
+  private OnItemClickListener onItemClickListener;
 
-  public WorkoutViewViewAdapter() {
+  public WorkoutViewAdapter(OnItemClickListener onItemClickListener) {
     this.dataSet = new ArrayList<>();
+    this.onItemClickListener = onItemClickListener;
   }
 
   @NonNull
@@ -27,7 +33,7 @@ public class WorkoutViewViewAdapter extends RecyclerView.Adapter<WorkoutViewView
         LayoutInflater.from(parent.getContext())
             .inflate(R.layout.view_holder_workout_exercise, parent, false);
 
-    return new WorkoutViewViewHolder(view);
+    return new WorkoutViewViewHolder(view, this.onItemClickListener);
   }
 
   @Override
@@ -55,11 +61,14 @@ public class WorkoutViewViewAdapter extends RecyclerView.Adapter<WorkoutViewView
     private ImageView icon;
     private ImageView reorderHandler;
 
-    WorkoutViewViewHolder(View view) {
+    WorkoutViewViewHolder(View view, OnItemClickListener onItemClickListener) {
       super(view);
       this.name = view.findViewById(R.id.exercise_name);
       this.sets = view.findViewById(R.id.sets);
       this.reps = view.findViewById(R.id.reps);
+      view.setOnClickListener(
+          v -> onItemClickListener.onItemClick(v, dataSet.get(getAdapterPosition()))
+      );
     }
 
     public void setSets(int sets) {

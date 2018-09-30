@@ -3,7 +3,6 @@ package com.jds.fitnessjunkiess.getfitapp.features.workout
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -11,16 +10,18 @@ import android.view.*
 import androidx.navigation.findNavController
 import com.jds.fitnessjunkiess.getfitapp.R
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout
+import com.jds.fitnessjunkiess.getfitapp.data.dataModels.WorkoutExerciseAssignment
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.WorkoutExercise
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseViewModel
-import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewViewAdapter
+import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewAdapter
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_workout_view.*
 
-class WorkoutViewFragment : Fragment() {
-
+class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
+{
     private lateinit var workoutExerciseViewModel: WorkoutExerciseViewModel
     private lateinit var workout: Workout
-    private lateinit var recyclerViewAdapter: WorkoutViewViewAdapter
+    private lateinit var recyclerViewAdapter: WorkoutViewAdapter
 
     private lateinit var actionBarInteractionInterface: OnFragmentActionBarInteractionInterface
 
@@ -35,7 +36,8 @@ class WorkoutViewFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         this.workout = arguments!!.getParcelable("workoutData")
-        this.recyclerViewAdapter = WorkoutViewViewAdapter()
+        this.recyclerViewAdapter =
+                WorkoutViewAdapter(this)
         this.workoutExerciseViewModel =
                 ViewModelProviders.of(this).get(WorkoutExerciseViewModel::class.java)
     }
@@ -93,5 +95,25 @@ class WorkoutViewFragment : Fragment() {
         }
 
         return true
+    }
+
+    override fun onItemClick(view: View, workoutExercise: WorkoutExercise) {
+        val workoutExerciseAssignment = WorkoutExerciseAssignment()
+        workoutExerciseAssignment.id = workoutExercise.id
+        workoutExerciseAssignment.exerciseId = workoutExercise.exerciseId
+        workoutExerciseAssignment.workoutId = workoutExercise.workoutId
+        workoutExerciseAssignment.userId = workoutExercise.userId
+        workoutExerciseAssignment.lengthTime = workoutExercise.lengthTime
+        workoutExerciseAssignment.restTime = workoutExercise.restTime
+        workoutExerciseAssignment.sprintTime = workoutExercise.sprintTime
+        workoutExerciseAssignment.sets = workoutExercise.sets
+        workoutExerciseAssignment.reps = workoutExercise.reps
+
+        val bundle = Bundle()
+        bundle.putParcelable("workoutExerciseAssignment", workoutExerciseAssignment)
+        val fragmentTransaction = fragmentManager!!.beginTransaction()
+        val editWorkoutExerciseDialog = EditWorkoutExerciseDialog()
+        editWorkoutExerciseDialog.arguments = bundle
+        editWorkoutExerciseDialog.show(fragmentTransaction, "editWorkoutExerciseDialog")
     }
 }

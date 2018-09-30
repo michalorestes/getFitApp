@@ -17,4 +17,8 @@ public class WorkoutExerciseAssignmentViewModel extends AndroidViewModel {
   public void insert(WorkoutExerciseAssignment workoutExerciseAssignment) {
     this.workoutExerciseAssignmentRepository.insert(workoutExerciseAssignment);
   }
+
+  public void update(WorkoutExerciseAssignment workoutExerciseAssignment) {
+    this.workoutExerciseAssignmentRepository.update(workoutExerciseAssignment);
+  }
 }

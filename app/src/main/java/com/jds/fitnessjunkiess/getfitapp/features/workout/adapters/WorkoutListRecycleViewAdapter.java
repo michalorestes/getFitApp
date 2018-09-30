@@ -18,7 +18,8 @@ import java.util.List;
 
 import androidx.navigation.Navigation;
 
-public class WorkoutListRecycleViewAdapter extends RecyclerView.Adapter<WorkoutListRecycleViewAdapter.WorkoutListViewHolder> {
+public class WorkoutListRecycleViewAdapter
+    extends RecyclerView.Adapter<WorkoutListRecycleViewAdapter.WorkoutListViewHolder> {
 
   private List<Workout> dataSet;
 

@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
+import android.support.v13.view.DragStartHelper
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
@@ -16,6 +17,10 @@ import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseViewMode
 import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewAdapter
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_workout_view.*
+import android.support.v7.widget.helper.ItemTouchHelper
+
+import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallback
+
 
 class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
 {
@@ -56,6 +61,11 @@ class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
         val manager = LinearLayoutManager(context)
         this.recycler_view.layoutManager = manager
         this.recycler_view.adapter = this.recyclerViewAdapter
+
+        val callback = ItemTouchCallback(this.recyclerViewAdapter)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(recycler_view)
+
         this.setHasOptionsMenu(true)
     }
 

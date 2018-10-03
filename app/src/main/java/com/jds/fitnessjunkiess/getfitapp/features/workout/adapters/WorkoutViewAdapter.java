@@ -9,10 +9,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallback;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.WorkoutViewViewHolder> {
+public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.WorkoutViewViewHolder> implements ItemTouchCallback.ItemTouchHelperAdapter {
+
+  @Override
+  public void onItemMove(int fromPosition, int toPosition) {
+    if (fromPosition < toPosition) {
+      for (int i = fromPosition; i < toPosition; i++) {
+        Collections.swap(this.dataSet, i, i + 1);
+      }
+    } else {
+      for (int i = fromPosition; i > toPosition; i--) {
+        Collections.swap(this.dataSet, i, i - 1);
+      }
+    }
+    notifyItemMoved(fromPosition, toPosition);
+  }
+
+  @Override
+  public void onItemDismiss(int position) {
+    this.dataSet.remove(position);
+    notifyItemRemoved(position);
+  }
 
   public interface OnItemClickListener {
     void onItemClick(View view, WorkoutExercise workoutExercise);

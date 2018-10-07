@@ -12,7 +12,7 @@ public class WorkoutExerciseAssignmentRepository {
   private WorkoutExercisesAssignmentDao workoutExercisesAssignmentDao;
 
   public WorkoutExerciseAssignmentRepository(Application application) {
-    WorkoutRoomDatabase workoutRoomDatabase = WorkoutRoomDatabase.getDb(application);
+    WorkoutRoomDatabase workoutRoomDatabase = WorkoutRoomDatabase.Companion.getDb(application);
     this.workoutExercisesAssignmentDao = workoutRoomDatabase.workoutExercisesAssignmentDao();
   }
 

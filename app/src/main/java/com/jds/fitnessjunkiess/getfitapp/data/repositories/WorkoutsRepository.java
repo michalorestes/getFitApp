@@ -14,7 +14,7 @@ public class WorkoutsRepository {
   private LiveData<List<Workout>> data;
 
   public WorkoutsRepository(Application context) {
-    WorkoutRoomDatabase workoutDatabase = WorkoutRoomDatabase.getDb(context);
+    WorkoutRoomDatabase workoutDatabase = WorkoutRoomDatabase.Companion.getDb(context);
     this.workoutDao = workoutDatabase.workoutDao();
     this.data = this.workoutDao.selectAll();
   }

@@ -16,7 +16,7 @@ public class WorkoutExerciseRepository {
   private int workoutId;
 
   public WorkoutExerciseRepository(Application context, int workoutId) {
-    WorkoutRoomDatabase database = WorkoutRoomDatabase.getDb(context);
+    WorkoutRoomDatabase database = WorkoutRoomDatabase.Companion.getDb(context);
     this.dao = database.workoutExerciseDao();
     this.workoutId = workoutId;
     this.data = dao.getWorkoutExercises(this.workoutId);

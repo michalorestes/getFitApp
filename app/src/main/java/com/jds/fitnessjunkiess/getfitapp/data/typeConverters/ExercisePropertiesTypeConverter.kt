@@ -5,8 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.ArrayList
 
-object ExercisePropertiesTypeConverter {
-
+class ExercisePropertiesTypeConverter {
     @TypeConverter
     fun jsonToMap(json: String): MutableMap<String, ArrayList<String>>? {
         val type = object : TypeToken<Map<String, ArrayList<String>>>() {

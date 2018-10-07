@@ -17,7 +17,7 @@ public class ExercisesRepository {
   private ExerciseDao dao;
 
   public ExercisesRepository(Application context) {
-    WorkoutRoomDatabase database = WorkoutRoomDatabase.getDb(context);
+    WorkoutRoomDatabase database = WorkoutRoomDatabase.Companion.getDb(context);
     this.dao = database.exerciseDao();
   }
 

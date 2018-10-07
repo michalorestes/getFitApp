@@ -148,7 +148,7 @@ public class ExerciseFilterDialog extends DialogFragment implements DialogInterf
       this.typesCheckboxMap.get(type).setChecked(true);
     }
 
-    if (exercisesFilters.isCustom() != null && exercisesFilters.isCustom()) {
+    if (exercisesFilters.isCustom()) {
       this.typesCheckboxMap.get(ExerciseTypes.CUSTOM).setChecked(true);
       this.typesCheckboxMap.get(ExerciseTypes.ALL).setChecked(false);
     }

@@ -7,5 +7,5 @@ import kotlinx.android.parcel.Parcelize
 data class ExercisesFilters(
     val muscleGroups: ArrayList<String> = ArrayList(),
     val types: ArrayList<String> = ArrayList(),
-    var isCustom: Boolean? = null
+    var isCustom: Boolean = false
 ) : Parcelable

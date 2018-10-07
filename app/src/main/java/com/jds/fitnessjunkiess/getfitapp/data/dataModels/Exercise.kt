@@ -15,7 +15,7 @@ class Exercise(
     var userId: Int = 0,
     var name: String = "",
     var picture: String = "",
-    var instructions: String? = null,
+    var instructions: String = "",
     var type: String = "",
     var isCustom: Boolean = false,
     var muscleGroups: MutableMap<String, ArrayList<String>> = hashMapOf(

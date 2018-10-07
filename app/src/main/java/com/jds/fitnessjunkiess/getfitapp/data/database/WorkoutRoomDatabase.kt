@@ -28,7 +28,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExercisePropertiesT
         WorkoutExerciseAssignment::class,
         Exercise::class, MuscleGroup::class
     ],
-    version = 13, exportSchema = false
+    version = 15, exportSchema = false
 )
 @TypeConverters(ExercisePropertiesTypeConverter::class)
 abstract class WorkoutRoomDatabase : RoomDatabase() {
@@ -60,7 +60,6 @@ abstract class WorkoutRoomDatabase : RoomDatabase() {
         }
 
         private val sRoomDatabaseCallback = object : RoomDatabase.Callback() {
-
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
                 PopulateDbAsync(instance!!).execute()

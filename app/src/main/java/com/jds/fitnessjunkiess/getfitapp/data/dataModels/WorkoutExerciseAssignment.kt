@@ -14,9 +14,9 @@ class WorkoutExerciseAssignment(
     var exerciseId: Int = 0,
     var workoutId: Int = 0,
     var userId: Int = 0,
-    var lengthTime: String? = null,
-    var restTime: String? = null,
-    var sprintTime: String? = null,
+    var lengthTime: String = "",
+    var restTime: String = "",
+    var sprintTime: String = "",
     var sets: Int = 0,
     var reps: Int = 0
 ) : Parcelable

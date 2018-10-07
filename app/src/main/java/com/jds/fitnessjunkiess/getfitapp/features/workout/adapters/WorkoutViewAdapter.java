@@ -61,9 +61,9 @@ public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.
 
   @Override
   public void onBindViewHolder(WorkoutViewViewHolder holder, int position) {
-    holder.setName(this.dataSet.get(position).exerciseName);
-    holder.setSets(this.dataSet.get(position).sets);
-    holder.setReps(this.dataSet.get(position).reps);
+    holder.setName(this.dataSet.get(position).getExerciseName());
+    holder.setSets(this.dataSet.get(position).getSets());
+    holder.setReps(this.dataSet.get(position).getReps());
   }
 
   @Override

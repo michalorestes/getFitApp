@@ -16,6 +16,10 @@ import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.MuscleGroup
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.WorkoutExerciseAssignment
+import com.jds.fitnessjunkiess.getfitapp.data.database.testData.ExercisesTestData
+import com.jds.fitnessjunkiess.getfitapp.data.database.testData.MuscleGroupTestData
+import com.jds.fitnessjunkiess.getfitapp.data.database.testData.WorkoutExerciseAssignmentTestData
+import com.jds.fitnessjunkiess.getfitapp.data.database.testData.WorkoutsTestData
 import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExercisePropertiesTypeConverter
 
 @Database(
@@ -24,7 +28,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExercisePropertiesT
         WorkoutExerciseAssignment::class,
         Exercise::class, MuscleGroup::class
     ],
-    version = 12, exportSchema = false
+    version = 13, exportSchema = false
 )
 @TypeConverters(ExercisePropertiesTypeConverter::class)
 abstract class WorkoutRoomDatabase : RoomDatabase() {
@@ -78,10 +82,10 @@ abstract class WorkoutRoomDatabase : RoomDatabase() {
             workoutExerciseDao.deleteAll()
             muscleGroupDao.deleteAll()
 
-            WorkoutsTestData.getData().forEach { workoutDao.insert(it) }
-            ExercisesTestData.getData().forEach { exerciseDao.insert(it) }
-            WorkoutExerciseAssignmentTestData.getData().forEach { workoutExerciseDao.insert(it) }
-            MuscleGroupTestData.getData().forEach { muscleGroupDao.insert(it) }
+            WorkoutsTestData.data.forEach { workoutDao.insert(it) }
+            ExercisesTestData.data.forEach { exerciseDao.insert(it) }
+            WorkoutExerciseAssignmentTestData.data.forEach { workoutExerciseDao.insert(it) }
+            MuscleGroupTestData.data.forEach { muscleGroupDao.insert(it) }
 
             return null
         }

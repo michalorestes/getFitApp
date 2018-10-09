@@ -4,27 +4,25 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v13.view.DragStartHelper
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import androidx.navigation.findNavController
 import com.jds.fitnessjunkiess.getfitapp.R
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout
-import com.jds.fitnessjunkiess.getfitapp.data.dataModels.WorkoutExerciseAssignment
-import com.jds.fitnessjunkiess.getfitapp.data.pojo.WorkoutExercise
-import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseViewModel
 import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewAdapter
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_workout_view.*
 import android.support.v7.widget.helper.ItemTouchHelper
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship
+import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseAssignmentViewModel
 
 import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallback
 
 
 class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
 {
-    private lateinit var workoutExerciseViewModel: WorkoutExerciseViewModel
+    private lateinit var exerciseAssignment: ExerciseAssignmentViewModel
     private lateinit var workout: Workout
     private lateinit var recyclerViewAdapter: WorkoutViewAdapter
 
@@ -40,11 +38,11 @@ class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        this.workout = arguments!!.getParcelable("workoutData")
+        this.workout = arguments!!.getParcelable("workoutData")!!
         this.recyclerViewAdapter =
                 WorkoutViewAdapter(this)
-        this.workoutExerciseViewModel =
-                ViewModelProviders.of(this).get(WorkoutExerciseViewModel::class.java)
+        this.exerciseAssignment=
+                ViewModelProviders.of(this).get(ExerciseAssignmentViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -71,9 +69,9 @@ class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
 
     override fun onStart() {
         super.onStart()
-        this.workoutExerciseViewModel.selectAll(this.workout.id).observe(
+        this.exerciseAssignment.selectExerciseRelationsData(this.workout.id).observe(
             this,
-            Observer { workoutExercises -> this.recyclerViewAdapter.updateDataSet(workoutExercises)
+            Observer { exerciseAssignment -> this.recyclerViewAdapter.updateDataSet(exerciseAssignment)
             })
     }
 
@@ -107,20 +105,9 @@ class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
         return true
     }
 
-    override fun onItemClick(view: View, workoutExercise: WorkoutExercise) {
-        val workoutExerciseAssignment = WorkoutExerciseAssignment()
-        workoutExerciseAssignment.id = workoutExercise.id
-        workoutExerciseAssignment.exerciseId = workoutExercise.exerciseId
-        workoutExerciseAssignment.workoutId = workoutExercise.workoutId
-        workoutExerciseAssignment.userId = workoutExercise.userId
-        workoutExerciseAssignment.lengthTime = workoutExercise.lengthTime
-        workoutExerciseAssignment.restTime = workoutExercise.restTime
-        workoutExerciseAssignment.sprintTime = workoutExercise.sprintTime
-        workoutExerciseAssignment.sets = workoutExercise.sets
-        workoutExerciseAssignment.reps = workoutExercise.reps
-
+    override fun onItemClick(view: View, exerciseRelationship: ExerciseRelationship) {
         val bundle = Bundle()
-        bundle.putParcelable("workoutExerciseAssignment", workoutExerciseAssignment)
+        bundle.putParcelable("workoutExerciseAssignment", exerciseRelationship.relationship)
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         val editWorkoutExerciseDialog = EditWorkoutExerciseDialog()
         editWorkoutExerciseDialog.arguments = bundle

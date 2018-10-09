@@ -8,16 +8,12 @@ import android.arch.persistence.room.TypeConverters
 import android.content.Context
 import android.os.AsyncTask
 import com.jds.fitnessjunkiess.getfitapp.data.dao.ExerciseDao
-import com.jds.fitnessjunkiess.getfitapp.data.dao.MuscleGroupDao
 import com.jds.fitnessjunkiess.getfitapp.data.dao.WorkoutDao
-import com.jds.fitnessjunkiess.getfitapp.data.dao.WorkoutExerciseDao
-import com.jds.fitnessjunkiess.getfitapp.data.dao.WorkoutExercisesAssignmentDao
+import com.jds.fitnessjunkiess.getfitapp.data.dao.ExercisesAssignmentDao
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise
-import com.jds.fitnessjunkiess.getfitapp.data.dataModels.MuscleGroup
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout
-import com.jds.fitnessjunkiess.getfitapp.data.dataModels.WorkoutExerciseAssignment
+import com.jds.fitnessjunkiess.getfitapp.data.dataModels.ExerciseAssignment
 import com.jds.fitnessjunkiess.getfitapp.data.database.testData.ExercisesTestData
-import com.jds.fitnessjunkiess.getfitapp.data.database.testData.MuscleGroupTestData
 import com.jds.fitnessjunkiess.getfitapp.data.database.testData.WorkoutExerciseAssignmentTestData
 import com.jds.fitnessjunkiess.getfitapp.data.database.testData.WorkoutsTestData
 import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExercisePropertiesTypeConverter
@@ -25,19 +21,17 @@ import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExercisePropertiesT
 @Database(
     entities = [
         Workout::class,
-        WorkoutExerciseAssignment::class,
-        Exercise::class, MuscleGroup::class
+        ExerciseAssignment::class,
+        Exercise::class
     ],
-    version = 15, exportSchema = false
+    version = 18, exportSchema = false
 )
 @TypeConverters(ExercisePropertiesTypeConverter::class)
 abstract class WorkoutRoomDatabase : RoomDatabase() {
 
     abstract fun workoutDao(): WorkoutDao
-    abstract fun workoutExerciseDao(): WorkoutExerciseDao
     abstract fun exerciseDao(): ExerciseDao
-    abstract fun muscleGroupDao(): MuscleGroupDao
-    abstract fun workoutExercisesAssignmentDao(): WorkoutExercisesAssignmentDao
+    abstract fun exercisesAssignmentDao(): ExercisesAssignmentDao
 
     companion object {
         private var instance: WorkoutRoomDatabase? = null
@@ -71,20 +65,17 @@ abstract class WorkoutRoomDatabase : RoomDatabase() {
         AsyncTask<Void, Void, Void>() {
 
         private val workoutDao: WorkoutDao = db.workoutDao()
-        private val workoutExerciseDao: WorkoutExerciseDao = db.workoutExerciseDao()
+        private val exerciseAssignment: ExercisesAssignmentDao = db.exercisesAssignmentDao()
         private val exerciseDao: ExerciseDao = db.exerciseDao()
-        private val muscleGroupDao: MuscleGroupDao = db.muscleGroupDao()
 
         override fun doInBackground(vararg params: Void): Void? {
             workoutDao.deleteAll()
             exerciseDao.deleteAll()
-            workoutExerciseDao.deleteAll()
-            muscleGroupDao.deleteAll()
+            exerciseAssignment.deleteAll()
 
             WorkoutsTestData.data.forEach { workoutDao.insert(it) }
             ExercisesTestData.data.forEach { exerciseDao.insert(it) }
-            WorkoutExerciseAssignmentTestData.data.forEach { workoutExerciseDao.insert(it) }
-            MuscleGroupTestData.data.forEach { muscleGroupDao.insert(it) }
+            WorkoutExerciseAssignmentTestData.data.forEach { exerciseAssignment.insert(it) }
 
             return null
         }

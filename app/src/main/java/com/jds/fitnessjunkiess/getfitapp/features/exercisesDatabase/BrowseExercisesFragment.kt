@@ -11,10 +11,10 @@ import android.widget.Toast
 import com.jds.fitnessjunkiess.getfitapp.R
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout
-import com.jds.fitnessjunkiess.getfitapp.data.dataModels.WorkoutExerciseAssignment
+import com.jds.fitnessjunkiess.getfitapp.data.dataModels.ExerciseAssignment
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseViewModel
-import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseAssignmentViewModel
+import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseAssignmentViewModel
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutsViewModel
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.AbstractExercisesAdapter
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.ExercisesAdapter
@@ -30,7 +30,7 @@ class BrowseExercisesFragment : Fragment(),
     private var workoutsList: List<Workout>? = null
     private lateinit var exercisesFilters: ExercisesFilters
 
-    private lateinit var workoutExerciseAssignment: WorkoutExerciseAssignmentViewModel
+    private lateinit var exerciseAssignment: ExerciseAssignmentViewModel
     private lateinit var exerciseViewModel: ExerciseViewModel
     private lateinit var workoutsViewModel: WorkoutsViewModel
 
@@ -52,9 +52,9 @@ class BrowseExercisesFragment : Fragment(),
         this.selectedWorkout = arguments?.getParcelable("selectedWorkout")
         this.exercisesFilters = this.getExerciseFilters()
 
-        this.workoutExerciseAssignment = ViewModelProviders
+        this.exerciseAssignment = ViewModelProviders
             .of(this)
-            .get(WorkoutExerciseAssignmentViewModel::class.java)
+            .get(ExerciseAssignmentViewModel::class.java)
         this.exerciseViewModel =  ViewModelProviders
             .of(activity!!)
             .get(ExerciseViewModel::class.java)
@@ -148,21 +148,21 @@ class BrowseExercisesFragment : Fragment(),
     }
 
     override fun insertExerciseAssignment(exercise: Exercise, workout: Workout) {
-        val exerciseAssignment = WorkoutExerciseAssignment()
+        val exerciseAssignment = ExerciseAssignment()
         exerciseAssignment.exerciseId = exercise.id
         exerciseAssignment.workoutId = workout.id
 
-        this.workoutExerciseAssignment.insert(exerciseAssignment)
+        this.exerciseAssignment.insert(exerciseAssignment)
 
         Toast.makeText(context,"${exercise.name} added to ${workout.name}",Toast.LENGTH_LONG)
             .show()
     }
 
     override fun insertExerciseAssignment(exercise: Exercise) {
-        val exerciseAssignment = WorkoutExerciseAssignment()
+        val exerciseAssignment = ExerciseAssignment()
         exerciseAssignment.exerciseId = exercise.id
         exerciseAssignment.workoutId = this.selectedWorkout!!.id
-        this.workoutExerciseAssignment.insert(exerciseAssignment)
+        this.exerciseAssignment.insert(exerciseAssignment)
 
         Toast.makeText(
             context,

@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.jds.fitnessjunkiess.getfitapp.R;
-import com.jds.fitnessjunkiess.getfitapp.data.pojo.WorkoutExercise;
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship;
 import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallback;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,10 +37,10 @@ public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.
   }
 
   public interface OnItemClickListener {
-    void onItemClick(View view, WorkoutExercise workoutExercise);
+    void onItemClick(View view, ExerciseRelationship workoutExercise);
   }
 
-  private List<WorkoutExercise> dataSet;
+  private List<ExerciseRelationship> dataSet;
   private OnItemClickListener onItemClickListener;
 
   public WorkoutViewAdapter(OnItemClickListener onItemClickListener) {
@@ -61,9 +60,9 @@ public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.
 
   @Override
   public void onBindViewHolder(WorkoutViewViewHolder holder, int position) {
-    holder.setName(this.dataSet.get(position).getExerciseName());
-    holder.setSets(this.dataSet.get(position).getSets());
-    holder.setReps(this.dataSet.get(position).getReps());
+    holder.setName(this.dataSet.get(position).getExercise().getName());
+    holder.setSets(this.dataSet.get(position).getRelationship().getSets());
+    holder.setReps(this.dataSet.get(position).getRelationship().getReps());
   }
 
   @Override
@@ -71,7 +70,7 @@ public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.
     return this.dataSet.size();
   }
 
-  public void updateDataSet(List<WorkoutExercise> data) {
+  public void updateDataSet(List<ExerciseRelationship> data) {
     this.dataSet = data;
     notifyDataSetChanged();
   }

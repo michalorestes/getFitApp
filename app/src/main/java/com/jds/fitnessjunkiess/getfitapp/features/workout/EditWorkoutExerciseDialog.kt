@@ -8,22 +8,22 @@ import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.widget.EditText
 import com.jds.fitnessjunkiess.getfitapp.R
-import com.jds.fitnessjunkiess.getfitapp.data.dataModels.WorkoutExerciseAssignment
-import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutExerciseAssignmentViewModel
+import com.jds.fitnessjunkiess.getfitapp.data.dataModels.ExerciseAssignment
+import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseAssignmentViewModel
 import kotlinx.android.synthetic.main.dialog_edit_workout_exercise.view.*
 
 class EditWorkoutExerciseDialog : DialogFragment(), DialogInterface.OnClickListener
 {
-    private lateinit var workoutExerciseAssignment: WorkoutExerciseAssignment
-    private lateinit var workoutExerciseAssignmentViewMode: WorkoutExerciseAssignmentViewModel
+    private lateinit var workoutExerciseAssignment: ExerciseAssignment
+    private lateinit var exerciseAssignmentViewModel: ExerciseAssignmentViewModel
     private lateinit var reps: EditText
     private lateinit var sets: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.workoutExerciseAssignment =
-                arguments!!["workoutExerciseAssignment"] as WorkoutExerciseAssignment
-        this.workoutExerciseAssignmentViewMode =
-                ViewModelProviders.of(activity!!).get(WorkoutExerciseAssignmentViewModel::class.java)
+                arguments!!["workoutExerciseAssignment"] as ExerciseAssignment
+        this.exerciseAssignmentViewModel =
+                ViewModelProviders.of(activity!!).get(ExerciseAssignmentViewModel::class.java)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -46,7 +46,7 @@ class EditWorkoutExerciseDialog : DialogFragment(), DialogInterface.OnClickListe
         if (which == -1) {
             this.workoutExerciseAssignment.sets = this.sets.text.toString().toInt()
             this.workoutExerciseAssignment.reps = this.reps.text.toString().toInt()
-            this.workoutExerciseAssignmentViewMode.update(this.workoutExerciseAssignment)
+            this.exerciseAssignmentViewModel.update(this.workoutExerciseAssignment)
         }
     }
 }

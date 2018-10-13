@@ -153,7 +153,7 @@ class BrowseExercisesFragment : Fragment(),
             val exerciseAssignment = ExerciseAssignment()
             exerciseAssignment.exerciseId = exercise.id
             exerciseAssignment.workoutId = workout.id
-            exerciseAssignment.position = exerciseAssignmentViewModel.getLastExercisePosition(selectedWorkout!!.id)
+            exerciseAssignment.position = exerciseAssignmentViewModel.getLastExercisePosition(workout.id)
 
             exerciseAssignmentViewModel.insert(exerciseAssignment)
         }

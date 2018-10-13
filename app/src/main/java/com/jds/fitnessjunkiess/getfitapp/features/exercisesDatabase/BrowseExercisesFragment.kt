@@ -21,6 +21,7 @@ import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.Exe
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.WorkoutContextExercisesAdapter
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_browse_exercises_list.*
+import kotlinx.coroutines.experimental.launch
 
 class BrowseExercisesFragment : Fragment(),
     AbstractExercisesAdapter.OnItemMenuClickInterface,
@@ -30,7 +31,7 @@ class BrowseExercisesFragment : Fragment(),
     private var workoutsList: List<Workout>? = null
     private lateinit var exercisesFilters: ExercisesFilters
 
-    private lateinit var exerciseAssignment: ExerciseAssignmentViewModel
+    private lateinit var exerciseAssignmentViewModel: ExerciseAssignmentViewModel
     private lateinit var exerciseViewModel: ExerciseViewModel
     private lateinit var workoutsViewModel: WorkoutsViewModel
 
@@ -52,7 +53,7 @@ class BrowseExercisesFragment : Fragment(),
         this.selectedWorkout = arguments?.getParcelable("selectedWorkout")
         this.exercisesFilters = this.getExerciseFilters()
 
-        this.exerciseAssignment = ViewModelProviders
+        this.exerciseAssignmentViewModel = ViewModelProviders
             .of(this)
             .get(ExerciseAssignmentViewModel::class.java)
         this.exerciseViewModel =  ViewModelProviders
@@ -148,21 +149,28 @@ class BrowseExercisesFragment : Fragment(),
     }
 
     override fun insertExerciseAssignment(exercise: Exercise, workout: Workout) {
-        val exerciseAssignment = ExerciseAssignment()
-        exerciseAssignment.exerciseId = exercise.id
-        exerciseAssignment.workoutId = workout.id
+        launch {
+            val exerciseAssignment = ExerciseAssignment()
+            exerciseAssignment.exerciseId = exercise.id
+            exerciseAssignment.workoutId = workout.id
+            exerciseAssignment.position = exerciseAssignmentViewModel.getLastExercisePosition(selectedWorkout!!.id)
 
-        this.exerciseAssignment.insert(exerciseAssignment)
+            exerciseAssignmentViewModel.insert(exerciseAssignment)
+        }
 
         Toast.makeText(context,"${exercise.name} added to ${workout.name}",Toast.LENGTH_LONG)
             .show()
     }
 
     override fun insertExerciseAssignment(exercise: Exercise) {
-        val exerciseAssignment = ExerciseAssignment()
-        exerciseAssignment.exerciseId = exercise.id
-        exerciseAssignment.workoutId = this.selectedWorkout!!.id
-        this.exerciseAssignment.insert(exerciseAssignment)
+        launch {
+            val exerciseAssignment = ExerciseAssignment()
+            exerciseAssignment.exerciseId = exercise.id
+            exerciseAssignment.workoutId = selectedWorkout!!.id
+            exerciseAssignment.position = exerciseAssignmentViewModel.getLastExercisePosition(selectedWorkout!!.id)
+
+            exerciseAssignmentViewModel.insert(exerciseAssignment)
+        }
 
         Toast.makeText(
             context,

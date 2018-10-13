@@ -1,5 +1,6 @@
 package com.jds.fitnessjunkiess.getfitapp.data.dataModels
 
+import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
@@ -7,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(tableName = "exercise_assignment")
-class ExerciseAssignment(
+data class ExerciseAssignment(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
     var exerciseId: Int = 0,

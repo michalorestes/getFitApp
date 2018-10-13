@@ -10,32 +10,17 @@ import android.widget.TextView;
 import com.jds.fitnessjunkiess.getfitapp.R;
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship;
 import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallback;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.WorkoutViewViewHolder> implements ItemTouchCallback.ItemTouchHelperAdapter {
-
-  @Override
-  public void onItemMove(int fromPosition, int toPosition) {
-    if (fromPosition < toPosition) {
-      for (int i = fromPosition; i < toPosition; i++) {
-        Collections.swap(this.dataSet, i, i + 1);
-      }
-    } else {
-      for (int i = fromPosition; i > toPosition; i--) {
-        Collections.swap(this.dataSet, i, i - 1);
-      }
-    }
-    notifyItemMoved(fromPosition, toPosition);
-  }
-
-  @Override
-  public void onItemDismiss(int position) {
-    this.dataSet.remove(position);
-    notifyItemRemoved(position);
-  }
-
+public class WorkoutViewAdapter
+    extends RecyclerView.Adapter<WorkoutViewAdapter.WorkoutViewViewHolder>
+    implements ItemTouchCallback.ItemTouchHelperAdapter
+{
   public interface OnItemClickListener {
     void onItemClick(View view, ExerciseRelationship workoutExercise);
   }
@@ -46,6 +31,10 @@ public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.
   public WorkoutViewAdapter(OnItemClickListener onItemClickListener) {
     this.dataSet = new ArrayList<>();
     this.onItemClickListener = onItemClickListener;
+  }
+
+  public List<ExerciseRelationship> getDataSet() {
+    return this.dataSet;
   }
 
   @NonNull
@@ -59,7 +48,7 @@ public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.
   }
 
   @Override
-  public void onBindViewHolder(WorkoutViewViewHolder holder, int position) {
+  public void onBindViewHolder(@NotNull WorkoutViewViewHolder holder, int position) {
     holder.setName(this.dataSet.get(position).getExercise().getName());
     holder.setSets(this.dataSet.get(position).getRelationship().getSets());
     holder.setReps(this.dataSet.get(position).getRelationship().getReps());
@@ -73,6 +62,29 @@ public class WorkoutViewAdapter extends RecyclerView.Adapter<WorkoutViewAdapter.
   public void updateDataSet(List<ExerciseRelationship> data) {
     this.dataSet = data;
     notifyDataSetChanged();
+  }
+
+  @Override
+  public void onItemMove(int fromPosition, int toPosition) {
+    this.dataSet.get(fromPosition).getRelationship().setPosition(toPosition);
+    this.dataSet.get(toPosition).getRelationship().setPosition(fromPosition);
+
+    if (fromPosition < toPosition) { //item moved down
+      for (int i = fromPosition; i < toPosition; i++) {
+        Collections.swap(this.dataSet, i, i + 1);
+      }
+    } else { //item moved up
+      for (int i = fromPosition; i > toPosition; i--) {
+        Collections.swap(this.dataSet, i, i - 1);
+      }
+    }
+    notifyItemMoved(fromPosition, toPosition);
+  }
+
+  @Override
+  public void onItemDismiss(int position) {
+    this.dataSet.remove(position);
+    notifyItemRemoved(position);
   }
 
   class WorkoutViewViewHolder extends RecyclerView.ViewHolder {

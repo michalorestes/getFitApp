@@ -27,6 +27,14 @@ class ExerciseAssignmentViewModel(application: Application) : AndroidViewModel(a
         this.exerciseAssignmentRepository.insert(exerciseAssignment)
     }
 
+    fun batchUpdate(exerciseAssignment: List<ExerciseAssignment>) {
+        this.exerciseAssignmentRepository.batchUpdate(exerciseAssignment)
+    }
+
+    fun getLastExercisePosition(workoutId: Int): Int {
+        return this.exerciseAssignmentRepository.lastExercisePosition(workoutId)
+    }
+
     fun update(exerciseAssignment: ExerciseAssignment) {
         this.exerciseAssignmentRepository.update(exerciseAssignment)
     }

@@ -50,13 +50,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     // Room components
-    compile 'android.arch.persistence.room:runtime:1.1.1'
-    compile 'android.arch.persistence.room:rxjava2:1.1.1'
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    implementation 'android.arch.persistence.room:rxjava2:1.1.1'
     kapt "android.arch.persistence.room:compiler:1.1.1"
 
     // RXJava
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     //jetfit
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -73,6 +73,7 @@ dependencies {
     //other
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
 }
 repositories {
     mavenCentral()

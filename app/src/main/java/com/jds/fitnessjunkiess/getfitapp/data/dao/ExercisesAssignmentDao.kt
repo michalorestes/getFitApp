@@ -20,8 +20,14 @@ interface ExercisesAssignmentDao {
     @Delete
     fun delete(workout: ExerciseAssignment)
 
-    @Query("SELECT * FROM exercise_assignment")
+    @Query("SELECT * FROM exercise_assignment ORDER BY position ASC")
     fun selectAll(): LiveData<List<ExerciseAssignment>>
+
+    @Update
+    fun batchUpdate(vararg assignment: ExerciseAssignment)
+
+    @Query("SELECT position FROM exercise_assignment WHERE workoutId = :workoutId ORDER BY position DESC LIMIT 1")
+    fun lastExercisePosition(workoutId: Int): Int
 
     @Query(
         "SELECT " +
@@ -36,7 +42,7 @@ interface ExercisesAssignmentDao {
                 "e.muscleGroups AS exercise_muscleGroups " +
                 "FROM exercise_assignment ea " +
                 "INNER JOIN exercises e ON ea.exerciseId = e.id " +
-                "WHERE ea.workoutId = :workoutId;"
+                "WHERE ea.workoutId = :workoutId  ORDER BY ea.position ASC;"
     )
     fun selectRelations(workoutId: Int): LiveData<List<ExerciseRelationship>>
 }

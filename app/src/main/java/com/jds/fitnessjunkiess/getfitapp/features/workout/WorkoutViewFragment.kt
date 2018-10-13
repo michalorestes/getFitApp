@@ -14,18 +14,19 @@ import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewAd
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_workout_view.*
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.util.Log
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseAssignmentViewModel
 
 import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallback
 
-
-class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
+class WorkoutViewFragment :
+    Fragment(),
+    WorkoutViewAdapter.OnItemClickListener
 {
-    private lateinit var exerciseAssignment: ExerciseAssignmentViewModel
-    private lateinit var workout: Workout
+    private lateinit var exerciseAssignmentViewModel: ExerciseAssignmentViewModel
     private lateinit var recyclerViewAdapter: WorkoutViewAdapter
-
+    private lateinit var workout: Workout
     private lateinit var actionBarInteractionInterface: OnFragmentActionBarInteractionInterface
 
     override fun onAttach(context: Context?) {
@@ -41,7 +42,7 @@ class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
         this.workout = arguments!!.getParcelable("workoutData")!!
         this.recyclerViewAdapter =
                 WorkoutViewAdapter(this)
-        this.exerciseAssignment=
+        this.exerciseAssignmentViewModel =
                 ViewModelProviders.of(this).get(ExerciseAssignmentViewModel::class.java)
     }
 
@@ -69,10 +70,18 @@ class WorkoutViewFragment : Fragment(), WorkoutViewAdapter.OnItemClickListener
 
     override fun onStart() {
         super.onStart()
-        this.exerciseAssignment.selectExerciseRelationsData(this.workout.id).observe(
+        this.exerciseAssignmentViewModel.selectExerciseRelationsData(this.workout.id).observe(
             this,
-            Observer { exerciseAssignment -> this.recyclerViewAdapter.updateDataSet(exerciseAssignment)
+            Observer {
+                exerciseAssignment -> this.recyclerViewAdapter.updateDataSet(exerciseAssignment)
             })
+    }
+
+    override fun onPause() {
+        super.onPause()
+        this.exerciseAssignmentViewModel.batchUpdate(
+            this.recyclerViewAdapter.dataSet.map { it.relationship }
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

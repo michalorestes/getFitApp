@@ -11,23 +11,31 @@ import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship
 
 class ExerciseAssignmentRepository(application: Application) {
 
-    private val exerciseAssignment: ExercisesAssignmentDao
+    private val dao: ExercisesAssignmentDao
 
     init {
         val workoutRoomDatabase = WorkoutRoomDatabase.getDb(application)
-        this.exerciseAssignment = workoutRoomDatabase!!.exercisesAssignmentDao()
+        this.dao = workoutRoomDatabase!!.exercisesAssignmentDao()
     }
 
     fun insert(workoutExerciseAssignment: ExerciseAssignment) {
-        InsertAsyncTask(this.exerciseAssignment).execute(workoutExerciseAssignment)
+        InsertAsyncTask(this.dao).execute(workoutExerciseAssignment)
     }
 
     fun update(workoutExerciseAssignment: ExerciseAssignment) {
-        UpdateAsyncTask(this.exerciseAssignment).execute(workoutExerciseAssignment)
+        UpdateAsyncTask(this.dao).execute(workoutExerciseAssignment)
+    }
+
+    fun batchUpdate(exerciseAssignment: List<ExerciseAssignment>) {
+        BatchUpdateAsyncTask(this.dao).execute(*exerciseAssignment.toTypedArray())
     }
 
     fun selectRelations(workoutId: Int): LiveData<List<ExerciseRelationship>> {
-        return this.exerciseAssignment.selectRelations(workoutId)
+        return this.dao.selectRelations(workoutId)
+    }
+
+    fun lastExercisePosition(workoutId: Int): Int {
+        return this.dao.lastExercisePosition(workoutId)
     }
 
     private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: ExercisesAssignmentDao) :
@@ -44,6 +52,15 @@ class ExerciseAssignmentRepository(application: Application) {
 
         override fun doInBackground(vararg params: ExerciseAssignment): Void? {
             mAsyncTaskDao.update(params[0])
+            return null
+        }
+    }
+
+    private class BatchUpdateAsyncTask internal constructor(private val mAsyncTaskDao: ExercisesAssignmentDao) :
+        AsyncTask<ExerciseAssignment, Void, Void>() {
+
+        override fun doInBackground(vararg params: ExerciseAssignment): Void? {
+            mAsyncTaskDao.batchUpdate(*params)
             return null
         }
     }

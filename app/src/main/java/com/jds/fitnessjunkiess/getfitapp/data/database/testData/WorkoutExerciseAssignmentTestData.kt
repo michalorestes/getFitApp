@@ -34,25 +34,28 @@ object WorkoutExerciseAssignmentTestData {
             workoutExerciseAssignment4.id = 4
             workoutExerciseAssignment4.reps = 12
             workoutExerciseAssignment4.restTime = "00:00:30"
-            workoutExerciseAssignment4.sets = 3
+            workoutExerciseAssignment4.sets = 0
             workoutExerciseAssignment4.exerciseId = 1
             workoutExerciseAssignment4.workoutId = 2
+            workoutExerciseAssignment4.position = 0
 
             val workoutExerciseAssignment5 = ExerciseAssignment()
             workoutExerciseAssignment5.id = 5
             workoutExerciseAssignment5.reps = 12
             workoutExerciseAssignment5.restTime = "00:00:30"
-            workoutExerciseAssignment5.sets = 4
+            workoutExerciseAssignment5.sets = 1
             workoutExerciseAssignment5.exerciseId = 2
             workoutExerciseAssignment5.workoutId = 2
+            workoutExerciseAssignment5.position = 1
 
             val workoutExerciseAssignment6 = ExerciseAssignment()
             workoutExerciseAssignment6.id = 6
             workoutExerciseAssignment6.reps = 12
             workoutExerciseAssignment6.restTime = "00:00:30"
-            workoutExerciseAssignment6.sets = 4
+            workoutExerciseAssignment6.sets = 2
             workoutExerciseAssignment6.exerciseId = 4
             workoutExerciseAssignment6.workoutId = 2
+            workoutExerciseAssignment6.position = 2
 
             val workoutExerciseAssignments = ArrayList<ExerciseAssignment>()
             workoutExerciseAssignments.add(workoutExerciseAssignment1)

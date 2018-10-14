@@ -14,6 +14,9 @@
     <string name="search_hint">hint test</string>
 
     <string name="primary_muscle_groups_spinner_prompt">Chose primary muscle group</string>
+    <string name="workout_view_pop_up_menu_edit">Edit</string>
+    <string name="workout_view_pop_up_menu_delete">Delete</string>
+    <string name="workout_view_pop_up_menu_track">Track</string>
     <string-array name="muscle_groups">
         <item>Core</item>
         <item>Biceps</item>

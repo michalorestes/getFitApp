@@ -1,10 +1,15 @@
 package com.jds.fitnessjunkiess.getfitapp.features.workout.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.jds.fitnessjunkiess.getfitapp.R;
@@ -21,16 +26,19 @@ public class WorkoutViewAdapter
     extends RecyclerView.Adapter<WorkoutViewAdapter.WorkoutViewViewHolder>
     implements ItemTouchCallback.ItemTouchHelperAdapter
 {
-  public interface OnItemClickListener {
+  public interface OnAdapterInteractionInterface {
     void onItemClick(View view, ExerciseRelationship workoutExercise);
+    void onRemoveExercise(ExerciseRelationship exerciseRelationship);
   }
 
   private List<ExerciseRelationship> dataSet;
-  private OnItemClickListener onItemClickListener;
+  private OnAdapterInteractionInterface onAdapterInteractionInterface;
+  private Context context;
 
-  public WorkoutViewAdapter(OnItemClickListener onItemClickListener) {
+  public WorkoutViewAdapter(Context context, OnAdapterInteractionInterface onAdapterInteractionInterface) {
+    this.context = context;
     this.dataSet = new ArrayList<>();
-    this.onItemClickListener = onItemClickListener;
+    this.onAdapterInteractionInterface = onAdapterInteractionInterface;
   }
 
   public List<ExerciseRelationship> getDataSet() {
@@ -44,7 +52,7 @@ public class WorkoutViewAdapter
         LayoutInflater.from(parent.getContext())
             .inflate(R.layout.view_holder_workout_exercise, parent, false);
 
-    return new WorkoutViewViewHolder(view, this.onItemClickListener);
+    return new WorkoutViewViewHolder(this.context, view, this.onAdapterInteractionInterface);
   }
 
   @Override
@@ -87,21 +95,32 @@ public class WorkoutViewAdapter
     notifyItemRemoved(position);
   }
 
-  class WorkoutViewViewHolder extends RecyclerView.ViewHolder {
+  class WorkoutViewViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
 
     private TextView name;
     private TextView sets;
     private TextView reps;
     private ImageView icon;
-    private ImageView reorderHandler;
 
-    WorkoutViewViewHolder(View view, OnItemClickListener onItemClickListener) {
+    private OnAdapterInteractionInterface onAdapterInteractionInterface;
+
+    WorkoutViewViewHolder(Context context, View view, OnAdapterInteractionInterface onAdapterInteractionInterface) {
       super(view);
+      this.onAdapterInteractionInterface = onAdapterInteractionInterface;
       this.name = view.findViewById(R.id.exercise_name);
       this.sets = view.findViewById(R.id.sets);
       this.reps = view.findViewById(R.id.reps);
+      Button optionsMenu = view.findViewById(R.id.options_menu);
+      optionsMenu.setOnClickListener(
+          v -> {
+            PopupMenu popupMenu = new PopupMenu(context, optionsMenu);
+            popupMenu.inflate(R.menu.popup_menu_workout_view_exercise_menu);
+            popupMenu.setOnMenuItemClickListener(this);
+            popupMenu.show();
+          }
+      );
       view.setOnClickListener(
-          v -> onItemClickListener.onItemClick(v, dataSet.get(getAdapterPosition()))
+          v -> onAdapterInteractionInterface.onItemClick(v, dataSet.get(getAdapterPosition()))
       );
     }
 
@@ -115,6 +134,22 @@ public class WorkoutViewAdapter
 
     public void setName(String name) {
       this.name.setText(name);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+      switch (menuItem.getItemId()) {
+        case R.id.workout_view_popup_menu_edit:
+          break;
+        case R.id.workout_view_popup_menu_delete:
+          Log.d("-->", "onMenuItemClick: delete");
+          this.onAdapterInteractionInterface.onRemoveExercise(dataSet.get(getAdapterPosition()));
+          break;
+        case R.id.workout_view_popup_menu_track:
+          break;
+      }
+
+      return true;
     }
   }
 }

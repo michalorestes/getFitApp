@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/background"
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:background="@color/colorBackground">
@@ -14,7 +15,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reorder_handle2"
+        app:layout_constraintStart_toEndOf="@+id/reorder_handle"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/body_weight_exercise_type" />
 
@@ -40,12 +41,12 @@
         android:text="Reps: 99"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/divider"
         app:layout_constraintTop_toBottomOf="@+id/exercise_name"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/divider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -70,18 +71,6 @@
 
     <ImageView
         android:id="@+id/reorder_handle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_more_vert_black_18dp" />
-
-    <ImageView
-        android:id="@+id/reorder_handle2"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="4dp"
@@ -92,4 +81,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/baseline_drag_indicator_black_24dp" />
+
+    <Button
+        android:id="@+id/options_menu"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/baseline_more_vert_black_18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

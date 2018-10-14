@@ -8,6 +8,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.dao.ExercisesAssignmentDao
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.ExerciseAssignment
 import com.jds.fitnessjunkiess.getfitapp.data.database.WorkoutRoomDatabase
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship
+import kotlinx.coroutines.experimental.launch
 
 class ExerciseAssignmentRepository(application: Application) {
 
@@ -36,6 +37,10 @@ class ExerciseAssignmentRepository(application: Application) {
 
     fun lastExercisePosition(workoutId: Int): Int {
         return this.dao.lastExercisePosition(workoutId)
+    }
+
+    fun delete(relationship: ExerciseAssignment) {
+        launch { dao.delete(relationship) }
     }
 
     private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: ExercisesAssignmentDao) :

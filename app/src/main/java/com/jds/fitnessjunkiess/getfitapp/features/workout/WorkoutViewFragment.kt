@@ -17,14 +17,10 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseAssignmentViewModel
 import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallback
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.RecyclerView.HORIZONTAL
-import android.support.v7.widget.RecyclerView.VERTICAL
-
 
 class WorkoutViewFragment :
     Fragment(),
-    WorkoutViewAdapter.OnItemClickListener
+    WorkoutViewAdapter.OnAdapterInteractionInterface
 {
     private lateinit var exerciseAssignmentViewModel: ExerciseAssignmentViewModel
     private lateinit var recyclerViewAdapter: WorkoutViewAdapter
@@ -43,7 +39,7 @@ class WorkoutViewFragment :
 
         this.workout = arguments!!.getParcelable("workoutData")!!
         this.recyclerViewAdapter =
-                WorkoutViewAdapter(this)
+                WorkoutViewAdapter(context, this)
         this.exerciseAssignmentViewModel =
                 ViewModelProviders.of(this).get(ExerciseAssignmentViewModel::class.java)
     }
@@ -62,9 +58,6 @@ class WorkoutViewFragment :
         val manager = LinearLayoutManager(context)
         this.recycler_view.layoutManager = manager
         this.recycler_view.adapter = this.recyclerViewAdapter
-
-        val itemDecor = DividerItemDecoration(context, VERTICAL)
-        this.recycler_view.addItemDecoration(itemDecor)
 
         val callback = ItemTouchCallback(this.recyclerViewAdapter)
         val touchHelper = ItemTouchHelper(callback)
@@ -126,5 +119,9 @@ class WorkoutViewFragment :
         val editWorkoutExerciseDialog = EditWorkoutExerciseDialog()
         editWorkoutExerciseDialog.arguments = bundle
         editWorkoutExerciseDialog.show(fragmentTransaction, "editWorkoutExerciseDialog")
+    }
+
+    override fun onRemoveExercise(exerciseRelationship: ExerciseRelationship?) {
+        this.exerciseAssignmentViewModel.delete(exerciseRelationship!!.relationship)
     }
 }

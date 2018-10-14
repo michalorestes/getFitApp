@@ -38,4 +38,8 @@ class ExerciseAssignmentViewModel(application: Application) : AndroidViewModel(a
     fun update(exerciseAssignment: ExerciseAssignment) {
         this.exerciseAssignmentRepository.update(exerciseAssignment)
     }
+
+    fun delete(relationship: ExerciseAssignment) {
+        this.exerciseAssignmentRepository.delete(relationship)
+    }
 }

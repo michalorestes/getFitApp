@@ -18,7 +18,7 @@ interface ExercisesAssignmentDao {
     fun deleteAll()
 
     @Delete
-    fun delete(workout: ExerciseAssignment)
+    fun delete(relationship: ExerciseAssignment)
 
     @Query("SELECT * FROM exercise_assignment ORDER BY position ASC")
     fun selectAll(): LiveData<List<ExerciseAssignment>>

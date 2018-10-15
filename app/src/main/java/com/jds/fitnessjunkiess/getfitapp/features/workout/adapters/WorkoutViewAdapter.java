@@ -27,8 +27,9 @@ public class WorkoutViewAdapter
     implements ItemTouchCallback.ItemTouchHelperAdapter
 {
   public interface OnAdapterInteractionInterface {
-    void onItemClick(View view, ExerciseRelationship workoutExercise);
+    void onEditExercise(ExerciseRelationship workoutExercise);
     void onRemoveExercise(ExerciseRelationship exerciseRelationship);
+    void onTrackExercise(View view, ExerciseRelationship exerciseRelationship);
   }
 
   private List<ExerciseRelationship> dataSet;
@@ -120,7 +121,7 @@ public class WorkoutViewAdapter
           }
       );
       view.setOnClickListener(
-          v -> onAdapterInteractionInterface.onItemClick(v, dataSet.get(getAdapterPosition()))
+          v -> onAdapterInteractionInterface.onTrackExercise(v, dataSet.get(getAdapterPosition()))
       );
     }
 
@@ -140,6 +141,7 @@ public class WorkoutViewAdapter
     public boolean onMenuItemClick(MenuItem menuItem) {
       switch (menuItem.getItemId()) {
         case R.id.workout_view_popup_menu_edit:
+          this.onAdapterInteractionInterface.onEditExercise(dataSet.get(getAdapterPosition()));
           break;
         case R.id.workout_view_popup_menu_delete:
           Log.d("-->", "onMenuItemClick: delete");

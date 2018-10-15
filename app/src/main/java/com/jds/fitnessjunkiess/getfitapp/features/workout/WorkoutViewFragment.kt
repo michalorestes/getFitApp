@@ -14,6 +14,7 @@ import com.jds.fitnessjunkiess.getfitapp.features.workout.adapters.WorkoutViewAd
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_workout_view.*
 import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.navigation.Navigation
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseAssignmentViewModel
 import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallback
@@ -91,7 +92,7 @@ class WorkoutViewFragment :
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.action_add_exercise -> {
-                val bundle = Bundle();
+                val bundle = Bundle()
                 bundle.putParcelable("selectedWorkout", this.workout)
                 view?.findNavController()?.navigate(
                     R.id.action_workoutViewFragment_to_browseExercisesFragment,
@@ -112,7 +113,7 @@ class WorkoutViewFragment :
         return true
     }
 
-    override fun onItemClick(view: View, exerciseRelationship: ExerciseRelationship) {
+    override fun onEditExercise(exerciseRelationship: ExerciseRelationship) {
         val bundle = Bundle()
         bundle.putParcelable("workoutExerciseAssignment", exerciseRelationship.relationship)
         val fragmentTransaction = fragmentManager!!.beginTransaction()
@@ -123,5 +124,9 @@ class WorkoutViewFragment :
 
     override fun onRemoveExercise(exerciseRelationship: ExerciseRelationship?) {
         this.exerciseAssignmentViewModel.delete(exerciseRelationship!!.relationship)
+    }
+
+    override fun onTrackExercise(view: View, exerciseRelationship: ExerciseRelationship) {
+        Navigation.findNavController(view).navigate(R.id.action_workoutViewFragment_to_trackSingleExerciseFragment)
     }
 }

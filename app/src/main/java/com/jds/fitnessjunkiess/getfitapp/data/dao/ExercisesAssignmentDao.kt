@@ -39,7 +39,8 @@ interface ExercisesAssignmentDao {
                 "e.instructions AS exercise_instructions," +
                 "e.type AS exercise_type," +
                 "e.isCustom AS exercise_isCustom," +
-                "e.muscleGroups AS exercise_muscleGroups " +
+                "e.muscleGroups AS exercise_muscleGroups, " +
+                "e.defaultLoggingType AS exercise_defaultLoggingType " +
                 "FROM exercise_assignment ea " +
                 "INNER JOIN exercises e ON ea.exerciseId = e.id " +
                 "WHERE ea.workoutId = :workoutId  ORDER BY ea.position ASC;"

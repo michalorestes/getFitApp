@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".features.initialisation.InitialisationActivity"
+            android:name=".features.MainActivity"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".features.MainActivity"
-            android:windowSoftInputMode="adjustNothing" />
 
         <meta-data
             android:name="preloaded_fonts"

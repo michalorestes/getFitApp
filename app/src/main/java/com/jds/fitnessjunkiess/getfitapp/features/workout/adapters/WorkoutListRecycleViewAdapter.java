@@ -32,7 +32,7 @@ public class WorkoutListRecycleViewAdapter
   public WorkoutListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View workoutCard =
         LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.workout_card_layout, parent, false);
+            .inflate(R.layout.view_holder_workout_list_item, parent, false);
 
     return new WorkoutListViewHolder(workoutCard);
   }

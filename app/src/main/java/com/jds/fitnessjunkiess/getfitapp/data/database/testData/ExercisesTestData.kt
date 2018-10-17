@@ -1,6 +1,7 @@
 package com.jds.fitnessjunkiess.getfitapp.data.database.testData
 
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseLoggingTypes
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroupKeys
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroups
@@ -18,6 +19,7 @@ object ExercisesTestData {
             exercise.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.BICEPS)
             exercise.type = ExerciseTypes.BODY_WEIGHT
             exercise.picture = "https://nourl.com/img.png"
+            exercise.defaultLoggingType = ExerciseLoggingTypes.REPS
 
             val exercise2 = Exercise()
             exercise2.id = 2
@@ -26,6 +28,7 @@ object ExercisesTestData {
             exercise2.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.BICEPS)
             exercise2.type = ExerciseTypes.WEIGHTS
             exercise2.picture = "https://nourl.com/img.png"
+            exercise2.defaultLoggingType = ExerciseLoggingTypes.REPS
 
             val exercise3 = Exercise()
             exercise3.id = 3
@@ -34,6 +37,7 @@ object ExercisesTestData {
             exercise3.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, MuscleGroups.CORE)
             exercise3.type = ExerciseTypes.BODY_WEIGHT
             exercise3.picture = "https://nourl.com/img.png"
+            exercise3.defaultLoggingType = ExerciseLoggingTypes.REPS
 
             val exercise4 = Exercise()
             exercise4.id = 4
@@ -45,13 +49,14 @@ object ExercisesTestData {
             exercise4.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, MuscleGroups.CORE)
             exercise4.type = ExerciseTypes.WEIGHTS
             exercise4.picture = "https://nourl.com/img.png"
+            exercise4.defaultLoggingType = ExerciseLoggingTypes.REPS
 
             val exercise5 = Exercise()
             exercise5.id = 5
             exercise5.name = "Trademil Run"
             exercise5.instructions = "Continue running"
             exercise5.type = ExerciseTypes.CARDIO
-            exercise5.picture = "https://nourl.com/img.png"
+            exercise5.defaultLoggingType = ExerciseLoggingTypes.TIME
 
             val exercises = ArrayList<Exercise>()
             exercises.add(exercise)

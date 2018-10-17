@@ -51,7 +51,7 @@ public class WorkoutViewAdapter
   public WorkoutViewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view =
         LayoutInflater.from(parent.getContext())
-            .inflate(R.layout.view_holder_workout_exercise, parent, false);
+            .inflate(R.layout.view_holder_workout_view_exercise_item, parent, false);
 
     return new WorkoutViewViewHolder(this.context, view, this.onAdapterInteractionInterface);
   }

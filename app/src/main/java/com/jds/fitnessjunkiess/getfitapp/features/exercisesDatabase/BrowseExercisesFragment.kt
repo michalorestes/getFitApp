@@ -17,7 +17,6 @@ import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseViewModel
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseAssignmentViewModel
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutsViewModel
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.AbstractExercisesAdapter
-import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.ExercisesAdapter
 import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.WorkoutContextExercisesAdapter
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_browse_exercises_list.*
@@ -28,7 +27,6 @@ class BrowseExercisesFragment : Fragment(),
     View.OnClickListener
 {
     private var selectedWorkout: Workout? = null
-    private var workoutsList: List<Workout>? = null
     private lateinit var exercisesFilters: ExercisesFilters
 
     private lateinit var exerciseAssignmentViewModel: ExerciseAssignmentViewModel
@@ -83,11 +81,8 @@ class BrowseExercisesFragment : Fragment(),
         val layoutManager = LinearLayoutManager(view.context)
         recycler_view.layoutManager = layoutManager
 
-        if (this.selectedWorkout == null) {
-            this.recyclerViewerAdapter = ExercisesAdapter(context, this)
-        } else {
-            this.recyclerViewerAdapter = WorkoutContextExercisesAdapter(this)
-        }
+        this.recyclerViewerAdapter = WorkoutContextExercisesAdapter(this)
+
 
         recycler_view.adapter = this.recyclerViewerAdapter
         this.setHasOptionsMenu(true)
@@ -102,14 +97,6 @@ class BrowseExercisesFragment : Fragment(),
                 this.recyclerViewerAdapter.updateDataSet(it)
             }
         })
-
-        if(this.selectedWorkout == null) {
-            this.workoutsViewModel.data.observe(this, Observer {
-                if (it != null) {
-                    this.workoutsList = it
-                }
-            })
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -176,9 +163,5 @@ class BrowseExercisesFragment : Fragment(),
             context,
             "${exercise.name} added to ${this.selectedWorkout!!.name}",Toast.LENGTH_LONG
         ).show()
-    }
-
-    override fun getWorkoutsList(): List<Workout>? {
-        return this.workoutsList
     }
 }

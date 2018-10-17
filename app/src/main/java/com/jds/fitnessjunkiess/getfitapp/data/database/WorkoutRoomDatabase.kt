@@ -24,7 +24,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExercisePropertiesT
         ExerciseAssignment::class,
         Exercise::class
     ],
-    version = 18, exportSchema = false
+    version = 19, exportSchema = false
 )
 @TypeConverters(ExercisePropertiesTypeConverter::class)
 abstract class WorkoutRoomDatabase : RoomDatabase() {

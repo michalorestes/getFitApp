@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters
+package com.jds.fitnessjunkiess.getfitapp.features.browseExercises.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

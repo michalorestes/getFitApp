@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase
+package com.jds.fitnessjunkiess.getfitapp.features.browseExercises
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -16,8 +16,8 @@ import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseViewModel
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseAssignmentViewModel
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.WorkoutsViewModel
-import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.AbstractExercisesAdapter
-import com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters.WorkoutContextExercisesAdapter
+import com.jds.fitnessjunkiess.getfitapp.features.browseExercises.adapters.AbstractExercisesAdapter
+import com.jds.fitnessjunkiess.getfitapp.features.browseExercises.adapters.WorkoutContextExercisesAdapter
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_browse_exercises_list.*
 import kotlinx.coroutines.experimental.launch

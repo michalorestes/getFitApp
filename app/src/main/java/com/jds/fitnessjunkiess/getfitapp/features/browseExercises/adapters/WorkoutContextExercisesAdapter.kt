@@ -1,9 +1,7 @@
-package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.adapters
+package com.jds.fitnessjunkiess.getfitapp.features.browseExercises.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 
 import com.jds.fitnessjunkiess.getfitapp.R
 

@@ -1,4 +1,4 @@
-package com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase
+package com.jds.fitnessjunkiess.getfitapp.features.browseExercises
 
 import android.app.Dialog
 import android.arch.lifecycle.ViewModelProviders

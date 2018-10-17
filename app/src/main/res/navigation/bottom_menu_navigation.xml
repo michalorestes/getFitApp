@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/browseExercisesFragment"
-        android:name="com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.BrowseExercisesFragment"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.browseExercises.BrowseExercisesFragment"
         android:label="BrowseExercisesFragment" >
         <action
             android:id="@+id/action_browseExercisesFragment_to_addCustomExerciseDialog"
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/addCustomExerciseDialog"
-        android:name="com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.AddCustomExerciseDialog"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.browseExercises.AddCustomExerciseDialog"
         android:label="AddCustomExerciseDialog" />
     <fragment
         android:id="@+id/trackSingleExerciseFragment"

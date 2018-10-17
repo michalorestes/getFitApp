@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity(), OnFragmentActionBarInteractionInterfac
         supportActionBar?.setDisplayShowHomeEnabled(false)
         val navController: NavController = Navigation.findNavController(this, R.id.my_nav_host_fragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
-        NavigationUI.setupWithNavController(this.navigation, navController)
     }
 
     override fun onSupportNavigateUp() =

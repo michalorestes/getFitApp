@@ -16,19 +16,6 @@
             app:destination="@id/workoutViewFragment" />
     </fragment>
     <fragment
-        android:id="@+id/action_exercises"
-        android:name="com.jds.fitnessjunkiess.getfitapp.features.exercisesDatabase.ExercisesHomeScreenFragment"
-        android:label="Exercises">
-        <action
-            android:id="@+id/action_action_exercises_to_browseExercisesFragment"
-            app:destination="@id/browseExercisesFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/action_profile"
-        android:name="com.jds.fitnessjunkiess.getfitapp.features.profile.ProfileFragment"
-        android:label="Profile"
-        tools:layout="@layout/fragment_profile"/>
-    <fragment
         android:id="@+id/workoutViewFragment"
         android:name="com.jds.fitnessjunkiess.getfitapp.features.workout.WorkoutViewFragment"
         tools:layout="@layout/fragment_workout_view">
@@ -56,6 +43,6 @@
         android:label="AddCustomExerciseDialog" />
     <fragment
         android:id="@+id/trackSingleExerciseFragment"
-        android:name="com.jds.fitnessjunkiess.getfitapp.features.workout.workoutTracking.TrackSingleExerciseFragment"
+        android:name="com.jds.fitnessjunkiess.getfitapp.features.workout.workoutLogging.SingleExerciseLoggingFragment"
         android:label="TrackSingleExerciseFragment" />
 </navigation>

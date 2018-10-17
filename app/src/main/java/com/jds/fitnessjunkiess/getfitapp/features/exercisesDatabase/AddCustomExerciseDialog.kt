@@ -15,6 +15,7 @@ import android.widget.Spinner
 import com.jds.fitnessjunkiess.getfitapp.R
 import com.jds.fitnessjunkiess.getfitapp.compoundViews.customCheckbox.CustomCheckbox
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise
+import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseLoggingTypes
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseTypes
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroupKeys
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.MuscleGroups
@@ -101,6 +102,7 @@ class AddCustomExerciseDialog : DialogFragment() {
         exercise.name = this.exerciseName.text.toString()
         exercise.type = this.getSelectedExerciseType()
         exercise.isCustom = true
+        exercise.defaultLoggingType = if (exercise.type == ExerciseTypes.CARDIO) ExerciseLoggingTypes.TIME else ExerciseLoggingTypes.REPS
         exercise.setMuscleGroupsByKey(MuscleGroupKeys.PRIMARY, this.getPrimaryMuscleGroup())
         this.getOtherMuscleGroups().forEach { muscleGroup ->
             exercise.setMuscleGroupsByKey(MuscleGroupKeys.OTHER, muscleGroup)

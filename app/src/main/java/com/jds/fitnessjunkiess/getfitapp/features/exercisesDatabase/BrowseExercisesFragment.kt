@@ -92,7 +92,7 @@ class BrowseExercisesFragment : Fragment(),
         super.onStart()
 
         exerciseViewModel.setFilterMutableLiveData(this.exercisesFilters)
-        this.exerciseViewModel.select().observe(this, Observer {
+        this.exerciseViewModel.selectData().observe(this, Observer {
             if (it != null) {
                 this.recyclerViewerAdapter.updateDataSet(it)
             }

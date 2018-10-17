@@ -15,6 +15,9 @@ interface ExerciseDao {
     @RawQuery(observedEntities = [Exercise::class])
     fun filterSelect(simpleSQLiteQuery: SimpleSQLiteQuery): LiveData<List<Exercise>>
 
+    @Query("SELECT * FROM exercises WHERE id = :exerciseId")
+    fun select(exerciseId: Int): LiveData<Exercise>
+
     @Query("SELECT * FROM exercises")
     fun selectAll(): LiveData<List<Exercise>>
 

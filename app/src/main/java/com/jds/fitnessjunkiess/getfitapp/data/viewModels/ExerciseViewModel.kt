@@ -12,6 +12,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.repositories.ExercisesRepository
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExercisesFilters
 
 class ExerciseViewModel(application: Application) : AndroidViewModel(application) {
+
     private var repository: ExercisesRepository = ExercisesRepository(application)
     internal var data = MediatorLiveData<List<Exercise>>()
 
@@ -31,8 +32,12 @@ class ExerciseViewModel(application: Application) : AndroidViewModel(application
         this.data.addSource(source) {this.data.setValue(it)}
     }
 
-    fun select(): LiveData<List<Exercise>> {
+    fun selectData(): LiveData<List<Exercise>> {
         return data
+    }
+
+    fun select(exerciseId: Int): LiveData<Exercise> {
+        return this.repository.select(exerciseId)
     }
 
     fun insert(exercise: Exercise) {

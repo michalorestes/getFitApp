@@ -8,30 +8,41 @@ import android.arch.persistence.room.TypeConverters
 import android.content.Context
 import android.os.AsyncTask
 import com.jds.fitnessjunkiess.getfitapp.data.dao.ExerciseDao
+import com.jds.fitnessjunkiess.getfitapp.data.dao.ExerciseLogDao
 import com.jds.fitnessjunkiess.getfitapp.data.dao.WorkoutDao
 import com.jds.fitnessjunkiess.getfitapp.data.dao.ExercisesAssignmentDao
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout
 import com.jds.fitnessjunkiess.getfitapp.data.dataModels.ExerciseAssignment
+import com.jds.fitnessjunkiess.getfitapp.data.dataModels.ExerciseLog
 import com.jds.fitnessjunkiess.getfitapp.data.database.testData.ExercisesTestData
 import com.jds.fitnessjunkiess.getfitapp.data.database.testData.WorkoutExerciseAssignmentTestData
 import com.jds.fitnessjunkiess.getfitapp.data.database.testData.WorkoutsTestData
 import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExercisePropertiesTypeConverter
+import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExerciseSetsLogTypeConverter
+import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExerciseTimeLogTypeConverter
 
 @Database(
     entities = [
         Workout::class,
         ExerciseAssignment::class,
-        Exercise::class
+        Exercise::class,
+        ExerciseLog::class
     ],
-    version = 19, exportSchema = false
+    version = 20, exportSchema = false
 )
-@TypeConverters(ExercisePropertiesTypeConverter::class)
+
+@TypeConverters(
+    ExercisePropertiesTypeConverter::class,
+    ExerciseSetsLogTypeConverter::class,
+    ExerciseTimeLogTypeConverter::class
+)
 abstract class WorkoutRoomDatabase : RoomDatabase() {
 
     abstract fun workoutDao(): WorkoutDao
     abstract fun exerciseDao(): ExerciseDao
     abstract fun exercisesAssignmentDao(): ExercisesAssignmentDao
+    abstract fun exerciseLogDao(): ExerciseLogDao
 
     companion object {
         private var instance: WorkoutRoomDatabase? = null

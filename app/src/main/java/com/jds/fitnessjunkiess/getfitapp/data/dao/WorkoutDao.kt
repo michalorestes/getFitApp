@@ -11,7 +11,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Workout
 
 @Dao
 interface WorkoutDao {
-    //TODO: select based on user id
+    //TODO: selectData based on user id
     @Query("SELECT * FROM workouts")
     fun selectAll(): LiveData<List<Workout>>
 

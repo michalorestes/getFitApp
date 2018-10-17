@@ -127,6 +127,10 @@ class WorkoutViewFragment :
     }
 
     override fun onTrackExercise(view: View, exerciseRelationship: ExerciseRelationship) {
-        Navigation.findNavController(view).navigate(R.id.action_workoutViewFragment_to_trackSingleExerciseFragment)
+        val bundle: Bundle = Bundle()
+        bundle.putParcelable("exerciseData", exerciseRelationship.exercise)
+
+        Navigation.findNavController(view)
+            .navigate(R.id.action_workoutViewFragment_to_trackSingleExerciseFragment, bundle)
     }
 }

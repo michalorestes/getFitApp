@@ -27,8 +27,8 @@ class ExercisesRepository(context: Application) {
         return this.dao.filterSelect(simpleSQLiteQuery)
     }
 
-    fun selectAll(): LiveData<List<Exercise>> {
-        return this.dao.selectAll()
+    fun select(exerciseId: Int): LiveData<Exercise> {
+        return this.dao.select(exerciseId)
     }
 
     fun insert(exercise: Exercise) {

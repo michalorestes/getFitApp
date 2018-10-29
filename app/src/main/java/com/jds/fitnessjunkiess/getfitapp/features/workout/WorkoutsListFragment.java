@@ -38,7 +38,6 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
   @Override
   public View onCreateView(
       @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    Log.d(TAG, "onCreateView");
     View view = inflater.inflate(R.layout.fragment_workouts_list, container, false);
     this.recyclerView = view.findViewById(R.id.workoutsList);
 
@@ -62,25 +61,6 @@ public class WorkoutsListFragment extends Fragment implements View.OnClickListen
         recycleViewAdapter.updateDataSet(workouts);
       }
     });
-    Log.d(TAG, "onStart");
-  }
-
-  @Override
-  public void onResume() {
-    super.onResume();
-    Log.d(TAG, "onResume");
-  }
-
-  @Override
-  public void onStop() {
-    super.onStop();
-    Log.d(TAG, "onStop");
-  }
-
-  @Override
-  public void onDestroy() {
-    super.onDestroy();
-    Log.d(TAG, "onDestroy");
   }
 
   @Override

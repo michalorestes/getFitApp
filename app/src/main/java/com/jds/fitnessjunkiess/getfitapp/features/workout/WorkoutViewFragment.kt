@@ -21,8 +21,7 @@ import com.jds.fitnessjunkiess.getfitapp.features.workout.helpers.ItemTouchCallb
 
 class WorkoutViewFragment :
     Fragment(),
-    WorkoutViewAdapter.OnAdapterInteractionInterface
-{
+    WorkoutViewAdapter.OnAdapterInteractionInterface {
     private lateinit var exerciseAssignmentViewModel: ExerciseAssignmentViewModel
     private lateinit var recyclerViewAdapter: WorkoutViewAdapter
     private lateinit var workout: Workout
@@ -71,8 +70,8 @@ class WorkoutViewFragment :
         super.onStart()
         this.exerciseAssignmentViewModel.selectExerciseRelationsData(this.workout.id).observe(
             this,
-            Observer {
-                exerciseAssignment -> this.recyclerViewAdapter.updateDataSet(exerciseAssignment)
+            Observer { exerciseAssignment ->
+                this.recyclerViewAdapter.updateDataSet(exerciseAssignment)
             })
     }
 
@@ -90,7 +89,7 @@ class WorkoutViewFragment :
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
+        when (item?.itemId) {
             R.id.action_add_exercise -> {
                 val bundle = Bundle()
                 bundle.putParcelable("selectedWorkout", this.workout)
@@ -106,7 +105,7 @@ class WorkoutViewFragment :
                 dialogTest.show(fragmentTransaction, "tag2")
             }
             else -> {
-               return  super.onOptionsItemSelected(item)
+                return super.onOptionsItemSelected(item)
             }
         }
 
@@ -127,8 +126,8 @@ class WorkoutViewFragment :
     }
 
     override fun onTrackExercise(view: View, exerciseRelationship: ExerciseRelationship) {
-        val bundle: Bundle = Bundle()
-        bundle.putParcelable("exerciseData", exerciseRelationship.exercise)
+        val bundle = Bundle()
+        bundle.putParcelable("exerciseData", exerciseRelationship)
 
         Navigation.findNavController(view)
             .navigate(R.id.action_workoutViewFragment_to_trackSingleExerciseFragment, bundle)

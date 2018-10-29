@@ -111,7 +111,7 @@ public class WorkoutViewAdapter
       this.name = view.findViewById(R.id.exercise_name);
       this.sets = view.findViewById(R.id.sets);
       this.reps = view.findViewById(R.id.reps);
-      Button optionsMenu = view.findViewById(R.id.options_menu);
+      TextView optionsMenu = view.findViewById(R.id.options_menu);
       optionsMenu.setOnClickListener(
           v -> {
             PopupMenu popupMenu = new PopupMenu(context, optionsMenu);

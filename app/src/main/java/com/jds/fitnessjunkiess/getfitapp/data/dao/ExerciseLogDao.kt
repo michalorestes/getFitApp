@@ -11,6 +11,6 @@ interface ExerciseLogDao {
     @Insert
     fun insert(exerciseLog: ExerciseLog)
 
-    @Query("SELECT * FROM exercise_log WHERE id = :logId")
-    fun selectOne(logId: Int): LiveData<ExerciseLog>
+    @Query("SELECT * FROM exercise_log WHERE exerciseId = :exerciseId AND workoutId = :workoutId ORDER BY id DESC")
+    fun selectOne(exerciseId: Int, workoutId: Int): LiveData<ExerciseLog>
 }

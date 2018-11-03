@@ -29,7 +29,7 @@ import com.jds.fitnessjunkiess.getfitapp.data.typeConverters.ExerciseTimeLogType
         Exercise::class,
         ExerciseLog::class
     ],
-    version = 20, exportSchema = false
+    version = 22, exportSchema = false
 )
 
 @TypeConverters(

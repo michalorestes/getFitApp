@@ -10,7 +10,11 @@ class ExerciseLogViewModel(application: Application): AndroidViewModel(applicati
 
     private val repository: ExerciseLogRepository = ExerciseLogRepository(application)
 
-    fun selectOne(logId: Int): LiveData<ExerciseLog> {
-        return this.repository.selectOne(logId)
+    fun selectOne(exerciseId: Int, workoutId: Int): LiveData<ExerciseLog> {
+        return this.repository.selectOne(exerciseId, workoutId)
+    }
+
+    fun insert(log: ExerciseLog) {
+        this.repository.insertLog(log)
     }
 }

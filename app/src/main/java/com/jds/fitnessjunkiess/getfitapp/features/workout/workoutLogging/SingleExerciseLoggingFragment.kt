@@ -11,20 +11,26 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.jds.fitnessjunkiess.getfitapp.R
-import com.jds.fitnessjunkiess.getfitapp.data.dataModels.Exercise
+import com.jds.fitnessjunkiess.getfitapp.data.dataModels.ExerciseLog
 import com.jds.fitnessjunkiess.getfitapp.data.pojo.ExerciseRelationship
 import com.jds.fitnessjunkiess.getfitapp.data.viewModels.ExerciseLogViewModel
 import com.jds.fitnessjunkiess.getfitapp.features.workout.workoutLogging.adapters.ExerciseSetsAdapter
 import com.jds.fitnessjunkiess.getfitapp.interfaces.OnFragmentActionBarInteractionInterface
 import kotlinx.android.synthetic.main.fragment_track_single_exercise.*
+import java.text.DateFormat
+import java.util.*
 
-class SingleExerciseLoggingFragment : Fragment() {
+
+class SingleExerciseLoggingFragment : Fragment(), View.OnClickListener {
 
     private lateinit var fragmentInteraction: OnFragmentActionBarInteractionInterface
     private lateinit var currentExercise: ExerciseRelationship
 
     private lateinit var exerciseLogViewModel: ExerciseLogViewModel
+
+    private lateinit var recyclerViewAdapter: ExerciseSetsAdapter
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -34,7 +40,6 @@ class SingleExerciseLoggingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activity: AppCompatActivity = activity as AppCompatActivity
-        activity.supportActionBar?.elevation = 0.0f
 
         this.currentExercise = arguments!!.getParcelable("exerciseData")!!
 
@@ -59,26 +64,55 @@ class SingleExerciseLoggingFragment : Fragment() {
         val layoutManager = LinearLayoutManager(view.context)
         recycler_view.layoutManager = layoutManager
 
-        val recyclerViewAdapter = ExerciseSetsAdapter(
+        this.recyclerViewAdapter = ExerciseSetsAdapter(
             this.currentExercise.relationship.sets,
             this.currentExercise.relationship.reps
         )
         recycler_view.adapter = recyclerViewAdapter
+
+        btn_save.setOnClickListener(this)
     }
 
     override fun onStart() {
         super.onStart()
+        val activity: AppCompatActivity = activity as AppCompatActivity
+        activity.supportActionBar?.elevation = 0.0f
 
-        this.exerciseLogViewModel.selectOne(this.currentExercise.exercise.id).observe(
+        this.exerciseLogViewModel.selectOne(
+            this.currentExercise.exercise.id,
+            this.currentExercise.relationship.workoutId
+        ).observe(
             this,
             Observer {
-            Log.d("--->", it.toString())
+            if (it?.setLogs != null) {
+                this.recyclerViewAdapter.updateDataSet(it.setLogs!!)
+            }
         })
     }
 
     override fun onPause() {
         super.onPause()
         val activity: AppCompatActivity = activity as AppCompatActivity
-        activity.supportActionBar?.elevation = 2.0f
+        activity.supportActionBar!!.elevation = 22.0f
+    }
+
+    override fun onClick(v: View) {
+        when(v.id) {
+            R.id.btn_save -> {
+                saveLog()
+                Navigation.findNavController(v).navigateUp()
+            }
+        }
+    }
+
+    private fun saveLog() {
+        val log = ExerciseLog(
+            exerciseId = this.currentExercise.exercise.id,
+            workoutId = this.currentExercise.relationship.workoutId,
+            date = DateFormat.getDateTimeInstance().format(Date()),
+            setLogs = this.recyclerViewAdapter.dataSet
+        )
+
+        this.exerciseLogViewModel.insert(log)
     }
 }

@@ -9,9 +9,10 @@ import java.util.*
 @Entity(tableName = "exercise_log")
 data class ExerciseLog(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val exerciseId: Int = 0,
-    val date: String,
-    val setLogs: List<LogSet>?,
-    val timeLogs: LogTime?
+    var id: Int = 0,
+    var exerciseId: Int = 0,
+    var workoutId: Int = 0,
+    var date: String? = "",
+    var setLogs: List<LogSet>? = null,
+    var timeLogs: LogTime? = LogTime()
 )
